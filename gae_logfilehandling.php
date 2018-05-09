@@ -16,32 +16,32 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-add_action( 'admin_notices', 'ept_check_create_log_folder' );
+add_action( 'admin_notices', 'gae_check_create_log_folder' );
 
 // create log folder
 // return true if folder has been created or exists else false
-function ept_createLogFolder() {
+function gae_createLogFolder() {
 	$error=false;
-	if (!@is_dir (EPT_LOGPATH)) {
-		if (!@mkdir (EPT_LOGPATH, 0777)) {
-			$ept_on_off=0;
-			update_option('ept_on_off', 0);
+	if (!@is_dir (gae_LOGPATH)) {
+		if (!@mkdir (gae_LOGPATH, 0777)) {
+			$gae_on_off=0;
+			update_option('gae_on_off', 0);
 			$error=true;
 		}
 	}
 
 	# check if log folder is writeable
-	if (!@is_writable(EPT_LOGPATH) ) {
+	if (!@is_writable(gae_LOGPATH) ) {
 
 		# trying to set permissions
-		if (!@chmod(EPT_LOGPATH, 0777)) {
-			$ept_on_off=0;
-			update_option('ept_on_off', 0);
+		if (!@chmod(gae_LOGPATH, 0777)) {
+			$gae_on_off=0;
+			update_option('gae_on_off', 0);
 			$error=true;
 		}
 	} else {
 		# create empty index.html file to hide logs from browsing
-		$emptyFile=EPT_LOGPATH.'index.html';
+		$emptyFile=gae_LOGPATH.'index.html';
 		$fileWrite = fopen($emptyFile, 'a');
 		fclose($fileWrite);
 	}
@@ -49,34 +49,34 @@ function ept_createLogFolder() {
 }
 
 # delete log folder
-function ept_deleteLogFolder() {
+function gae_deleteLogFolder() {
 	# delete log folder and logs
-	if (@is_dir(EPT_LOGPATH)) {
-		ept_deltree(EPT_LOGPATH);
+	if (@is_dir(gae_LOGPATH)) {
+		gae_deltree(gae_LOGPATH);
 	}
 }
 
 // try to create log folder and print success or error on admin panel
-function ept_check_create_log_folder() {
+function gae_check_create_log_folder() {
 	# check for folder
-	if (ept_check_folder_error()) {
-		if (!ept_createLogFolder()) {
-			print '<div id="message" class="error">'.__("Empty Plugin Template (EPT) Error: Can't write to log folder ", EMU2_I18N_DOMAIN).EPT_LOGPATH.__(" Permissions 777 needed.", EMU2_I18N_DOMAIN).'</div>';
+	if (gae_check_folder_error()) {
+		if (!gae_createLogFolder()) {
+			print '<div id="message" class="error">'.__("Empty Plugin Template (EPT) Error: Can't write to log folder ", EMU2_I18N_DOMAIN).gae_LOGPATH.__(" Permissions 777 needed.", EMU2_I18N_DOMAIN).'</div>';
 		} else {
-			print '<div id="message" class="updated">'.__("Empty Plugin Template (EPT): Log folder created: ", EMU2_I18N_DOMAIN).EPT_LOGPATH.'</div>';
+			print '<div id="message" class="updated">'.__("Empty Plugin Template (EPT): Log folder created: ", EMU2_I18N_DOMAIN).gae_LOGPATH.'</div>';
 		}
 	}
 }
 
-function ept_check_folder_error() {
+function gae_check_folder_error() {
 	$error=false;
 	# check if log folder is writeable
-	if (!@is_writable(EPT_LOGPATH) ) {
+	if (!@is_writable(gae_LOGPATH) ) {
 		# trying to set permissions
-		if (!@chmod(EPT_LOGPATH, 0777)) {
+		if (!@chmod(gae_LOGPATH, 0777)) {
 			// can't write to or create log folder
 			// maybe you should switch you lugin to off now
-			// $ept_on_off=false;
+			// $gae_on_off=false;
 			$error=true;
 		}
 	}
@@ -84,11 +84,11 @@ function ept_check_folder_error() {
 }
 
 # deletes all files and folders and subfolders in given folder
-function ept_deltree($f) {
+function gae_deltree($f) {
 	if (@is_dir($f)) {
 		foreach(glob($f.'/*') as $sf) {
 			if (@is_dir($sf) && !is_link($sf)) {
-				@ept_deltree($sf);
+				@gae_deltree($sf);
 			} else {
 				@unlink($sf);
 			}
@@ -100,7 +100,7 @@ function ept_deltree($f) {
 
 
 # write a message to the logfile
-function ept_writelog() {
+function gae_writelog() {
 	$numargs = func_num_args();
 	$arg_list = func_get_args();
 	if ($numargs >2) $linenumber=func_get_arg(2); else $linenumber="";
@@ -108,13 +108,13 @@ function ept_writelog() {
 	if ($numargs >=1) $string=func_get_arg(0);
 	if (!isset($string) or $string=="") return;
 
-	$logFile=EPT_LOGPATH.'/ops-'.date("Y-m").".log";
+	$logFile=gae_LOGPATH.'/ops-'.date("Y-m").".log";
 	$timeStamp = date("d/M/Y:H:i:s O");
 
 	$fileWrite = fopen($logFile, 'a');
 
 	//flock($fileWrite, LOCK_SH);
-	if (ept_debug()) {
+	if (gae_debug()) {
 		$logline="[$timeStamp] ".html_entity_decode($string)." $functionname $linenumber\r\n";	# for debug purposes
 	} else {
 		$logline="[$timeStamp] ".html_entity_decode($string)."\r\n";
