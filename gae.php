@@ -23,7 +23,7 @@ License: GPL3
 define( 'gae_PUGIN_NAME', 'Google Analytcs Events');
 define( 'gae_PLUGIN_DIRECTORY', 'google-analytics-events');
 define( 'gae_CURRENT_VERSION', '0.9.1' );
-define( 'gae_CURRENT_BUILD', '3' );
+define( 'gae_CURRENT_BUILD', '1' );
 define( 'gae_LOGPATH', str_replace('\\', '/', WP_CONTENT_DIR).'/gae-logs/');
 define( 'gae_DEBUG', false);		# never use debug mode on productive systems
 // i18n plugin domain for language files
