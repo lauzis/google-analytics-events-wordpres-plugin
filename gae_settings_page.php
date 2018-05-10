@@ -324,6 +324,22 @@ $sections = [
 
   if (isset($_POST["option_page"]) && $_POST["option_page"] == 'gae-settings-group'){
       //combining the scritps
+
+      $result_file_path = gae_PLUGIN_PATH."/js/gae-combined.js";
+
+      $main_file_path = gae_PLUGIN_PATH."/js-parts/gae-main.js";
+
+      $js_parts_to_include=["gae-variables","gae-functions"];
+
+      $combined_js_content= file_get_contents($main_file_path);
+      foreach($js_parts_to_include as $js_part){
+        $file_to_include = gae_PLUGIN_PATH."/js-parts/$js_part.js";
+        $combined_js_content = str_replace("//[$js_part]",file_get_contents($file_to_include),$combined_js_content);
+      }
+
+      file_put_contents($result_file_path,$combined_js_content);
+
+
   }
 
 ?>
