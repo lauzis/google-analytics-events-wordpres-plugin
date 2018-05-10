@@ -125,6 +125,24 @@ $sections = [
         ]
       ],
       [
+        "id"=>"form_tracking_gravity_forms_on",
+        "title"=>"Enable gravity forms tracking",
+        "type"=>"select",
+        "value"=>"",
+        "placeholder"=>"",
+        "default_value"=>"0",
+        "options"=>[
+          [
+            "value"=>"1",
+            "title"=>"Enable"
+          ],
+          [
+            "value"=>"0",
+            "title"=>"Disable"
+          ],
+        ]
+      ],
+      [
         "id"=>"form_tracking_starts_to_fill_fields_on",
         "title"=>"Enable form fields tracking",
         "type"=>"select",
@@ -170,7 +188,35 @@ $sections = [
       ],
     ],
   ],
-  ["title"=>"Cta buttons"],
+  [
+    "id"=>"custom-links",
+    "title"=>"Custome Links",
+    "description"=>"If you want track custom link that does not fit into other categories (social links, outgoing links, links to file...),
+    then please add some special attributes ( data-ga-category, data-ga-actio, data-ga-label) to those links.
+    As we are using ourselves this plugin, we have built in attributes that we are tracking. So if you want to track some particluar link,
+     you should add data attributes, see the example. ",
+    "example"=>'<a href="link to somehting or place" data-ga-category="Shopping cart" data-ga-action="Clicked" data-ga-label="In Header">Click me </a>',
+    "fields"=> [
+      [
+        "id"=>"outgoing_links_on",
+        "title"=>"Enable custom link tracking",
+        "type"=>"select",
+        "value"=>"",
+        "placeholder"=>"",
+        "default_value"=>"1",
+        "options"=>[
+          [
+            "value"=>"1",
+            "title"=>"Enable"
+          ],
+          [
+            "value"=>"0",
+            "title"=>"Disable"
+          ],
+        ]
+      ],
+    ],
+  ],
   [
     "id"=>"outgoing-links",
     "title"=>"Outgoing Links",
@@ -197,13 +243,48 @@ $sections = [
       ],
     ],
   ],
+
+  [
+    "id"=>"custom-element-tracking",
+    "title"=>"Custom element click tracking",
+    "description"=>"Enable this if you want to track some custom elements, by css class or id",
+    "fields"=> [
+      [
+        "id"=>"custom_element_tracking_on",
+        "title"=>"Enable custom element tracking",
+        "type"=>"select",
+        "value"=>"",
+        "placeholder"=>"",
+        "default_value"=>"1",
+        "options"=>[
+          [
+            "value"=>"1",
+            "title"=>"Enable"
+          ],
+          [
+            "value"=>"0",
+            "title"=>"Disable"
+          ],
+        ]
+      ],
+      [
+        "id"=>"custom_element_tracking_class",
+        "title"=>"Add class, id to be tracked (comma seperated)",
+        "type"=>"text",
+        "value"=>"",
+        "placeholder"=>".btn,cta-btn,button",
+        "default_value"=>".kad-btn, .ga-track-click, .yop_poll_vote_button, .btn-cta, .cta-btn .btn, .cta-btn, button",
+      ],
+    ],
+  ],
+
   ["title"=>"Debug"],
 ];
 ?>
 <h1><?php _e('Google analytics settings',gae_PUGIN_NAME); ?> - <?php print gae_PUGIN_NAME ." ". gae_CURRENT_VERSION. "<sub>(Build ".gae_CURRENT_BUILD.")</sub>"; ?></h1>
 
 
-<form method="post" action="options.php" autocomplete="off">
+<form method="post" action="" autocomplete="off">
   <?php settings_fields( 'gae-settings-group' ); ?>
   <?php foreach($sections as $section): ?>
       <section id="<?= $section["id"] ?>">
@@ -211,7 +292,14 @@ $sections = [
           <h2 id="section-<?= $section["id"] ?>"><?= $section["title"]; ?></h2>
           <p>
               <?= $section["description"]; ?>
+
           </p>
+          <?php if ($section["example"]): ?>
+            <code>
+                <?= htmlentities($section["example"]); ?>
+            </code>
+          <?php endif; ?>
+
           <ul id="section-<?= $section["id"] ?>-content">
             <?php foreach($section["fields"] as $field): ?>
               <?php $title=$field["title"] ?>
@@ -230,4 +318,14 @@ $sections = [
     <input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
   </p>
 </forms>
+<pre>
+<?php
+  print_r($_POST);
+
+  if (isset($_POST["option_page"]) && $_POST["option_page"] == 'gae-settings-group'){
+      //combining the scritps
+  }
+
+?>
+</pre>
       <table class="form-table">        <tr valign="top">        <th scope="row">New Option Name</th>        <td><input type="text" name="new_option_name" value="<?php echo get_option('new_option_name'); ?>" /></td>        </tr>                 <tr valign="top">        <th scope="row">Some Other Option</th>        <td><input type="text" name="some_other_option" value="<?php echo get_option('some_other_option'); ?>" /></td>        </tr>                <tr valign="top">        <th scope="row">Options, Etc.</th>        <td><input type="text" name="option_etc" value="<?php echo get_option('option_etc'); ?>" /></td>        </tr>    </table>

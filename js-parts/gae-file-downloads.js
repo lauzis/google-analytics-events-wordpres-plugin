@@ -1,7 +1,7 @@
-if (is_outgoing_url(url)){
+if (is_file(url)){
     self.click(function(){
         var text = get_link_text(self);
-        send_event("Outgoing links",'Outgoing link clicked', text.trim()+' button clicked');
+        send_event("File download",'File download clicked', text);
     });
     self.addClass("gae-events");
     return;

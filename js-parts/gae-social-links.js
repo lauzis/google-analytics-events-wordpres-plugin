@@ -29,4 +29,4 @@ for (x in social_links){
 if (social_link_tracker_added){
   //skipp looping cause we already added the event
   return;
-}
+};

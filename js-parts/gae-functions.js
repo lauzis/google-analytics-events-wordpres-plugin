@@ -211,6 +211,7 @@ function json2array(json){
     return result;
 }
 
+
 //TODO UPDATE HIOSTORY PUSH
 //NOW ITS MORE as  TITLE PUSH
 function push_history(url){
@@ -257,6 +258,7 @@ function pop_history(){
     return url;
 }
 
+
 function send_event(category, action, label, value){
 
     if(IS_GA){
@@ -275,4 +277,4 @@ function send_event(category, action, label, value){
         console.log('send', 'event', category, action, label, value);
     }
 
-}
+};
