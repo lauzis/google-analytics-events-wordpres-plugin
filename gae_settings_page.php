@@ -101,32 +101,6 @@ $sections = [
     ],
   ],
   [
-    "id"=>"outgoing-links",
-    "title"=>"Outgoing Links",
-    "description"=>"Enable this if you want to see how often outgoing links are clicked.
-    This will track when users are leaving your site via autgoing links in content. This sometimes also helps to track some links that could be by mistake.",
-    "fields"=> [
-      [
-        "id"=>"outgoing_links_on",
-        "title"=>"Enable outgoing link tracking",
-        "type"=>"select",
-        "value"=>"",
-        "placeholder"=>"",
-        "default_value"=>"1",
-        "options"=>[
-          [
-            "value"=>"1",
-            "title"=>"Enable"
-          ],
-          [
-            "value"=>"0",
-            "title"=>"Disable"
-          ],
-        ]
-      ],
-    ],
-  ],
-  [
     "id"=>"form-tracking",
     "title"=>"Forms tracking",
     "description"=>"Enable this if you want to see when someone tries to submit some form. If you have some forms in your website, this will help you track if users actually are using your forms.
@@ -170,8 +144,59 @@ $sections = [
       ],
     ],
   ],
-  ["title"=>"File download"],
+  [
+    "id"=>"file-downloads",
+    "title"=>"File downloads",
+    "description"=>"Enable this if you want to see how often files that are linked in content are opened/downloaded.",
+    "fields"=> [
+      //todo allow user to specify the extensions
+      [
+        "id"=>"file_donwloads_on",
+        "title"=>"Enable file click tracking",
+        "type"=>"select",
+        "value"=>"",
+        "placeholder"=>"",
+        "default_value"=>"1",
+        "options"=>[
+          [
+            "value"=>"1",
+            "title"=>"Enable"
+          ],
+          [
+            "value"=>"0",
+            "title"=>"Disable"
+          ],
+        ]
+      ],
+    ],
+  ],
   ["title"=>"Cta buttons"],
+  [
+    "id"=>"outgoing-links",
+    "title"=>"Outgoing Links",
+    "description"=>"Enable this if you want to see how often outgoing links are clicked.
+    This will track when users are leaving your site via autgoing links in content. This sometimes also helps to track some links that could be by mistake.",
+    "fields"=> [
+      [
+        "id"=>"outgoing_links_on",
+        "title"=>"Enable outgoing link tracking",
+        "type"=>"select",
+        "value"=>"",
+        "placeholder"=>"",
+        "default_value"=>"1",
+        "options"=>[
+          [
+            "value"=>"1",
+            "title"=>"Enable"
+          ],
+          [
+            "value"=>"0",
+            "title"=>"Disable"
+          ],
+        ]
+      ],
+    ],
+  ],
   ["title"=>"Debug"],
 ];
 ?>
