@@ -337,7 +337,17 @@ $sections = [
         $combined_js_content = str_replace("//[$js_part]",file_get_contents($file_to_include),$combined_js_content);
       }
 
-      file_put_contents($result_file_path,$combined_js_content);
+
+      if (is_writable($result_file_path)){
+        if (file_put_contents($result_file_path,$combined_js_content)){
+          print("result saved to: $result_file_path");
+        } else {
+          print("failed");
+        };
+      } else {
+        print("Cabt generate file!");
+      }
+
 
 
   }
