@@ -26,10 +26,152 @@ $sections = [
             "title"=>"Classic Google analytics code"
           ],
         ],
+      ],
+      [
+        "id"=>"script_analytics_id",
+        "title"=>"Google analytics id",
+        "type"=>"text",
+        "value"=>"",
+        "placeholder"=>"UA-XXX-X",
+        "default_value"=>"",
       ]
     ],
   ],
-  ["title"=>"Contact Links"],
+  [
+    "id"=>"time-trigger",
+    "title"=>"Time trigger (bounce rate)",
+    "description"=>"By default in google analytics if page is visited and then browser closed,
+    or user navigates to different/other website, the visit would count as a bounced.
+    Cause there was no event, after the visit. So in some cases its usuful to send time triggered
+    event that user would not count as a bounced. For examle if user is on site 30sek,
+    probabbly he is reading content, so this user should not count as bounced even if he went away afterwards.",
+    "fields"=> [
+      [
+        "id"=>"time_trigger_on",
+        "title"=>"Enable time trigger",
+        "type"=>"select",
+        "value"=>"",
+        "placeholder"=>"",
+        "default_value"=>"1",
+        "options"=>[
+          [
+            "value"=>"1",
+            "title"=>"Enable"
+          ],
+          [
+            "value"=>"0",
+            "title"=>"Disable"
+          ],
+        ]
+      ],
+      [
+        "id"=>"time_trigger_treshold",
+        "title"=>"Time trigger treshold (seconds)",
+        "type"=>"text",
+        "value"=>"",
+        "placeholder"=>"30",
+        "default_value"=>"30",
+      ]
+
+    ]
+  ],
+  [
+    "id"=>"contact-links",
+    "title"=>"Contact Links",
+    "description"=>"Enable this if you want to see how often contact links are clicked on your website. This will track links containing email, phone number.",
+    "fields"=> [
+      [
+        "id"=>"contact_links_on",
+        "title"=>"Enable contact link tracking",
+        "type"=>"select",
+        "value"=>"",
+        "placeholder"=>"",
+        "default_value"=>"1",
+        "options"=>[
+          [
+            "value"=>"1",
+            "title"=>"Enable"
+          ],
+          [
+            "value"=>"0",
+            "title"=>"Disable"
+          ],
+        ]
+      ],
+    ],
+  ],
+  [
+    "id"=>"outgoing-links",
+    "title"=>"Outgoing Links",
+    "description"=>"Enable this if you want to see how often outgoing links are clicked.
+    This will track when users are leaving your site via autgoing links in content. This sometimes also helps to track some links that could be by mistake.",
+    "fields"=> [
+      [
+        "id"=>"outgoing_links_on",
+        "title"=>"Enable outgoing link tracking",
+        "type"=>"select",
+        "value"=>"",
+        "placeholder"=>"",
+        "default_value"=>"1",
+        "options"=>[
+          [
+            "value"=>"1",
+            "title"=>"Enable"
+          ],
+          [
+            "value"=>"0",
+            "title"=>"Disable"
+          ],
+        ]
+      ],
+    ],
+  ],
+  [
+    "id"=>"form-tracking",
+    "title"=>"Forms tracking",
+    "description"=>"Enable this if you want to see when someone tries to submit some form. If you have some forms in your website, this will help you track if users actually are using your forms.
+    Sometimes it helps also to find some bugs with forms, you see that users ar trying to send form, but you dont have any antires. Maybe there is some problem with forms.",
+    "fields"=> [
+      [
+        "id"=>"form_tracking_submition_on",
+        "title"=>"Enable form submition tracking",
+        "type"=>"select",
+        "value"=>"",
+        "placeholder"=>"",
+        "default_value"=>"1",
+        "options"=>[
+          [
+            "value"=>"1",
+            "title"=>"Enable"
+          ],
+          [
+            "value"=>"0",
+            "title"=>"Disable"
+          ],
+        ]
+      ],
+      [
+        "id"=>"form_tracking_starts_to_fill_fields_on",
+        "title"=>"Enable form fields tracking",
+        "type"=>"select",
+        "value"=>"",
+        "placeholder"=>"",
+        "default_value"=>"0",
+        "options"=>[
+          [
+            "value"=>"1",
+            "title"=>"Enable"
+          ],
+          [
+            "value"=>"0",
+            "title"=>"Disable"
+          ],
+        ]
+      ],
+    ],
+  ],
+  ["title"=>"File download"],
+  ["title"=>"Cta buttons"],
   ["title"=>"Debug"],
 ];
 ?>
@@ -51,6 +193,7 @@ $sections = [
               <?php $id=$field["id"] ?>
               <?php $value=$field["value"] ?>
               <?php $default_value=$field["default_value"] ?>
+              <?php $placeholder=$field["placeholder"] ?>
               <?php $options=$field["options"] ?>
               <li><?php require(gae_PLUGIN_PATH."/fields/".$field["type"].".php"); ?></li>
             <?php endforeach; ?>
