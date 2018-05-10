@@ -11,7 +11,7 @@ $sections = [
         "title"=>"Embed analytics code",
         "type"=>"select",
         "value"=>"",
-        "default_value"=>0,
+        "default_value"=>"0",
         "options"=>[
           [
             "value"=>"0",
@@ -36,7 +36,7 @@ $sections = [
 <h1><?php _e('Google analytics settings',gae_PUGIN_NAME); ?> - <?php print gae_PUGIN_NAME ." ". gae_CURRENT_VERSION. "<sub>(Build ".gae_CURRENT_BUILD.")</sub>"; ?></h1>
 
 
-<form method="post" action="options.php">
+<form method="post" action="options.php" autocomplete="off">
   <?php settings_fields( 'gae-settings-group' ); ?>
   <?php
   foreach($sections as $section) {
