@@ -22,6 +22,7 @@ License: GPL3
 // some definition we will use
 define( 'gae_PUGIN_NAME', 'Google Analytcs Events');
 define( 'gae_PLUGIN_DIRECTORY', 'google-analytics-events');
+define( 'gae_PLUGIN_PATH',  WP_CONTENT_DIR.'/plugins/'.gae_PLUGIN_DIRECTORY);
 define( 'gae_CURRENT_VERSION', '0.9.1' );
 define( 'gae_CURRENT_BUILD', '1' );
 define( 'gae_LOGPATH', str_replace('\\', '/', WP_CONTENT_DIR).'/gae-logs/');

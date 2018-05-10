@@ -8,11 +8,14 @@ $sections = [
     "fields"=> [
       [
         "id"=>"script_type",
+        "title"=>"Embed analytics code",
         "type"=>"select",
+        "value"=>"",
+        "default_value"=>0,
         "options"=>[
           [
             "value"=>"0",
-            "title"=>"Analytcs code already added"
+            "title"=>"Analytcs code already added",
           ],
           [
             "value"=>"tag-manager",
@@ -20,7 +23,7 @@ $sections = [
           ],
           [
             "value"=>"analytics",
-            "title"=>"Clasig code"
+            "title"=>"Classic Google analytics code"
           ],
         ],
       ]
@@ -45,7 +48,12 @@ $sections = [
           </p>
           <ul>
             <?php foreach($section["fields"] as $field): ?>
-              <li><?php include(gae_PLUGIN_DIRECTORY."fields/".$field["type"]); ?></li>
+              <?php $title=$field["title"] ?>
+              <?php $id=$field["id"] ?>
+              <?php $value=$field["value"] ?>
+              <?php $default_value=$field["default_value"] ?>
+              <?php $options=$field["options"] ?>
+              <li><?php require(gae_PLUGIN_PATH."/fields/".$field["type"].".php"); ?></li>
             <?php endforeach; ?>
 
           </ul>
