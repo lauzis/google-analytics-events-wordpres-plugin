@@ -38,15 +38,14 @@ $sections = [
 
 <form method="post" action="options.php" autocomplete="off">
   <?php settings_fields( 'gae-settings-group' ); ?>
-  <?php
-  foreach($sections as $section) {
-      ?>
-      <section>
-          <h2><?= $section["title"]; ?></h2>
+  <?php foreach($sections as $section): ?>
+      <section id="<?= $section["id"] ?>">
+
+          <h2 id="section-<?= $section["id"] ?>"><?= $section["title"]; ?></h2>
           <p>
               <?= $section["description"]; ?>
           </p>
-          <ul>
+          <ul id="section-<?= $section["id"] ?>-content">
             <?php foreach($section["fields"] as $field): ?>
               <?php $title=$field["title"] ?>
               <?php $id=$field["id"] ?>
@@ -55,12 +54,10 @@ $sections = [
               <?php $options=$field["options"] ?>
               <li><?php require(gae_PLUGIN_PATH."/fields/".$field["type"].".php"); ?></li>
             <?php endforeach; ?>
-
           </ul>
+
       </section>
-      <?php
-  }
-  ?>
+  <?php endforeach; ?>
   <p class="submit">
     <input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
   </p>
