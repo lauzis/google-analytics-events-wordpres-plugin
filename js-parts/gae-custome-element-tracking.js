@@ -28,4 +28,4 @@ $(click_tracking_elements).each(function(){
     self.addClass("gae-events");
   }
 
-})
+});

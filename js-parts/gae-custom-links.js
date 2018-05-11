@@ -5,4 +5,4 @@ if(self.data("gaCategory") && self.data("gaAction") && self.data("gaLabel")){
     });
     self.addClass("gae-events");
     return;
-}
+};
