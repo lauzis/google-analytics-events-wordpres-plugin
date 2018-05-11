@@ -145,10 +145,18 @@ function gae_generate_combined(){
 	        }
 	      }
 
+				print_r($js_parts_to_include);
+
 	      $combined_js_content= file_get_contents($main_file_path);
 	      foreach($js_parts_to_include as $js_part){
 	        $file_to_include = gae_PLUGIN_PATH."/js-parts/$js_part.js";
-	        $combined_js_content = str_replace("//[$js_part]",file_get_contents($file_to_include),$combined_js_content);
+					$start_text = "
+					/* ------ $js_part --- $file_to_include ------ STARTS */
+					";
+					$end_text = "
+					/* ------ $js_part ---  $file_to_include ------ ENDS */
+					";
+	        $combined_js_content = str_replace("//[$js_part]",$start_text.file_get_contents($file_to_include).$end_text,$combined_js_content);
 	      }
 
 
@@ -165,6 +173,14 @@ function gae_generate_combined(){
 
 	?>
 	</pre>
+	<?php
+}
+
+
+function gae_message($text, $type="success")
+{
+	?>
+		<div id="message" class="<?= $type ?>"><?= $text ?></div>
 	<?php
 }
 ?>
