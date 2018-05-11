@@ -1,5 +1,5 @@
+<?php gae_generate_combined(); ?>
 <?php
-
 $sections = [
   [
     "id"=>"analytics-scirpt",
@@ -47,7 +47,7 @@ $sections = [
     probabbly he is reading content, so this user should not count as bounced even if he went away afterwards.",
     "fields"=> [
       [
-        "id"=>"time_trigger_on",
+        "id"=>"gae-time-trigger",
         "title"=>"Enable time trigger",
         "type"=>"select",
         "value"=>"",
@@ -81,7 +81,7 @@ $sections = [
     "description"=>"Enable this if you want to see how often contact links are clicked on your website. This will track links containing email, phone number.",
     "fields"=> [
       [
-        "id"=>"contact_links_on",
+        "id"=>"gae-contact-links",
         "title"=>"Enable contact link tracking",
         "type"=>"select",
         "value"=>"",
@@ -107,7 +107,7 @@ $sections = [
     Sometimes it helps also to find some bugs with forms, you see that users ar trying to send form, but you dont have any antires. Maybe there is some problem with forms.",
     "fields"=> [
       [
-        "id"=>"form_tracking_submition_on",
+        "id"=>"gae-form-tracking",
         "title"=>"Enable form submition tracking",
         "type"=>"select",
         "value"=>"",
@@ -125,7 +125,7 @@ $sections = [
         ]
       ],
       [
-        "id"=>"form_tracking_gravity_forms_on",
+        "id"=>"gae-form-tracking-gravity",
         "title"=>"Enable gravity forms tracking",
         "type"=>"select",
         "value"=>"",
@@ -143,7 +143,7 @@ $sections = [
         ]
       ],
       [
-        "id"=>"form_tracking_starts_to_fill_fields_on",
+        "id"=>"gae-form-tracking-field-change",
         "title"=>"Enable form fields tracking",
         "type"=>"select",
         "value"=>"",
@@ -169,7 +169,7 @@ $sections = [
     "fields"=> [
       //todo allow user to specify the extensions
       [
-        "id"=>"file_donwloads_on",
+        "id"=>"gae-file-donwloads",
         "title"=>"Enable file click tracking",
         "type"=>"select",
         "value"=>"",
@@ -198,7 +198,7 @@ $sections = [
     "example"=>'<a href="link to somehting or place" data-ga-category="Shopping cart" data-ga-action="Clicked" data-ga-label="In Header">Click me </a>',
     "fields"=> [
       [
-        "id"=>"outgoing_links_on",
+        "id"=>"gae-custom-links",
         "title"=>"Enable custom link tracking",
         "type"=>"select",
         "value"=>"",
@@ -224,7 +224,7 @@ $sections = [
     This will track when users are leaving your site via autgoing links in content. This sometimes also helps to track some links that could be by mistake.",
     "fields"=> [
       [
-        "id"=>"outgoing_links_on",
+        "id"=>"gae-outgoing-links",
         "title"=>"Enable outgoing link tracking",
         "type"=>"select",
         "value"=>"",
@@ -250,7 +250,7 @@ $sections = [
     "description"=>"Enable this if you want to track some custom elements, by css class or id",
     "fields"=> [
       [
-        "id"=>"custom_element_tracking_on",
+        "id"=>"gae-custom-element-tracking",
         "title"=>"Enable custom element tracking",
         "type"=>"select",
         "value"=>"",
@@ -318,40 +318,7 @@ $sections = [
     <input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
   </p>
 </forms>
-<pre>
-<?php
-  print_r($_POST);
-
-  if (isset($_POST["option_page"]) && $_POST["option_page"] == 'gae-settings-group'){
-      //combining the scritps
-
-      $result_file_path = gae_PLUGIN_PATH."/js/gae-combined.js";
-
-      $main_file_path = gae_PLUGIN_PATH."/js-parts/gae-main.js";
-
-      $js_parts_to_include=["gae-variables","gae-functions"];
-
-      $combined_js_content= file_get_contents($main_file_path);
-      foreach($js_parts_to_include as $js_part){
-        $file_to_include = gae_PLUGIN_PATH."/js-parts/$js_part.js";
-        $combined_js_content = str_replace("//[$js_part]",file_get_contents($file_to_include),$combined_js_content);
-      }
-
-
-      if (is_writable($result_file_path)){
-        if (file_put_contents($result_file_path,$combined_js_content)){
-          print("result saved to: $result_file_path");
-        } else {
-          print("failed");
-        };
-      } else {
-        print("Cabt generate file!");
-      }
 
 
 
-  }
-
-?>
-</pre>
       <table class="form-table">        <tr valign="top">        <th scope="row">New Option Name</th>        <td><input type="text" name="new_option_name" value="<?php echo get_option('new_option_name'); ?>" /></td>        </tr>                 <tr valign="top">        <th scope="row">Some Other Option</th>        <td><input type="text" name="some_other_option" value="<?php echo get_option('some_other_option'); ?>" /></td>        </tr>                <tr valign="top">        <th scope="row">Options, Etc.</th>        <td><input type="text" name="option_etc" value="<?php echo get_option('option_etc'); ?>" /></td>        </tr>    </table>

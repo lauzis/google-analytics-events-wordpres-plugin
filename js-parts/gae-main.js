@@ -23,12 +23,16 @@ jQuery(function($) {
       }
   });
 
+  //[gae-custom-element-tracking]
+
+  //[gae-search]
+
+  //[gae-mailchimp]
 
   //[gae-form-tracking-gravity]
 
-  //[gae-form-tracking]
+  //[gae-form-tracking-field-change]
 
-  //[gae-custom_element_tracking]
-
+  //[gae-time-trigger]
 
 });

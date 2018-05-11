@@ -103,4 +103,68 @@ function gae_debug() {
 	# only run debug on localhost
 	if ($_SERVER["HTTP_HOST"]=="localhost" && defined('EPS_DEBUG') && EPS_DEBUG==true) return true;
 }
+
+function gae_get_js_parts()
+{
+	return [
+		"gae-contact-links",
+		"gae-custom-links",
+		"gae-custome-element-tracking",
+		"gae-file-downloads",
+		"gae-form-tracking-field-change",
+		"gae-form-tracking-gravity",
+		"gae-form-tracking",
+		"gae-mailchimp",
+		"gae-outgoing-links",
+		"gae-search",
+		"gae-social-links",
+		"gae-time-trigger"
+	];
+}
+
+
+function gae_generate_combined(){
+	?>
+	<pre>
+	<?php
+	  print_r($_POST);
+
+	  if (isset($_POST["option_page"]) && $_POST["option_page"] == 'gae-settings-group'){
+	      //combining the scritps
+
+	      $result_file_path = gae_PLUGIN_PATH."/js/gae-combined.js";
+
+	      $main_file_path = gae_PLUGIN_PATH."/js-parts/gae-main.js";
+
+	      $js_parts_to_include=["gae-variables","gae-functions"];
+
+	      $all_js_parts= gae_get_js_parts();
+	      foreach($all_js_parts as $js_part){
+	        if (isset($_POST[$js_part]) && $_POST[$js_part]){
+	          $js_parts_to_include[] = $js_part;
+	        }
+	      }
+
+	      $combined_js_content= file_get_contents($main_file_path);
+	      foreach($js_parts_to_include as $js_part){
+	        $file_to_include = gae_PLUGIN_PATH."/js-parts/$js_part.js";
+	        $combined_js_content = str_replace("//[$js_part]",file_get_contents($file_to_include),$combined_js_content);
+	      }
+
+
+	      if (is_writable($result_file_path)){
+	        if (file_put_contents($result_file_path,$combined_js_content)){
+	          print("result saved to: $result_file_path");
+	        } else {
+	          print("failed");
+	        };
+	      } else {
+	        print("Cabt generate file!");
+	      }
+	  }
+
+	?>
+	</pre>
+	<?php
+}
 ?>
