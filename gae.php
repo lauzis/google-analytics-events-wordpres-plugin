@@ -23,6 +23,7 @@ License: GPL3
 define( 'gae_PUGIN_NAME', 'Google Analytcs Events');
 define( 'gae_PLUGIN_DIRECTORY', 'google-analytics-events');
 define( 'gae_PLUGIN_PATH',  WP_CONTENT_DIR.'/plugins/'.gae_PLUGIN_DIRECTORY);
+define( 'gae_INCLUDES_PATH',  gae_PLUGIN_PATH."/includes");
 define( 'gae_CURRENT_VERSION', '0.9.1' );
 define( 'gae_CURRENT_BUILD', '1' );
 define( 'gae_LOGPATH', str_replace('\\', '/', WP_CONTENT_DIR).'/gae-logs/');
@@ -124,11 +125,6 @@ function gae_get_js_parts()
 
 
 function gae_generate_combined(){
-	?>
-	<pre>
-	<?php
-	  print_r($_POST);
-
 	  if (isset($_POST["option_page"]) && $_POST["option_page"] == 'gae-settings-group'){
 	      //combining the scritps
 
@@ -167,13 +163,9 @@ function gae_generate_combined(){
 	          print("failed");
 	        };
 	      } else {
-	        print("Cabt generate file!");
+	        print("Cant generate file!");
 	      }
 	  }
-
-	?>
-	</pre>
-	<?php
 }
 
 
@@ -183,4 +175,20 @@ function gae_message($text, $type="success")
 		<div id="message" class="<?= $type ?>"><?= $text ?></div>
 	<?php
 }
-?>
+
+
+function gae_get_sections()
+{
+	$sections = json_decode(file_get_contents(gae_INCLUDES_PATH."/sections.json"),true);
+	foreach($sections as $sk => $s){
+		foreach($s["fields"] as $fk => $f){
+			if(isset($_POST[$f["id"]])){
+				$sections[$sk]["fields"][$fk]["value"] = $_POST[$f["id"]];
+				update_option($f["id"],$_POST[$f["id"]]);
+			} elseif (get_option($f["id"])) {
+				$sections[$sk]["fields"][$fk]["value"] = get_option($f["id"]);
+			}
+		}
+	}
+	return $sections;
+}
