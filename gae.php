@@ -26,6 +26,9 @@ define( 'gae_PLUGIN_PATH',  WP_CONTENT_DIR.'/plugins/'.gae_PLUGIN_DIRECTORY);
 define( 'gae_INCLUDES_PATH',  gae_PLUGIN_PATH."/includes");
 define( 'gae_CURRENT_VERSION', '0.9.1' );
 define( 'gae_CURRENT_BUILD', '1' );
+$uloads_dir = wp_upload_dir();
+define( 'gae_GENERATE_PATH', str_replace('\\', '/', $uloads_dir["basedir"].'/gae/'));
+define( 'gae_GENERATE_FILE', gae_GENERATE_PATH.'gae.js');
 define( 'gae_LOGPATH', str_replace('\\', '/', WP_CONTENT_DIR).'/gae-logs/');
 define( 'gae_DEBUG', false);		# never use debug mode on productive systems
 // i18n plugin domain for language files
@@ -124,11 +127,23 @@ function gae_get_js_parts()
 }
 
 
-function gae_generate_combined(){
+function gae_generate_combined()
+{
+		gae_writelog("Regenerating scrtip start.=========",__FUNCTION__,__LINE__);
+
+		if (!is_dir(gae_GENERATE_PATH) || !file_exists(gae_GENERATE_PATH)){
+			mkdir(gae_GENERATE_PATH,0655,true);
+			if (!is_writable(gae_GENERATE_PATH)){
+				gae_message("Cant wrtie to file, in directory:".gae_GENERATE_PATH,"error");
+			}
+		}
+
 	  if (isset($_POST["option_page"]) && $_POST["option_page"] == 'gae-settings-group'){
 	      //combining the scritps
 
 	      $result_file_path = gae_PLUGIN_PATH."/js/gae-combined.js";
+
+				$result_file_upload_path  = gae_GENERATE_FILE;
 
 	      $main_file_path = gae_PLUGIN_PATH."/js-parts/gae-main.js";
 
@@ -155,17 +170,33 @@ function gae_generate_combined(){
 	        $combined_js_content = str_replace("//[$js_part]",$start_text.file_get_contents($file_to_include).$end_text,$combined_js_content);
 	      }
 
+				if (gae_DEVELOPMENT_MODE){
+					gae_writelog("Trying save regenerated file to subfolder.=========",__FUNCTION__,__LINE__);
+		      if (is_writable($result_file_path)){
+		        if (file_put_contents($result_file_path,$combined_js_content)){
+							gae_writelog("Result saved to: $result_file_path ",__FUNCTION__,__LINE__);
+		        } else {
+		          gae_writelog("FAILED (can be ignored) save to: $result_file_path ",__FUNCTION__,__LINE__);
+		        };
+		      } else {
+		        gae_writelog("FAILED (can be ignored) file is not writable: $result_file_path ",__FUNCTION__,__LINE__);
+		      }
+				}
 
-	      if (is_writable($result_file_path)){
-	        if (file_put_contents($result_file_path,$combined_js_content)){
-	          print("result saved to: $result_file_path");
+				if (is_writable($result_file_uload_path)){
+	        if (file_put_contents($result_file_upload_path,$combined_js_content)){
+						gae_writelog("Result saved to: $result_file_upload_path ",__FUNCTION__,__LINE__);
 	        } else {
-	          print("failed");
+						gae_message("Cant save the generated file. $result_file_upload_path","error");
+	          gae_writelog("FAILED save to: $result_file_upload_path ",__FUNCTION__,__LINE__);
 	        };
 	      } else {
-	        print("Cant generate file!");
+					gae_message("Cant save the generated file. $result_file_upload_path","error");
+	        gae_writelog("FAILED file is not writable: $result_file_upload_path ",__FUNCTION__,__LINE__);
 	      }
 	  }
+
+		gae_writelog("Regenerating scrtip end.=========",__FUNCTION__,__LINE__);
 }
 
 

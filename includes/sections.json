@@ -281,12 +281,16 @@
           "title":"Disabled"
         },
         {
+          "value":"enable-php-log",
+          "title":"Enable - php log"
+        },
+        {
           "value":"enable-console-log",
-          "title":"Enable - console log"
+          "title":"Enable - console.log + php log"
         },
         {
           "value":"enable-show-on-front",
-          "title":"Enable - show on front + console.log"
+          "title":"Enable - show on front + console.log + php log"
         }
       ]
     },

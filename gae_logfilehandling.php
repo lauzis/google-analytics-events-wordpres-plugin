@@ -61,7 +61,7 @@ function gae_check_create_log_folder() {
 	# check for folder
 	if (gae_check_folder_error()) {
 		if (!gae_createLogFolder()) {
-			gae_message(__("Google Analytics Events (GAE) Error: Can't write to log folder ", EMU2_I18N_DOMAIN).gae_LOGPATH.__(" Permissions 777 needed.", EMU2_I18N_DOMAIN),"error");
+			gae_message(__("Google Analytics Events (GAE) Error: Can't write to log folder ", EMU2_I18N_DOMAIN).gae_LOGPATH." ".__("Php process shoul be allowed to write to that folder.", EMU2_I18N_DOMAIN),"error");
 		} else {
 			gae_message(__("Google Analytics Events (GAE): Log folder created: ", EMU2_I18N_DOMAIN).gae_LOGPATH,"message");
 		}
