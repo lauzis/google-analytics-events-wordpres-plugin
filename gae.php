@@ -27,8 +27,11 @@ define( 'gae_INCLUDES_PATH',  gae_PLUGIN_PATH."/includes");
 define( 'gae_CURRENT_VERSION', '0.9.1' );
 define( 'gae_CURRENT_BUILD', '1' );
 $uloads_dir = wp_upload_dir();
+
 define( 'gae_GENERATE_PATH', str_replace('\\', '/', $uloads_dir["basedir"].'/gae/'));
 define( 'gae_GENERATE_FILE', gae_GENERATE_PATH.'gae.js');
+define( 'gae_GENERATE_URL', $uloads_dir["baseurl"].'/gae/gae.js');
+
 define( 'gae_LOGPATH', str_replace('\\', '/', WP_CONTENT_DIR).'/gae-logs/');
 define( 'gae_DEBUG', false);		# never use debug mode on productive systems
 // i18n plugin domain for language files
@@ -57,21 +60,14 @@ add_action( 'admin_menu', 'gae_create_menu' );
 //call register settings function
 add_action( 'admin_init', 'gae_register_settings' );
 
+//
+add_action('wp_enqueue_scripts','gea_register_scripts');
+
+//
 
 register_activation_hook(__FILE__, 'gae_activate');
 register_deactivation_hook(__FILE__, 'gae_deactivate');
 register_uninstall_hook(__FILE__, 'gae_uninstall');
-
-// activating the default values
-function gae_activate() {
-	add_option('gae_option_3', 'any_value');
-}
-
-// deactivating
-function gae_deactivate() {
-	// needed for proper deletion of every option
-	delete_option('gae_option_3');
-}
 
 // uninstalling
 function gae_uninstall() {
@@ -97,9 +93,7 @@ function gae_create_menu() {
 
 function gae_register_settings() {
 	//register settings
-	register_setting( 'ept-settings-group', 'new_option_name' );
-	register_setting( 'ept-settings-group', 'some_other_option' );
-	register_setting( 'ept-settings-group', 'option_etc' );
+	//gea_register_scripts();
 }
 
 // check if debug is activated
@@ -183,15 +177,15 @@ function gae_generate_combined()
 		      }
 				}
 
-				if (is_writable($result_file_uload_path)){
+				if (is_writable(dirname($result_file_uload_path))|| 1){
 	        if (file_put_contents($result_file_upload_path,$combined_js_content)){
 						gae_writelog("Result saved to: $result_file_upload_path ",__FUNCTION__,__LINE__);
 	        } else {
-						gae_message("Cant save the generated file. $result_file_upload_path","error");
+						gae_message("Cant save the generated file. $result_file_upload_path . The folder / file should be writable by php and accessible - readable publicly.","error");
 	          gae_writelog("FAILED save to: $result_file_upload_path ",__FUNCTION__,__LINE__);
 	        };
 	      } else {
-					gae_message("Cant save the generated file. $result_file_upload_path","error");
+					gae_message("Folder is not writable. ".dirname($result_file_upload_path),"error");
 	        gae_writelog("FAILED file is not writable: $result_file_upload_path ",__FUNCTION__,__LINE__);
 	      }
 	  }
@@ -222,4 +216,10 @@ function gae_get_sections()
 		}
 	}
 	return $sections;
+}
+
+
+function gea_register_scripts()
+{
+		wp_enqueue_script('gae_ga', gae_GENERATE_URL, array('jquery'));
 }
