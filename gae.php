@@ -23,6 +23,7 @@ License: GPL3
 define( 'gae_PUGIN_NAME', 'Google Analytcs Events');
 define( 'gae_PLUGIN_DIRECTORY', 'google-analytics-events');
 define( 'gae_PLUGIN_PATH',  WP_CONTENT_DIR.'/plugins/'.gae_PLUGIN_DIRECTORY);
+define( 'gae_PLUGIN_URL',  WP_CONTENT_URL.'/plugins/'.gae_PLUGIN_DIRECTORY);
 define( 'gae_INCLUDES_PATH',  gae_PLUGIN_PATH."/includes");
 define( 'gae_CURRENT_VERSION', '0.9.1' );
 define( 'gae_CURRENT_BUILD', '1' );
@@ -88,12 +89,16 @@ function gae_create_menu() {
 	#$parent_slug="edit.php";		# For Posts
 	// more examples at http://codex.wordpress.org/Administration_Menus
 	//add_submenu_page( $parent_slug, __("HTML Title 4", EMU2_I18N_DOMAIN), __("Menu title 4", EMU2_I18N_DOMAIN), 9, gae_PLUGIN_DIRECTORY.'/gae_settings_page.php');
+
+	add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), 'gae_add_settings_link_to_plugin_list' );
+
 }
 
 
 function gae_register_settings() {
 	//register settings
 	//gea_register_scripts();
+	gae_admin_register_scripts();
 }
 
 // check if debug is activated
@@ -219,7 +224,47 @@ function gae_get_sections()
 }
 
 
+function gae_is_debug(){
+	//TODO check if the its debug mode, and what level
+	return true;
+}
+
+
+function gae_is_settings_page(){
+	//// TODO: check if we are on settings page to load addtional css
+	return true;
+}
+
+
+function gae_add_custom_admin_css() {
+  echo '<link id="'.gae_PLUGIN_DIRECTORY.'" rel="stylesheet" href="'.gae_PLUGIN_URL.'/css/gae-admin.css'.'" type="text/css" media="all" />';
+}
+
+
+function gae_admin_register_scripts(){
+	if(is_admin()){
+		if (gae_is_settings_page()){
+			add_action('admin_head', 'gae_add_custom_admin_css');
+		}
+	}
+}
+
+
 function gea_register_scripts()
 {
-		wp_enqueue_script('gae_ga', gae_GENERATE_URL, array('jquery'));
+
+		wp_enqueue_script('gae-ga', gae_GENERATE_URL, array('jquery'));
+
+		if (!is_admin() && gae_is_debug()){
+				wp_enqueue_style('gae-css', gae_PLUGIN_URL.'/css/gae-debug.css');
+				wp_enqueue_script('gae-debug', gae_PLUGIN_URL.'/js/gae-debug.js', array('jquery'));
+		}
+
+}
+
+function gae_add_settings_link_to_plugin_list()
+{
+	$links[] = '<a href="'. esc_url( get_admin_url(null, 'options-general.php?page=google-analytics-events/gae_settings_page.php') ) .'">Settings</a>';
+	///$links[] = '<a href="http://wp-buddy.com" target="_blank">More plugins by WP-Buddy</a>';
+	return $links;
 }
