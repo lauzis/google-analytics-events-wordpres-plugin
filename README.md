@@ -1,10 +1,29 @@
 # Google Analytics Events Wordpres Plugin
 Wordpress plugin that sets basic google analytics events for webpage
 
+== Todolog ==
+
+0.9.4 Debug settings implementation backend
+ - Include js acording to debug settings
+ - Include inline google analytics acording to debug settings
+ - Debug code settings by ip
+
+0.9.5 Debug settings implementation frontend
+ - css that shows the elements that will triger ga event
+ - css that will show that user is in debug mode 
+
+
+...
+
+0.9.x-2 Translations po/mo files
+0.9.x-1 Donate links
+0.9.x Proor reeding, fixing the pidgeon english
+
+1.0.0 Publishing, beer
+
+
 
 == Chanelog ==
-
-0.9.4 (TODO - Focus on next update) - Debug setting implementation
 
 0.9.3 - Usable, but some parts not implemented yet, but a lot of work have been done
 
