@@ -2,7 +2,7 @@
 
   <label for="<?= $id ?>">
     <?= $title ?>
-  </lable>
+  </label>
 
   <select name="<?= $id ?>" id="<?= $id ?>">
     <?php foreach($options as $o): ?>
@@ -13,5 +13,8 @@
       value="<?= $o["value"] ?>"><?= $o["title"] ?></option>
     <?php endforeach; ?>
   </select>
+  <?php if ($description): ?>
+    <p class="gae-form-field-description"><?= $description ?></p>
+  <?php endif; ?>
 
 </div>

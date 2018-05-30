@@ -32,6 +32,15 @@
       "value":"",
       "placeholder":"UA-XXX-X",
       "default_value":""
+    },
+    {
+      "id":"gae-script-analytics-id-debug",
+      "title":"Google analytics id for debug",
+      "type":"text",
+      "value":"",
+      "placeholder":"UA-XXX-X",
+      "default_value":"",
+      "description":"As you will test, all events and clicks will be sent to google analytics. As this could potentially scew statistics its recomended to create seperate google analytics view so that you can safely test all events. This id will be used only if the debug mode is on."
     }
   ]
 },

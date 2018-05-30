@@ -1,7 +1,49 @@
 .google-analytics-events-section {
-  margin-top:30px;
+  margin-top:60px;
+  padding:0 30px;
+}
+
+.google-analytics-events-section > h1 {
+  line-height: 30px;
+}
+
+.google-analytics-events-section > h2 {
+  font-size:30px;
+}
+
+.google-analytics-events-section code {
+  padding:10px;
+  font-family: monospace;
+  display:block;
 }
 
 .google-analytics-events-description {
-  padding:30px;
+  padding:0 30px;
+  border-style:solid;
+  border-width:0 0 0 1px;
+  max-width: 500px;
+}
+
+.gae-form-field > label {
+  display: block;
+  font-weight:bold;
+  width:100%;
+  white-space: normal;
+  max-width: 500px;
+}
+
+.gae-form-field > input,
+.gae-form-field > select {
+  padding:5px 5px;
+  text-align:left;
+  margin-top:5px;
+  width:100%;
+  border-style:solid;
+  max-width: 500px;
+}
+
+.gae-form-field > p {
+  font-style:italic;
+  padding:0px;
+  margin:0px;
 }

@@ -2,8 +2,12 @@
 
   <label for="<?= $id ?>">
     <?= $title ?>
-  </lable>
+  </label>
 
   <input name="<?= $id ?>" id="<?= $id ?>" placeholder="<?= $placeholder ?>" value="<?= $value ? $value : $default_value; ?>" />
+
+  <?php if ($description): ?>
+    <p class="gae-form-field-description"><?= $description ?></p>
+  <?php endif; ?>
 
 </div>
