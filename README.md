@@ -15,9 +15,11 @@ Wordpress plugin that sets basic google analytics events for webpage
 
 ...
 
-0.9.x-2 Translations po/mo files
-0.9.x-1 Donate links
-0.9.x Proor reeding, fixing the pidgeon english
+0.9.x(-2) Translations po/mo files
+
+0.9.x(-1) Donate links
+
+0.9.x Proor reeding, fixing the pigeon english
 
 1.0.0 Publishing, beer
 
