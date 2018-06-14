@@ -1,0 +1,19 @@
+body {
+    border-width:6px;
+    border-color:red;
+    border-style:solid;
+}
+.gae-info {
+    position:fixed;
+    width:80%;
+    background-color:green;
+    color:red;
+    right:0px;
+    padding:20px;
+    top:50px;
+    display:none;
+}
+
+.show {
+    display:block;
+}

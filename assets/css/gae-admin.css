@@ -3,6 +3,11 @@
   padding:0 30px;
 }
 
+.google-analytics-events-section {
+  margin-top:60px;
+  padding:0 30px;
+}
+
 .google-analytics-events-section > h1 {
   line-height: 30px;
 }
@@ -30,10 +35,12 @@
   width:100%;
   white-space: normal;
   max-width: 500px;
+  margin-top:20px;
 }
 
 .gae-form-field > input,
-.gae-form-field > select {
+.gae-form-field > select,
+.gae-form-field > textarea {
   padding:5px 5px;
   text-align:left;
   margin-top:5px;
@@ -41,9 +48,13 @@
   border-style:solid;
   max-width: 500px;
 }
+.gae-form-field > textarea {
+  min-height:200px;
+}
 
 .gae-form-field > p {
   font-style:italic;
   padding:0px;
   margin:0px;
+  max-width: 500px;
 }
