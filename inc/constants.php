@@ -7,9 +7,15 @@ define( 'gae_PLUGIN_DIRECTORY', 'google-analytics-events');
 define( 'gae_PLUGIN_PATH',  WP_CONTENT_DIR.'/plugins/'.gae_PLUGIN_DIRECTORY);
 define( 'gae_PLUGIN_URL',  WP_CONTENT_URL.'/plugins/'.gae_PLUGIN_DIRECTORY);
 
-define( 'gae_ASSETS_URL',  gae_PLUGIN_URL."/assets/");
+define( 'gae_ASSETS_URL',  gae_PLUGIN_URL."/assets");
+define( 'gae_ASSETS_PATH',  gae_PLUGIN_PATH."/assets");
+
 define( 'gae_JS_URL',  gae_ASSETS_URL."/js");
-define( 'gae_CSS_URL',  gae_ASSETS_URL."/js");
+define( 'gae_CSS_URL',  gae_ASSETS_URL."/css");
+
+define( 'gae_JS_PARTS_PATH',  gae_ASSETS_PATH."/js/parts");
+
+
 
 define( 'gae_INCLUDES_PATH',  gae_PLUGIN_PATH."/inc");
 define( 'gae_CURRENT_VERSION', '0.9.4' );

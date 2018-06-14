@@ -260,21 +260,42 @@ function pop_history(){
 
 
 function send_event(category, action, label, value){
-
+    
     if(IS_GA){
-        ga('send', 'event',category, action, label, value );
+        if (typeof ga === "function"){
+            ga('send', 'event',category, action, label, value );
+            debug_message('ga called: category='+category+' action='+action+' label='+label+' value='+value);
+        } else {
+
+                debug_message("We could not find ga function. Is Google analytics loaded?");
+            }
+        }
+
     }
 
     if (!IS_GA){
-        gtag('event', action, {
-            'event_category': category,
-            'event_label': label,
-            'value': value
-        });
-    }
+        if (typeof gtag === "function"){
+            gtag('event', action, {
+                'event_category': category,
+                'event_label': label,
+                'value': value
+            });
+            debug_message('gtag called: category='+category+' action='+action+' label='+label+' value='+value);
+        } else {
+            debug_message("We could not find gtag function. Is Google analytics loaded?");
+        }
 
-    if (DEBUG_MODE){
-        console.log('send', 'event', category, action, label, value);
     }
-
 };
+
+
+function debug_message(message){
+
+    if (GAE_DEBUG_LEVEL>1) {
+        console.log(message);
+        if (typeof GAE_DEBUG.showMessage==="function"){
+            GAE_DEBUG.showMessage(message)
+        }
+    }
+
+}

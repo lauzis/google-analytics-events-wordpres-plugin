@@ -1,5 +1,5 @@
-if (typeof DEBUG_MODE === "undefined"){
-    var DEBUG_MODE = true;
+if (typeof GAE_DEBUG_LEVEL === "undefined"){
+    var GAE_DEBUG_LEVEL = [gae-debug-level];
 }
 
 if (typeof contact_page_link === "undefined"){

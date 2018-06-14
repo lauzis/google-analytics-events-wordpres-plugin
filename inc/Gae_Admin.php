@@ -56,7 +56,36 @@ class Gae_Admin {
 // check if debug is activated
   public static function debug() {
     # only run debug on localhost
-    if ($_SERVER["HTTP_HOST"]=="localhost" && defined('EPS_DEBUG') && EPS_DEBUG==true) return true;
+    $ips = get_option("gea-debug-ip");
+    $ips = explode(",",$ips);
+    $ips = array_unique($ips);
+    if (count($ips)>0){
+        if (!in_array($_SERVER["REMOTE_ADDR"],$ips)){
+            return false;
+        }
+    }
+    $debug_level = get_option("gae-debug");
+    switch($debug_level){
+        case "disabled":
+            return false;
+        break;
+        case "enable-php-log":
+            return 1;
+            break;
+        case "enable-console-log":
+          return 2;
+        break;
+        case "enable-show-on-front":
+            return 3;
+        break;
+
+        default:
+            return $debug_level;
+        break;
+    }
+    print_r($ips);
+    die();
+    return false;
   }
 
   public static function get_js_parts()
@@ -80,6 +109,10 @@ class Gae_Admin {
 
   public static function generate_combined()
   {
+
+    $result_file_path = gae_PLUGIN_PATH."/js/gae-combined.js";
+    $result_file_upload_path  = gae_GENERATE_FILE;
+
     Gae_Logger::write_log("Regenerating scrtip start.=========",__FUNCTION__,__LINE__);
 
     if (!is_dir(gae_GENERATE_PATH) || !file_exists(gae_GENERATE_PATH)){
@@ -92,11 +125,7 @@ class Gae_Admin {
     if (isset($_POST["option_page"]) && $_POST["option_page"] == 'gae-settings-group'){
       //combining the scritps
 
-      $result_file_path = gae_PLUGIN_PATH."/js/gae-combined.js";
-
-      $result_file_upload_path  = gae_GENERATE_FILE;
-
-      $main_file_path = gae_PLUGIN_PATH."/js-parts/gae-main.js";
+      $main_file_path = gae_JS_PARTS_PATH."/gae-main.js";
 
       $js_parts_to_include=["gae-variables","gae-functions"];
 
@@ -111,17 +140,24 @@ class Gae_Admin {
 
       $combined_js_content= file_get_contents($main_file_path);
       foreach($js_parts_to_include as $js_part){
-        $file_to_include = gae_PLUGIN_PATH."/js-parts/$js_part.js";
+        $file_to_include = gae_JS_PARTS_PATH."/$js_part.js";
+        print_r($file_to_include);
+
         $start_text = "
 					/* ------ $js_part --- $file_to_include ------ STARTS */
 					";
         $end_text = "
 					/* ------ $js_part ---  $file_to_include ------ ENDS */
 					";
-        $combined_js_content = str_replace("//[$js_part]",$start_text.file_get_contents($file_to_include).$end_text,$combined_js_content);
+        [gae-debug-level]
+
+        $js_part_content = $start_text.file_get_contents($file_to_include).$end_text;
+        
+
+        $combined_js_content = str_replace("//[$js_part]",$js_part_contet,$combined_js_content);
       }
 
-      if (gae_DEVELOPMENT_MODE){
+      if (self::debug()){
         Gae_Logger::write_log("Trying save regenerated file to subfolder.=========",__FUNCTION__,__LINE__);
         if (is_writable($result_file_path)){
           if (file_put_contents($result_file_path,$combined_js_content)){
@@ -134,15 +170,15 @@ class Gae_Admin {
         }
       }
 
-      if (is_writable(dirname($result_file_uload_path))|| 1){
+      if (is_writable(dirname($result_file_upload_path))){
         if (file_put_contents($result_file_upload_path,$combined_js_content)){
           Gae_Logger::write_log("Result saved to: $result_file_upload_path ",__FUNCTION__,__LINE__);
         } else {
-          gae_message("Cant save the generated file. $result_file_upload_path . The folder / file should be writable by php and accessible - readable publicly.","error");
+          self::message("Cant save the generated file. $result_file_upload_path . The folder / file should be writable by php and accessible - readable publicly.","error");
           Gae_Logger::write_log("FAILED save to: $result_file_upload_path ",__FUNCTION__,__LINE__);
         };
       } else {
-        gae_message("Folder is not writable. ".dirname($result_file_upload_path),"error");
+        self::message("Folder is not writable. ".dirname($result_file_upload_path),"error");
         Gae_Logger::write_log("FAILED file is not writable: $result_file_upload_path ",__FUNCTION__,__LINE__);
       }
     }
@@ -176,11 +212,6 @@ class Gae_Admin {
   }
 
 
-  public static function gae_is_debug(){
-    //TODO check if the its debug mode, and what level
-    return true;
-  }
-
 
   public static function is_settings_page(){
     //// TODO: check if we are on settings page to load addtional css
@@ -188,15 +219,15 @@ class Gae_Admin {
   }
 
 
-  public static function add_custom_admin_css() {
-    echo '<link id="'.gae_PLUGIN_DIRECTORY.'" rel="stylesheet" href="'.gae_PLUGIN_URL.'/css/gae-admin.css'.'" type="text/css" media="all" />';
+  public static function add_css() {
+    echo '<link id="'.gae_PLUGIN_DIRECTORY.'" rel="stylesheet" href="'.gae_CSS_URL.'/gae-admin.css'.'" type="text/css" media="all" />';
   }
 
 
   public static function add_scripts(){
     if(is_admin()){
       if (self::is_settings_page()){
-        add_action('admin_head', 'gae_add_custom_admin_css');
+        add_action('admin_head', 'Gae_Admin::add_css');
       }
     }
   }

@@ -12,15 +12,14 @@ class Gae_Frontend {
 
         wp_enqueue_script('gae-ga', gae_GENERATE_URL, array('jquery'));
 
-        if (!is_admin() && gae_is_debug()){
-          wp_enqueue_style('gae-css', gae_PLUGIN_URL.'/css/gae-debug.css');
-          wp_enqueue_script('gae-debug', gae_PLUGIN_URL.'/js/gae-debug.js', array('jquery'));
+        if (!is_admin() && Gae_Admin::debug() && Gae_Admin::debug() > 2){
+          wp_enqueue_style('gae-css', gae_CSS_URL.'/gae-debug.css');
+          wp_enqueue_script('gae-debug', gae_JS_URL.'/gae-debug.js', array('jquery'),gae_CURRENT_VERSION,true);
         }
-
     }
 
 
-  function add_inline_script()
+  public static function add_inline_scripts()
   {
     $ga_id = get_option("gae-script-analytics-id");
     $ga_type = get_option("gae-script-type");
@@ -68,7 +67,11 @@ class Gae_Frontend {
     }
     ?>
     <script>
-        alert("but works <?php echo $ga_id ?>  <?php echo $ga_type ?>");
+
+        <?php if (Gae_Admin::debug()>0): ?>
+            var GAE_DEBUG_LEVEL = '<?= Gae_Admin::debug() ?>';
+        <?php endif; ?>
+
     </script>
     <?php
   }
