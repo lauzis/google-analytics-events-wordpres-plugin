@@ -3,14 +3,22 @@ Wordpress plugin that sets basic google analytics events for webpage
 
 == Todolog ==
 
-0.9.4 Debug settings implementation backend
- - Include js acording to debug settings
- - Include inline google analytics acording to debug settings
- - Debug code settings by ip
 
 0.9.5 Debug settings implementation frontend
  - css that shows the elements that will triger ga event
- - css that will show that user is in debug mode 
+ - css that will show that user is in debug mode
+ 
+0.9.6 Fill the missing code parts
+
+0.9.7 Check todos in the code 
+
+0.9.8 Give someone to test, get feedback
+    - setup
+    - changins settings
+    - debuging mode
+    - debuging mode by ip
+
+0.9.9 Bugfixing
 
 
 ...
@@ -21,11 +29,24 @@ Wordpress plugin that sets basic google analytics events for webpage
 
 0.9.x Proor reeding, fixing the pigeon english
 
-1.0.0 Publishing, beer
+1.0.0 Publishing, drinking beer
+
+1.0.1 Rewrite the js code as the object
+
+1.0.2 Rewrite code that it would not rely on jQuery
+
+1.0.3 New features 
 
 
 
 == Chanelog ==
+
+0.9.4 Debug settings implementation backend
+
+ - Include js acording to debug settings 
+ - Include inline google analytics acording to debug settings
+ - Debug code settings by ip
+
 
 0.9.3 - Usable, but some parts not implemented yet, but a lot of work have been done
 
