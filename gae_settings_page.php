@@ -37,6 +37,10 @@
                 <?php $placeholder= !empty($field["placeholder"]) ? $field["placeholder"] : "" ?>
                 <?php $options= !empty($field["options"]) ? $field["options"] : [] ?>
                 <?php $description= !empty($field["description"]) ? $field["description"] : "" ?>
+                <?php if ($id==="gea-debug-ip"){
+                    $description.="<br/>You current ip address is: ".$_SERVER["REMOTE_ADDR"];
+                }
+                ?>
                 <li><?php require(gae_INCLUDES_PATH."/fields/".$field["type"].".php"); ?></li>
               <?php endforeach; ?>
             </ul>
