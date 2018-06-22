@@ -6,14 +6,45 @@ body {
 .gae-info {
     position:fixed;
     width:80%;
-    background-color:green;
-    color:red;
+    background-color:#ffffff;
+    color:#1a1a1a;
     right:0px;
     padding:20px;
     top:50px;
+    border-radius: 5px 0 0 5px;
+    border-color:#1a1a1a;
+    border-style:solid;
+    border-width:1px;
+    box-shadow: 3px 3px 5px 6px #ccc;
     display:none;
 }
 
 .show {
     display:block;
+}
+
+#gae-info-close {
+    padding-right:10px;
+}
+
+.gae-events {
+    border-style:dashed;
+    border-color:darkred;
+    border-width: 3px;
+}
+
+.gae-events-social-links{
+    border-color:darkblue;
+}
+
+.gae-event-contact-links{
+    background-color:darkorange;
+}
+
+.gae-events-file-downloads {
+    border-color:black;
+}
+
+.gae-events-outgoing-links {
+    border-color:red;
 }

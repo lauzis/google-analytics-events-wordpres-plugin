@@ -1,24 +1,23 @@
 # Google Analytics Events Wordpres Plugin
 Wordpress plugin that sets basic google analytics events for webpage
 
-== Todolog ==
+== Donate ==
 
+Paypal: https://www.paypal.com/donate/?token=qqE_BWPb2BtCwWAWh92scW9C6Q2Fj2PVXtmU9Q9Vl2onvas1sOVcW0xLrwjdfGR2KOEoi0&country.x=US&locale.x=US
 
-0.9.5 Debug settings implementation frontend
- - css that shows the elements that will triger ga event
- - css that will show that user is in debug mode
- 
+== Todo log ==
+
 0.9.6 Fill the missing code parts
 
 0.9.7 Check todos in the code 
 
 0.9.8 Give someone to test, get feedback
     - setup
-    - changins settings
-    - debuging mode
-    - debuging mode by ip
+    - changing settings
+    - debugging mode
+    - debugging mode by ip
 
-0.9.9 Bugfixing
+0.9.9 Bug fixing
 
 
 ...
@@ -27,7 +26,7 @@ Wordpress plugin that sets basic google analytics events for webpage
 
 0.9.x(-1) Donate links
 
-0.9.x Proor reeding, fixing the pigeon english
+0.9.x Proof reeding, fixing the pigeon English
 
 1.0.0 Publishing, drinking beer
 
@@ -39,12 +38,17 @@ Wordpress plugin that sets basic google analytics events for webpage
 
 
 
-== Chanelog ==
+== Changelog ==
 
-0.9.4 Debug settings implementation backend
+0.9.5 Debug settings implementation frontend
+ - css that shows the elements that will trigger ga event
+ - css that will show that user is in debug mode
 
- - Include js acording to debug settings 
- - Include inline google analytics acording to debug settings
+
+0.9.4 Debug settings implementation backed
+
+ - Include js according to debug settings 
+ - Include inline google analytics according to debug settings
  - Debug code settings by ip
 
 
@@ -52,20 +56,18 @@ Wordpress plugin that sets basic google analytics events for webpage
 
  - Plugin settings done.
  - Error messages, warning messages of plugin implemented
- - Som settings page styling done
- - Can add google analytics code or google tam ganager code via plugin
+ - Some settings page styling done
+ - Can add google analytics code or google tag manager code via plugin
  - Combines all js parts into one file, that is included in footer
  - So will track some events already
- - Generates also standalone scritp that can be used without the plugin. For use in different sites than wordpress.
+ - Generates also stand-alone script that can be used without the plugin. For use in different sites than wordpress.
  - File naming fixes
 
 0.9.2 - Spitting up the google analytics code. <br/>
-The plugin was based on google analytics javascript code that i was working on in collobration with SEO Specialist Mārtiņš Groza (https://lv.linkedin.com/in/martins-groza-a104a690) when we both were employees of Digitalscore (http://www.digitalscore.lv/) <br/>
+The plugin was based on google analytics javascript code that i was working on in collaboration with SEO Specialist Mārtiņš Groza (https://lv.linkedin.com/in/martins-groza-a104a690) when we both were employees of Digitalscore (http://www.digitalscore.lv/) <br/>
 So at starting point the common parts of that script, that can be used in any project, was split into several sections, that could be switched on or off.
 
 0.9.1 - Setup, Initial version <br/>
-Based upon one plugin template, that is a bit outdated, and almoust nothing have left of, but still want to give credit to the author of that plugin template
-
-Contributors: 1manfactory.com  <br/>
-Donate link: http://1manfactory.com/donate <br>
+Based upon one plugin template, that is a bit outdated, and almost nothing have left of, but still want to give credit to the author of that plugin template
+1manfactory.com (1manfactory.com/donate) <br>
 

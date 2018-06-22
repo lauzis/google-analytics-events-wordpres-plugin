@@ -56,14 +56,17 @@ class Gae_Admin {
 // check if debug is activated
   public static function debug() {
     # only run debug on localhost
-    $ips = get_option("gea-debug-ip");
-    $ips = explode(",",$ips);
-    $ips = array_unique($ips);
-    if (count($ips)>0){
+    $ips = trim(get_option("gea-debug-ip"));
+    if (!empty($ips)){
+      $ips = explode(",",$ips);
+      $ips = array_unique($ips);
+      if (count($ips)>0){
         if (!in_array($_SERVER["REMOTE_ADDR"],$ips)){
-            return false;
+          return false;
         }
+      }
     }
+
     $debug_level = get_option("gae-debug");
     switch($debug_level){
         case "disabled":
@@ -83,8 +86,6 @@ class Gae_Admin {
             return $debug_level;
         break;
     }
-    print_r($ips);
-    die();
     return false;
   }
 
@@ -129,6 +130,7 @@ class Gae_Admin {
 
       $js_parts_to_include=["gae-variables","gae-functions"];
 
+
       $all_js_parts= self::get_js_parts();
       foreach($all_js_parts as $js_part){
         if (isset($_POST[$js_part]) && $_POST[$js_part]){
@@ -136,25 +138,21 @@ class Gae_Admin {
         }
       }
 
-      print_r($js_parts_to_include);
-
       $combined_js_content= file_get_contents($main_file_path);
       foreach($js_parts_to_include as $js_part){
         $file_to_include = gae_JS_PARTS_PATH."/$js_part.js";
-        print_r($file_to_include);
 
-        $start_text = "
-					/* ------ $js_part --- $file_to_include ------ STARTS */
-					";
-        $end_text = "
-					/* ------ $js_part ---  $file_to_include ------ ENDS */
-					";
-        [gae-debug-level]
+        $start_text = "\n\n/* ------ $js_part --- $file_to_include ------ STARTS */\n\n";
+        $end_text = "\n\n/* ------ $js_part ---  $file_to_include ------ ENDS */\n\n";
+
 
         $js_part_content = $start_text.file_get_contents($file_to_include).$end_text;
-        
+        $js_part_content = str_replace("[gae-debug-level]",Gae_Admin::debug(),$js_part_content);
+        $js_part_content = str_replace("[gae-script-type]",Gae_Admin::script_type(),$js_part_content);
 
-        $combined_js_content = str_replace("//[$js_part]",$js_part_contet,$combined_js_content);
+
+
+        $combined_js_content = str_replace("//[$js_part]",$js_part_content,$combined_js_content);
       }
 
       if (self::debug()){
@@ -197,16 +195,22 @@ class Gae_Admin {
 
   public static function get_sections()
   {
+      $options_updated = false;
     $sections = json_decode(file_get_contents(gae_INCLUDES_PATH."/sections.json"),true);
+    //todo write help about how to check what code is in page, maybe write test script, that tries to figure out
     foreach($sections as $sk => $s){
       foreach($s["fields"] as $fk => $f){
         if(isset($_POST[$f["id"]])){
           $sections[$sk]["fields"][$fk]["value"] = $_POST[$f["id"]];
           update_option($f["id"],$_POST[$f["id"]]);
+          $options_updated  = true;
         } elseif (get_option($f["id"])) {
           $sections[$sk]["fields"][$fk]["value"] = get_option($f["id"]);
         }
       }
+    }
+    if ($options_updated){
+      update_option("gae-assets-version",time());
     }
     return $sections;
   }
@@ -247,5 +251,33 @@ class Gae_Admin {
   }
 
 
+  public static function script_type()
+  {
+        // function returs if the googla analytics script used or google tag manager.
+
+        $is_ga = -1;
+        switch(get_option("gae-script-type")){
+            case "added-tag-manager":
+                $is_ga = 1;
+                break;
+            case "added-tag-analytics":
+                $is_ga = 0;
+                break;
+            case "added-idk":
+                $is_ga = -1;
+                break;
+            case "tag-manager":
+                $is_ga = 2;
+                break;
+            case "analytics":
+                $is_ga = 3;
+                break;
+            default:
+                $is_ga = -1;
+                break;
+        }
+        return $is_ga;
+
+  }
 
 }

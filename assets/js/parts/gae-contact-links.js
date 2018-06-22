@@ -1,4 +1,5 @@
 //EMAIL ADDRESS LINKS CLICKED
+
 $('a[href^="mailto:"]').click(function(){
 
     var self = $(this);
@@ -11,6 +12,7 @@ $('a[href^="mailto:"]').click(function(){
 })
 
 $('a[href^="mailto:"]').addClass("gae-event");
+$('a[href^="mailto:"]').addClass("gae-event-contact-links");
 
 
 //PHONE NUMBERS CLICKED
@@ -25,3 +27,7 @@ $('a[href^="tel:"]').click(function(){
 
 });
 $('a[href^="tel:"]').addClass("gae-event");
+$('a[href^="tel:"]').addClass("gae-event-contact-links");
+
+
+debug_message("Assigned click events to contact links");

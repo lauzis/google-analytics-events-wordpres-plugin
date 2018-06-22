@@ -9,11 +9,19 @@
       "title":"Embed analytics code",
       "type":"select",
       "value":"",
-      "default_value":"0",
+      "default_value":"added-tag-manager",
       "options":[
         {
-          "value":"0",
-          "title":"Analytcs code already added"
+          "value":"added-tag-manager",
+          "title":"Don`t add, code already added manually (tag manager)"
+        },
+        {
+          "value":"added-tag-analytics",
+          "title":"Don`t add, code already added manually (analytics)"
+        },
+        {
+          "value":"added-idk",
+          "title":"Don`t add, its there but i dont know what style"
         },
         {
           "value":"tag-manager",
@@ -103,6 +111,31 @@
   ]
 },
 {
+  "id":"social-links",
+  "title":"Social Links",
+  "description":"Enable this if you want to see how often social links are clicked on your website. This will track links containing social links facebook, twitter, google + .",
+  "fields": [
+    {
+      "id":"gae-social-links",
+      "title":"Enable social link tracking",
+      "type":"select",
+      "value":"",
+      "placeholder":"",
+      "default_value":"1",
+      "options":[
+        {
+          "value":"1",
+          "title":"Enable"
+        },
+        {
+          "value":"0",
+          "title":"Disable"
+        }
+      ]
+    }
+  ]
+},
+{
   "id":"form-tracking",
   "title":"Forms tracking",
   "description":"Enable this if you want to see when someone tries to submit some form. If you have some forms in your website, this will help you track if users actually are using your forms. Sometimes it helps also to find some bugs with forms, you see that users ar trying to send form, but you dont have any antires. Maybe there is some problem with forms.",
@@ -169,7 +202,7 @@
   "description":"Enable this if you want to see how often files that are linked in content are opened/downloaded.",
   "fields": [
     {
-      "id":"gae-file-donwloads",
+      "id":"gae-file-downloads",
       "title":"Enable file click tracking",
       "type":"select",
       "value":"",
@@ -239,6 +272,40 @@
     }
   ]
 },
+  {
+    "id":"specific-links",
+    "title":"Specific Link Destination",
+    "description":"Enable this if you want to track links leading to some custom url. For example, in page there could be several links to 'about us' page and you wana track all these links how ofthen they are visited.",
+    "fields": [
+      {
+        "id":"gae-track-links-to-specific-urls",
+        "title":"Enable specific link tracking",
+        "type":"select",
+        "value":"",
+        "placeholder":"",
+        "default_value":"1",
+        "options":[
+          {
+            "value":"1",
+            "title":"Enable"
+          },
+          {
+            "value":"0",
+            "title":"Disable"
+          }
+        ]
+      },
+      {
+        "id":"gae-track-links-to-specific-urls",
+        "title":"Add urls you want to track (comma seperated)",
+        "type":"textarea",
+        "value":"",
+        "placeholder":"http://somesite.com/about-us,\n http://partner.site.com",
+        "default_value":""
+      }
+    ]
+  },
+
 {
   "id":"custom-element-tracking",
   "title":"Custom element click tracking",
@@ -274,8 +341,8 @@
 },
 {
   "id":"debug",
-  "title":"Custom element click tracking",
-  "description":"Enable this if you want to track some custom elements, by css class or id",
+  "title":"Debuging",
+  "description":"Enable this for testing purposes, to see to what elements events are added and if they fire at all.",
   "fields": [
     {
       "id":"gae-debug",
