@@ -48,7 +48,7 @@ class Gae_Admin {
     #$parent_slug="edit.php";		# For Posts
     // more examples at http://codex.wordpress.org/Administration_Menus
     //add_submenu_page( $parent_slug, __("HTML Title 4", EMU2_I18N_DOMAIN), __("Menu title 4", EMU2_I18N_DOMAIN), 9, gae_PLUGIN_DIRECTORY.'/gae_settings_page.php');
-    add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), 'Gae_Admin::add_settings_link_to_plugin_list' );
+    add_filter( 'plugin_action_links_' . plugin_basename(gae_PLUGIN_FILE), 'Gae_Admin::add_settings_link_to_plugin_list' );
 
   }
 
@@ -239,7 +239,11 @@ class Gae_Admin {
 
   public static function add_settings_link_to_plugin_list($links)
   {
+    if (ģae_DONATION_SHOW_LINKS){
+      $links[] = '<a target="_blank" href="'.gae_DONATION_URL.'">Donate</a>';
+    }
     $links[] = '<a href="'. esc_url( get_admin_url(null, 'options-general.php?page=google-analytics-events/gae_settings_page.php') ) .'">Settings</a>';
+
     ///$links[] = '<a href="http://wp-buddy.com" target="_blank">More plugins by WP-Buddy</a>';
     return $links;
   }
