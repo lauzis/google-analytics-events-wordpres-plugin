@@ -41,15 +41,20 @@ function get_element_position(jq_object){
 //helper function to check if link is outgoing link
 function is_outgoing_url(url){
 
-    if (url.indexOf(HOST)>0){
+
+    if (url.indexOf(HOST)!==-1){
         return false;
     } else {
-        if (url.indexOf("/")==1){
+        if (url.length>4){
+            if (url.substring(0, 7)!=="http://" && url.substring(0, 8)!=="https://"){
+                return false;
+            }
+        }
+        if (url.indexOf("?")==0 || url.length==0 || url.indexOf("/")==0 || url.indexOf("#")==0){
             return false;
         } else {
             return true;
         }
-
     }
 }
 
@@ -65,21 +70,24 @@ function contains(a, obj) {
     return false;
 }
 
+//the list of downloadable files
+function get_valid_file_extensions(){
+    return ['.pdf','.doc','.docx','.zip','.xls','.xslx'];
+}
+
 
 //helper function that check if the link is downlodable file
 function is_file(url){
     var file_extension = url.split('.').pop();
-    if (file_extension.length<4){
-        return contains(file_extension,get_valid_file_extensions());
+    file_extension="."+file_extension;
+    if (file_extension.length<5){
+        console.log(contains(get_valid_file_extensions(),file_extension));
+        return contains(get_valid_file_extensions(),file_extension);
     }
     return false;
 }
 
 
-//the list of downloadable files
-function get_valid_file_extensions(){
-    return ['.pdf','.doc','.docx','.zip','.xls','.xslx'];
-}
 
 
 //function that gets title of the sectiom/page
@@ -260,20 +268,21 @@ function pop_history(){
 
 
 function send_event(category, action, label, value){
+
     
-    if(IS_GA){
+    if(GAE_SCRIPT_TYPE===1 || GAE_SCRIPT_TYPE===3){
+
         if (typeof ga === "function"){
             ga('send', 'event',category, action, label, value );
             debug_message('ga called: category='+category+' action='+action+' label='+label+' value='+value);
         } else {
-
-                debug_message("We could not find ga function. Is Google analytics loaded?");
-            }
+            debug_message("We could not find ga function. Is Google analytics loaded?");
         }
 
     }
 
-    if (!IS_GA){
+    if (GAE_SCRIPT_TYPE===0 || GAE_SCRIPT_TYPE===2){
+
         if (typeof gtag === "function"){
             gtag('event', action, {
                 'event_category': category,
@@ -284,18 +293,20 @@ function send_event(category, action, label, value){
         } else {
             debug_message("We could not find gtag function. Is Google analytics loaded?");
         }
-
     }
-};
+    if (GAE_SCRIPT_TYPE===-1){
+        debug_message("We could not find gtag / ga function. Is Google analytics loaded?");
+    }
+}
 
 
 function debug_message(message){
 
     if (GAE_DEBUG_LEVEL>1) {
         console.log(message);
-        if (typeof GAE_DEBUG.showMessage==="function"){
+        if (typeof GAE_DEBUG === "object" && typeof GAE_DEBUG.showMessage==="function"){
             GAE_DEBUG.showMessage(message)
         }
     }
 
-}
+};

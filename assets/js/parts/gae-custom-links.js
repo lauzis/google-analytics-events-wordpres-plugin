@@ -4,5 +4,7 @@ if(self.data("gaCategory") && self.data("gaAction") && self.data("gaLabel")){
         send_event(self.data("gaCategory"), self.data("gaAction"), self.data("gaLabel"));
     });
     self.addClass("gae-events");
-    return;
+    self.addClass("gae-events-custom-links");
 };
+
+debug_message("Assigned click events to another custom links?");

@@ -7,3 +7,5 @@ $(value_tracking_selector).change(function(){
         tracked_form_values[id] = self.val();
     }
 });
+
+debug_message("Assigned on change events on custome tracker");

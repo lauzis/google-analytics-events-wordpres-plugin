@@ -12,6 +12,9 @@ jQuery(function($) {
       var self = $(this);
       var url=self.attr("href");
       if(!self.hasClass("gae-events")){
+
+        //[gae-track-links-to-specific-urls]
+
         //[gae-custom-links]
 
         //[gae-social-links]

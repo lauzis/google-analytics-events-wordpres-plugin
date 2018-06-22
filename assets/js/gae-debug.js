@@ -16,13 +16,12 @@ var GAE_DEBUG = {
         if (timeout>0){
             setTimeout(function(){
                 GAE_DEBUG.removeClass("gae-info","show")
-            }, 3000);
+            }, 6000);
         } else {
             GAE_DEBUG.removeClass("gae-info","show")
         }
     },
     appendHtml: function(el, str) {
-        console.log(el);
         var div = document.createElement('div');
         div.innerHTML = str;
         while (div.children.length > 0) {
@@ -38,7 +37,8 @@ var GAE_DEBUG = {
         //this.assignEvents();
     },
     assignEvents: function(){
-        document.getElementById("gae-info-close").onclick = function() {
+        document.getElementById("gae-info-close").onclick = function(e) {
+            e.preventDefault();
             GAE_DEBUG.hideMessage(0);
         }
 
