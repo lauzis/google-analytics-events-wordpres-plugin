@@ -81,7 +81,6 @@ function is_file(url){
     var file_extension = url.split('.').pop();
     file_extension="."+file_extension;
     if (file_extension.length<5){
-        console.log(contains(get_valid_file_extensions(),file_extension));
         return contains(get_valid_file_extensions(),file_extension);
     }
     return false;
