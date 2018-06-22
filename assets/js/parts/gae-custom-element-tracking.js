@@ -29,3 +29,6 @@ $(click_tracking_elements).each(function(){
   }
 
 });
+
+
+debug_message("Assigned click events to custom elements");
