@@ -25,7 +25,9 @@ if (typeof GAE_SCRIPT_TYPE === "undefined"){
     }
 }
 
-
+if (typeof(GAE_TIME_TRIGGER_TRESHOLD)==="undefined"){
+    var GAE_TIME_TRIGGER_TRESHOLD = [gae-time-trigger-treshold];
+}
 
 if (typeof contact_page_link === "undefined"){
     var contact_page_link="";

@@ -302,9 +302,10 @@ function send_event(category, action, label, value){
 function debug_message(message){
 
     if (GAE_DEBUG_LEVEL>1) {
-        console.log(message);
+
         if (typeof GAE_DEBUG === "object" && typeof GAE_DEBUG.showMessage==="function"){
-            GAE_DEBUG.showMessage(message)
+
+            GAE_DEBUG.showMessage(message);;
         }
     }
 

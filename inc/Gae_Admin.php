@@ -140,6 +140,8 @@ class Gae_Admin {
 
       $combined_js_content= file_get_contents($main_file_path);
       foreach($js_parts_to_include as $js_part){
+
+
         $file_to_include = gae_JS_PARTS_PATH."/$js_part.js";
 
         $start_text = "\n\n/* ------ $js_part --- $file_to_include ------ STARTS */\n\n";
@@ -150,7 +152,12 @@ class Gae_Admin {
         $js_part_content = str_replace("[gae-debug-level]",Gae_Admin::debug(),$js_part_content);
         $js_part_content = str_replace("[gae-script-type]",Gae_Admin::script_type(),$js_part_content);
 
-
+        $sections = self::get_sections();
+        foreach($sections as $s){
+            foreach($s["fields"] as $field){
+                $js_part_content = str_replace("[".$field["id"]."]",$field["value"],$js_part_content);
+            }
+        }
 
         $combined_js_content = str_replace("//[$js_part]",$js_part_content,$combined_js_content);
       }
