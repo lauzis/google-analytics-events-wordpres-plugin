@@ -94,7 +94,7 @@ class Gae_Admin {
     return [
       "gae-contact-links",
       "gae-custom-links",
-      "gae-custome-element-tracking",
+      "gae-custom-element-tracking",
       "gae-file-downloads",
       "gae-form-tracking-field-change",
       "gae-form-tracking-gravity",
@@ -119,17 +119,15 @@ class Gae_Admin {
     if (!is_dir(gae_GENERATE_PATH) || !file_exists(gae_GENERATE_PATH)){
       mkdir(gae_GENERATE_PATH,0655,true);
       if (!is_writable(gae_GENERATE_PATH)){
-        Gae_Admin::message("Cant wrtie to file, in directory:".gae_GENERATE_PATH,"error");
+        Gae_Admin::message("Cant write to file, in directory:".gae_GENERATE_PATH,"error");
       }
     }
 
     if (isset($_POST["option_page"]) && $_POST["option_page"] == 'gae-settings-group'){
       //combining the scritps
-
       $main_file_path = gae_JS_PARTS_PATH."/gae-main.js";
 
       $js_parts_to_include=["gae-variables","gae-functions"];
-
 
       $all_js_parts= self::get_js_parts();
       foreach($all_js_parts as $js_part){
@@ -140,7 +138,6 @@ class Gae_Admin {
 
       $combined_js_content= file_get_contents($main_file_path);
       foreach($js_parts_to_include as $js_part){
-
 
         $file_to_include = gae_JS_PARTS_PATH."/$js_part.js";
 
@@ -167,6 +164,7 @@ class Gae_Admin {
         if (is_writable($result_file_path)){
           if (file_put_contents($result_file_path,$combined_js_content)){
             Gae_Logger::write_log("Result saved to: $result_file_path ",__FUNCTION__,__LINE__);
+            self::message("Result saved to: $result_file_path ".gae_GENERATE_PATH,"success");
           } else {
             Gae_Logger::write_log("FAILED (can be ignored) save to: $result_file_path ",__FUNCTION__,__LINE__);
           };
@@ -177,6 +175,7 @@ class Gae_Admin {
 
       if (is_writable(dirname($result_file_upload_path))){
         if (file_put_contents($result_file_upload_path,$combined_js_content)){
+          self::message("Result saved to: $result_file_upload_path ".gae_GENERATE_PATH,"success");
           Gae_Logger::write_log("Result saved to: $result_file_upload_path ",__FUNCTION__,__LINE__);
         } else {
           self::message("Cant save the generated file. $result_file_upload_path . The folder / file should be writable by php and accessible - readable publicly.","error");
@@ -188,7 +187,7 @@ class Gae_Admin {
       }
     }
 
-    Gae_Logger::write_log("Regenerating scrtip end.=========",__FUNCTION__,__LINE__);
+    Gae_Logger::write_log("Regenerating script end.=========",__FUNCTION__,__LINE__);
   }
 
 
@@ -205,14 +204,17 @@ class Gae_Admin {
       $options_updated = false;
     $sections = json_decode(file_get_contents(gae_INCLUDES_PATH."/sections.json"),true);
     //todo write help about how to check what code is in page, maybe write test script, that tries to figure out
+
     foreach($sections as $sk => $s){
+
       foreach($s["fields"] as $fk => $f){
+
         if(isset($_POST[$f["id"]])){
-          $sections[$sk]["fields"][$fk]["value"] = $_POST[$f["id"]];
           update_option($f["id"],$_POST[$f["id"]]);
+          $sections[$sk]["fields"][$fk]["value"]=$_POST[$f["id"]];
           $options_updated  = true;
-        } elseif (get_option($f["id"])) {
-          $sections[$sk]["fields"][$fk]["value"] = get_option($f["id"]);
+        } else {
+            $sections[$sk]["fields"][$fk]["value"]=get_option($f["id"]);
         }
       }
     }
