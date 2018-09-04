@@ -7,6 +7,8 @@ jQuery(function($) {
   //TODO local storage
   push_history(get_title());
 
+  //[gae-contact-links]
+
   //Links tracking
   $('a').each(function(){
       var self = $(this);
