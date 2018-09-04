@@ -296,7 +296,7 @@
         ]
       },
       {
-        "id":"gae-track-links-to-specific-urls",
+        "id":"gae-track-links-to-specific-urls-list",
         "title":"Add urls you want to track (comma seperated)",
         "type":"textarea",
         "value":"",
