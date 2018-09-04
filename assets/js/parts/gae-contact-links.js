@@ -9,7 +9,7 @@ $('a[href^="mailto:"]').click(function(){
 
     send_event('Contacts', "Email address clicked"+ click_position, selected_email.trim());
 
-})
+});
 
 $('a[href^="mailto:"]').addClass("gae-event");
 $('a[href^="mailto:"]').addClass("gae-event-contact-links");
@@ -26,6 +26,7 @@ $('a[href^="tel:"]').click(function(){
     send_event("Contacts", "Phone number clicked "+ click_position, selected_phone.trim());
 
 });
+
 $('a[href^="tel:"]').addClass("gae-event");
 $('a[href^="tel:"]').addClass("gae-event-contact-links");
 
