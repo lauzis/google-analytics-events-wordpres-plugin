@@ -101,6 +101,7 @@ class Gae_Admin {
       "gae-form-tracking",
       "gae-mailchimp",
       "gae-outgoing-links",
+      "gae-track-links-to-specific-urls",
       "gae-search",
       "gae-social-links",
       "gae-time-trigger"

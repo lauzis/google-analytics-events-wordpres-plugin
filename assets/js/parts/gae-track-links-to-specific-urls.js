@@ -1,13 +1,20 @@
-debug_message("todo track links to specific urls");
-var gae_destinations_to_track = "[gae-track-links-to-specific-urls-list]";
-console.log(gae_destinations_to_track);
+if (!self.hasClass("gae-events")){
 
-gae_destinations_to_track = gae_destinations_to_track.split(",");
-console.log(gae_destinations_to_track);
+    var gae_destinations_to_track = "[gae-track-links-to-specific-urls-list]";
+    gae_destinations_to_track = gae_destinations_to_track.split(",");
+    var gaeD2T = null;
+    for(gaeD2T  in gae_destinations_to_track) {
+        if (url===gae_destinations_to_track[gaeD2T]){
+            self.addClass("gae-events");
+            self.addClass("gae-events-urls-by-destination");
 
-var gaeD2T = null;
-for(gaeD2T  in gae_destinations_to_track){
-
-    console.log(gae_destinations_to_track[gaeD2T]);
-
+            self.click(function(){
+                var self = $(this);
+                var text = get_link_text(self);
+                send_event("Links by destination",'Target link clicked',text);
+            });
+        }
+    }
+    debug_message("Assigned click events on links with specific targets");
 }
+

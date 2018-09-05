@@ -48,3 +48,7 @@ body {
 .gae-events-outgoing-links {
     border-color:red;
 }
+
+.gae-events-urls-by-destination {
+    border-color:darkgreen;
+}

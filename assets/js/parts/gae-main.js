@@ -12,8 +12,10 @@ jQuery(function($) {
   //Links tracking
   $('a').each(function(){
       var self = $(this);
-      var url=self.attr("href");
+
       if(!self.hasClass("gae-events")){
+          var url=self.attr("href");
+          var text = get_link_text(self);
 
         //[gae-track-links-to-specific-urls]
 
@@ -24,6 +26,8 @@ jQuery(function($) {
         //[gae-file-downloads]
 
         //[gae-outgoing-links]
+
+        //[gae-track-links-to-specific-urls]
 
       }
   });
