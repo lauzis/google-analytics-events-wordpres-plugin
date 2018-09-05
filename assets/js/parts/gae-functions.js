@@ -139,7 +139,11 @@ function get_social_profile_links()
     social_links.push({"url":"facebook.com","title":"Facebook"});
     social_links.push({"url":"twitter.com","title":"Twitter"});
     social_links.push({"url":"linkedin.com","title":"LinkedIn"});
-    social_links.push({"url":"youtube.com","title":"Youtube"});
+    social_links.push({"url":"youtube.com/user/","title":"Youtube User"});
+    social_links.push({"url":"youtube.com/channel/","title":"Youtube Channel"});
+    social_links.push({"url":"draugiem.lv","title":"Draugiem Lv"});
+    social_links.push({"url":"instagram.com","title":"Instagram"});
+    social_links.push({"url":"pinterest.com","title":"Pinterest"});
     return social_links;
 
 }
