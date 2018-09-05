@@ -21,6 +21,7 @@ Wordpress plugin that sets basic google analytics events for webpage
 
 
 ...
+0.9.x(-3) Additional debug levels, less noizy and possible to block going to garget could be front end switch. On / Off.
 
 0.9.x(-2) Translations po/mo files
 
@@ -36,7 +37,7 @@ Wordpress plugin that sets basic google analytics events for webpage
 
 1.0.3 New features 
 
-
+1.0.4 Issu with outgoing links thats are without http(s):// for examle href="www.google.lv" 
 
 == Changelog ==
 
