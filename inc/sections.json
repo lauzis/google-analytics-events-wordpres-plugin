@@ -250,7 +250,7 @@
 {
   "id":"outgoing-links",
   "title":"Outgoing Links",
-  "description":"Enable this if you want to see how often outgoing links are clicked. This will track when users are leaving your site via autgoing links in content. This sometimes also helps to track some links that could be by mistake.",
+  "description":"Enable this if you want to see how often outgoing links are clicked. This will track when users are leaving your site via outgoing links in content. Sometimes helps to find some links that could be by mistake. If social link tracking is switched off, then all the social links (if any) are considered as outgoing.",
   "fields": [
     {
       "id":"gae-outgoing-links",
