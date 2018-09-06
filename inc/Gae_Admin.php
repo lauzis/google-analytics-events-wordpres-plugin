@@ -98,7 +98,7 @@ class Gae_Admin {
       "gae-file-downloads",
       "gae-form-tracking-field-change",
       "gae-form-tracking-gravity",
-      "gae-form-tracking",
+      "gae-form-submition-tracking",
       "gae-mailchimp",
       "gae-outgoing-links",
       "gae-track-links-to-specific-urls",
@@ -133,20 +133,30 @@ class Gae_Admin {
       $all_js_parts= self::get_js_parts();
       foreach($all_js_parts as $js_part){
         if (isset($_POST[$js_part]) && $_POST[$js_part]){
+            print($js_part."<br/>");
           $js_parts_to_include[] = $js_part;
         }
       }
+
+      print("<pre>");
+      print_r($js_parts_to_include);
+      print("</pre>");
 
       $combined_js_content= file_get_contents($main_file_path);
       foreach($js_parts_to_include as $js_part){
 
         $file_to_include = gae_JS_PARTS_PATH."/$js_part.js";
 
+        print($file_to_include."<br/>");
+
         $start_text = "\n\n/* ------ $js_part --- $file_to_include ------ STARTS */\n\n";
         $end_text = "\n\n/* ------ $js_part ---  $file_to_include ------ ENDS */\n\n";
 
 
         $js_part_content = $start_text.file_get_contents($file_to_include).$end_text;
+
+        print(htmlentities($js_part_content));
+
         $js_part_content = str_replace("[gae-debug-level]",Gae_Admin::debug(),$js_part_content);
         $js_part_content = str_replace("[gae-script-type]",Gae_Admin::script_type(),$js_part_content);
 

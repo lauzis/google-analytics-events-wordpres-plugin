@@ -57,3 +57,4 @@
         });
 
         debug_message("TODO: Assigned success events on gravity forms");
+        debug_message("TODO: Assigned success sending form");

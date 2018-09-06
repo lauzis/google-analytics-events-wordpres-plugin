@@ -8,4 +8,4 @@ $(value_tracking_selector).change(function(){
     }
 });
 
-debug_message("Assigned on change events on custome tracker");
+debug_message("TODO: Assigned keypress events on form fields");

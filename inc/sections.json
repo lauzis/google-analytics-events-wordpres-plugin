@@ -141,7 +141,7 @@
   "description":"Enable this if you want to see when someone tries to submit some form. If you have some forms in your website, this will help you track if users actually are using your forms. Sometimes it helps also to find some bugs with forms, you see that users ar trying to send form, but you dont have any antires. Maybe there is some problem with forms.",
   "fields": [
     {
-      "id":"gae-form-tracking",
+      "id":"gae-form-submition-tracking",
       "title":"Enable form submition tracking",
       "type":"select",
       "value":"",

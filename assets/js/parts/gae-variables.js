@@ -44,6 +44,4 @@ var tracked_form_values = [];
 //gravity forms class for tracking value and sending it to when form is succesfull
 var value_tracking_selector = '.ga-track-value select, .ga-track-value input, select.ga-track-value, input.ga-track-value';
 
-var click_tracking_elements = '.kad-btn, .ga-track-click, .yop_poll_vote_button, .btn-cta, .cta-btn';
-
 var HOST = document.location.hostname;

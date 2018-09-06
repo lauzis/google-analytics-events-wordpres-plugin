@@ -32,6 +32,8 @@ jQuery(function($) {
       }
   });
 
+  //[gae-form-submition-tracking]
+
   //[gae-custom-element-tracking]
 
   //[gae-search]

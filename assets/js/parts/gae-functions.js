@@ -170,6 +170,46 @@ function get_link_text(jquery_obj){
         return text.trim();
     }
 
+    console.log(jquery_obj.prop("tagName"));
+    if (jquery_obj.prop("tagName")==="form" || jquery_obj.prop("tagName")==="FORM"){
+
+        let h1 = jquery_obj.children().find("h1")
+        if (h1.length>0){
+            console.log("find h1 ",h1.first().text(),"---",h1);
+            return h1.first().text();
+        }
+        let h2 = jquery_obj.children().find("h2");
+        if (h2.length>0){
+            console.log("find h2 ",h2.first().text(),"---",h2);
+            return h2.first().text();
+        }
+        let h3 = jquery_obj.children().find("h3");
+        if (h3.length>0){
+            console.log("find h3 ",h3.first().text(),"---",h3);
+            return h3.first().text();
+        }
+        let formName = jquery_obj.attr("name");
+        if (formName){
+            console.log("returned id", formName);
+            return formName;
+        }
+
+        let formID = jquery_obj.attr("id");
+        if (formID){
+            console.log("returned id", formID);
+            return formID;
+        }
+
+        let submitBtn = jquery_obj.children().find('input[type=submit]');
+        if (submitBtn.length>0){
+            console.log("find submit ",submitBtn.first().val(),"---",submitBtn);
+            return submitBtn.first().val();
+        }
+        
+        return "form"
+
+    }
+
     if(text){
         return text;
     }
