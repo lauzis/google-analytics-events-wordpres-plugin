@@ -173,24 +173,24 @@ function get_link_text(jquery_obj){
     console.log(jquery_obj.prop("tagName"));
     if (jquery_obj.prop("tagName")==="form" || jquery_obj.prop("tagName")==="FORM"){
 
-        let h1 = jquery_obj.children().find("h1")
+        let h1 = jquery_obj.find("h1");
         if (h1.length>0){
             console.log("find h1 ",h1.first().text(),"---",h1);
-            return h1.first().text();
+            return h1.text();
         }
-        let h2 = jquery_obj.children().find("h2");
+        let h2 = jquery_obj.find("h2");
         if (h2.length>0){
             console.log("find h2 ",h2.first().text(),"---",h2);
-            return h2.first().text();
+            return h2.text();
         }
-        let h3 = jquery_obj.children().find("h3");
+        let h3 = jquery_obj.find("h3");
         if (h3.length>0){
             console.log("find h3 ",h3.first().text(),"---",h3);
-            return h3.first().text();
+            return h3.text();
         }
         let formName = jquery_obj.attr("name");
         if (formName){
-            console.log("returned id", formName);
+            console.log("returned form name", formName);
             return formName;
         }
 
@@ -200,13 +200,11 @@ function get_link_text(jquery_obj){
             return formID;
         }
 
-        let submitBtn = jquery_obj.children().find('input[type=submit]');
+        let submitBtn = jquery_obj.find('input[type=submit]');
         if (submitBtn.length>0){
-            console.log("find submit ",submitBtn.first().val(),"---",submitBtn);
-            return submitBtn.first().val();
+            return submitBtn.first().text();
         }
-        
-        return "form"
+        return "unknow form"
 
     }
 
