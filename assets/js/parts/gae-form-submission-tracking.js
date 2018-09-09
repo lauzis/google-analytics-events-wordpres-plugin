@@ -1,4 +1,3 @@
-//todo
 $( "form" ).each(function(){
 
     var self = $(this);

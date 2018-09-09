@@ -169,7 +169,7 @@ function get_link_text(jquery_obj){
         text = jquery_obj.attr("alt");
         return text.trim();
     }
-    
+
     if (jquery_obj.prop("tagName")==="form" || jquery_obj.prop("tagName")==="FORM"){
 
         let h1 = jquery_obj.find("h1");
@@ -192,6 +192,11 @@ function get_link_text(jquery_obj){
         let formID = jquery_obj.attr("id");
         if (formID){
             return formID;
+        }
+
+        let formRole = jquery_obj.attr("role");
+        if (formRole){
+            return formRole;
         }
 
         let submitBtn = jquery_obj.find('input[type=submit]');

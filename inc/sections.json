@@ -141,26 +141,8 @@
   "description":"Enable this if you want to see when someone tries to submit some form. If you have some forms in your website, this will help you track if users actually are using your forms. Sometimes it helps also to find some bugs with forms, you see that users ar trying to send form, but you dont have any antires. Maybe there is some problem with forms.",
   "fields": [
     {
-      "id":"gae-form-submition-tracking",
-      "title":"Enable form submition tracking",
-      "type":"select",
-      "value":"",
-      "placeholder":"",
-      "default_value":"1",
-      "options":[
-        {
-          "value":"1",
-          "title":"Enable"
-        },
-        {
-          "value":"0",
-          "title":"Disable"
-        }
-      ]
-    },
-    {
-      "id":"gae-form-tracking-gravity",
-      "title":"Enable gravity forms tracking",
+      "id":"gae-form-tracking-field-change",
+      "title":"Enable form fields tracking",
       "type":"select",
       "value":"",
       "placeholder":"",
@@ -177,8 +159,26 @@
       ]
     },
     {
-      "id":"gae-form-tracking-field-change",
-      "title":"Enable form fields tracking",
+      "id":"gae-form-submission-tracking",
+      "title":"Enable form submission tracking",
+      "type":"select",
+      "value":"",
+      "placeholder":"",
+      "default_value":"1",
+      "options":[
+        {
+          "value":"1",
+          "title":"Enable"
+        },
+        {
+          "value":"0",
+          "title":"Disable"
+        }
+      ]
+    },
+    {
+      "id":"gae-form-tracking-gravity-success",
+      "title":"Enable gravity forms success tracking",
       "type":"select",
       "value":"",
       "placeholder":"",
