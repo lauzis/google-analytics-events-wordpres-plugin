@@ -46,7 +46,12 @@ class Gae_Admin
     {
 
         // or create options menu page
-        add_options_page(__('Google Analytics Events', EMU2_I18N_DOMAIN), __("Google Analytics Events", EMU2_I18N_DOMAIN), 9, gae_PLUGIN_DIRECTORY . '/gae_settings_page.php');
+        add_options_page(
+                __('Google Analytics Events', EMU2_I18N_DOMAIN), //'My Options',
+                __("Google Analytics Events", EMU2_I18N_DOMAIN), //'My Plugin',
+                "manage_options", //cap
+                gae_PLUGIN_DIRECTORY . '/gae_settings_page.php'//file
+        );
         // or create sub menu page
         $parent_slug = "index.php";    # For Dashboard
         #$parent_slug="edit.php";		# For Posts

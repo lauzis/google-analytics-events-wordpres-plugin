@@ -15,7 +15,7 @@ $( "form" ).each(function(){
                 category = "Form";
             }
             if (!action){
-                action = "Form Submited";
+                action = "Form Submitted";
             }
             if (!label){
                 label = get_link_text(self);
