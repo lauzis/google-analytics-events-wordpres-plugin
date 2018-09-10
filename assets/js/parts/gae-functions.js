@@ -351,3 +351,16 @@ function debug_message(message){
     }
 
 };
+
+
+function get_gravity_form_id(formId){
+
+    if (typeof(formId)==="undefined"){
+        return null;
+    }
+
+    if (formId.indexOf("gform_")>-1){
+        return formId.replace("gform_","");
+    }
+    return null;
+}
