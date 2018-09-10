@@ -22,7 +22,6 @@ $("form").each(function(){
     } else {
         form_id = get_link_text(form);
     }
-    console.log("should be gravity form",form_id);
 
     form.find('textarea,input[type="email"],input[type="text"],select').each(function(index, element){
         var input = $(this);

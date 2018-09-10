@@ -136,6 +136,31 @@
   ]
 },
 {
+  "id":"search",
+  "title":"Wordpress search form tracking",
+  "description":"Wordpress search form tracking",
+  "fields": [
+    {
+      "id":"gae-search",
+      "title":"Enable wordpress search form tracking",
+      "type":"select",
+      "value":"",
+      "placeholder":"",
+      "default_value":"0",
+      "options":[
+        {
+          "value":"1",
+          "title":"Enable"
+        },
+        {
+          "value":"0",
+          "title":"Disable"
+        }
+      ]
+    }
+  ]
+},
+{
   "id":"form-tracking",
   "title":"Forms tracking",
   "description":"Enable this if you want to see when someone tries to submit some form. If you have some forms in your website, this will help you track if users actually are using your forms. Sometimes it helps also to find some bugs with forms, you see that users ar trying to send form, but you dont have any antires. Maybe there is some problem with forms.",
