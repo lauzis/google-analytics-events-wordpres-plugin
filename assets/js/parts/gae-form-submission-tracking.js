@@ -6,6 +6,8 @@ $( "form" ).each(function(){
             //lets try to find title
 
             var self = $(this);
+            var formId = self.attr("id");
+            var gravityFormId = get_gravity_form_id(formId);
             var category = self.data("gaCategory");
             var action = self.data("gaAction");
             var label = self.data("gaLabel");
@@ -22,6 +24,9 @@ $( "form" ).each(function(){
             }
             if (!value){
                 value = null;
+            }
+            if (gravityFormId){
+                label = "Gravity form "+gravityFormId;
             }
 
             send_event(category, action, label, value)
