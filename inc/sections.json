@@ -365,6 +365,31 @@
   ]
 },
 {
+  "id":"mailchimp-success-tracking",
+  "title":"Mailchimp",
+  "description":"",
+  "fields": [
+    {
+      "id":"gae-mailchimp",
+      "title":"Enable mailchimp success tracking",
+      "type":"select",
+      "value":"",
+      "placeholder":"",
+      "default_value":"1",
+      "options":[
+        {
+          "value":"1",
+          "title":"Enable"
+        },
+        {
+          "value":"0",
+          "title":"Disable"
+        }
+      ]
+    }
+  ]
+},
+{
   "id":"debug",
   "title":"Debuging",
   "description":"Enable this for testing purposes, to see to what elements events are added and if they fire at all.",
