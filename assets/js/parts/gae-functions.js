@@ -264,7 +264,7 @@ function push_history(title){
 
     // storring last 5 urls
     var allowed_lenght =3;
-    url = url || document.location.href;
+    title = title || document.location.href;
     var h_titles =getCookie("history");
     if (h_titles.length>0){
         try {
