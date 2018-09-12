@@ -3,7 +3,11 @@ Wordpress plugin that sets basic google analytics events for webpage
 
 == Donate ==
 
-Paypal: https://www.paypal.me/Lauzis https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=aivars.lauzis@gmail.com&lc=US&item_name=Donation+for+Google+Analytics+Event+Wordpres+Plugin+Support+And+Development&no_note=0&cn=&currency_code=USD&bn=PP-DonationsBF:btn_donateCC_LG.gif:NonHosted
+Paypal: 
+
+[Paypal](https://www.paypal.me/Lauzis)
+
+[Paypal Wp Plugin Support](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=aivars.lauzis@gmail.com&lc=US&item_name=Donation+for+Google+Analytics+Event+Wordpres+Plugin+Support+And+Development&no_note=0&cn=&currency_code=USD&bn=PP-DonationsBF:btn_donateCC_LG.gif:NonHosted)  
 
 BTC: 3FtCcedzVcuQEBWTbbjLQBgWiBbNgT8cQG
 
