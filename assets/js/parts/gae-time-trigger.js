@@ -1,4 +1,3 @@
-//TODO
 if (typeof(GAE_TIME_TRIGGER_TRESHOLD)!=="undefined" && GAE_TIME_TRIGGER_TRESHOLD>0){
     debug_message(GAE_TIME_TRIGGER_TRESHOLD);
     setTimeout(function(){
