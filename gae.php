@@ -12,7 +12,8 @@ License: GPL3
 /*
 		Aivars Lauzis  (email : lauzis@inbox.lv)
 		This plugin is started by using plugin template (EPT plugin)
-		EPT - Empty Plugin Template
+		EPT - Empty Plugin Template.
+        At current stage, there not much left of initial plugin, but anyway wanted to shout out for the guy/guys.
 		http://1manfactory.com/ept
 		Author: Juergen Schulze, 1manfactory@gmail.com
 		Author URI: http://1manfactory.com
