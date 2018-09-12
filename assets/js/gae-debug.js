@@ -9,17 +9,7 @@ var GAE_DEBUG = {
         el.classList.remove(class_name);
     },
     showMessage : function(message){
-        document.getElementById("gae-info-text").innerHTML=message;
-        GAE_DEBUG.addClass("gae-info","show");
-    },
-    hideMessage : function(timeout){
-        if (timeout>0){
-            setTimeout(function(){
-                GAE_DEBUG.removeClass("gae-info","show")
-            }, 6000);
-        } else {
-            GAE_DEBUG.removeClass("gae-info","show")
-        }
+        this.addInfoElement(message);
     },
     appendHtml: function(el, str) {
         var div = document.createElement('div');
@@ -28,27 +18,17 @@ var GAE_DEBUG = {
             el.appendChild(div.children[0]);
         }
     },
-    getInfoTemplate: function(){
-        return '<div id="gae-info" class="gae-info show"><a id="gae-info-close" href="">Close</a><span id="gae-info-text"></span></div>';
+    getInfoTemplate: function(message){
+        return '<div class="gae-info show"><a class="gae-info-close" onclick="GAE_DEBUG.closeInfo(this);" href="#close">Close</a><span id="gae-info-text">'+message+'</span></div>';
     },
-    addInfoElement: function(){
-        console.log(document.body);
-        this.appendHtml(document.body,this.getInfoTemplate());
-        //this.assignEvents();
+    closeInfo : function(obj){
+        obj.parentElement.remove();
     },
-    assignEvents: function(){
-        document.getElementById("gae-info-close").onclick = function(e) {
-            e.preventDefault();
-            GAE_DEBUG.hideMessage(0);
-        }
-
+    addInfoElement: function(message){
+        this.appendHtml(document.body,this.getInfoTemplate(message));
     },
     init : function(){
-        this.addInfoElement();
-        this.assignEvents();
-
-        this.showMessage("We are in debug mode");
-        this.hideMessage(3000);
+        this.addInfoElement("We are in debug mode");
     }
 
 }

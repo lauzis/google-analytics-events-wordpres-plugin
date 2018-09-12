@@ -9,7 +9,5 @@ if (!self.hasClass("gae-events")){
         self.addClass("gae-events-outgoing-links");
 
     };
-
-    debug_message("Assigned click events on outgoing links!");
 }
 

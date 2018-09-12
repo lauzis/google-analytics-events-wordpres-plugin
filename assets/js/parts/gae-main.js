@@ -1,41 +1,47 @@
 //[gae-variables]
 //[gae-functions]
 
-jQuery(function($) {
+jQuery(function ($) {
 
-  //pushing in history the current url
-  //TODO local storage
-  push_history(get_title());
+    //pushing in history the current url
+    //TODO local storage
+    push_history(get_title());
 
-  //Links tracking
-  $('a').each(function(){
-      var self = $(this);
-      var url=self.attr("href");
-      if(!self.hasClass("gae-events")){
+    //[gae-contact-links]
 
-        //[gae-track-links-to-specific-urls]
+    //Links tracking
+    $('a').each(function () {
+        var self = $(this);
 
-        //[gae-custom-links]
+        if (!self.hasClass("gae-events")) {
+            var url = self.attr("href");
+            var text = get_link_text(self);
 
-        //[gae-social-links]
+            //[gae-track-links-to-specific-urls]
 
-        //[gae-file-downloads]
+            //[gae-custom-links]
 
-        //[gae-outgoing-links]
+            //[gae-social-links]
 
-      }
-  });
+            //[gae-file-downloads]
 
-  //[gae-custom-element-tracking]
+            //[gae-outgoing-links]
 
-  //[gae-search]
+            //[gae-track-links-to-specific-urls]
 
-  //[gae-mailchimp]
+        }
+    });
 
-  //[gae-form-tracking-gravity]
+    //[gae-custom-element-tracking]
 
-  //[gae-form-tracking-field-change]
+    //[gae-search]
 
-  //[gae-time-trigger]
+    //[gae-mailchimp]
+    //[gae-form-tracking-gravity-success]
+    //[gae-form-tracking-field-change]
+    //[gae-form-submission-tracking]
+
+
+    //[gae-time-trigger]
 
 });

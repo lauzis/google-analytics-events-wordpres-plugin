@@ -28,9 +28,10 @@ body {
 }
 
 .gae-events {
-    border-style:dashed;
+    border-style:dashed !important;
     border-color:darkred;
-    border-width: 3px;
+    border-width: 3px !important;
+    /*cursor:not-allowed !important;*/
 }
 
 .gae-events-social-links{
@@ -48,3 +49,16 @@ body {
 .gae-events-outgoing-links {
     border-color:red;
 }
+
+.gae-events-urls-by-destination {
+    border-color:darkgreen;
+}
+
+.gae-events-custom-element-tracking {
+    border-color:magenta;
+}
+
+.gae-event-form-submission {
+    border-color:magenta;
+}
+

@@ -3,7 +3,7 @@ Wordpress plugin that sets basic google analytics events for webpage
 
 == Donate ==
 
-Paypal: https://www.paypal.com/donate/?token=qqE_BWPb2BtCwWAWh92scW9C6Q2Fj2PVXtmU9Q9Vl2onvas1sOVcW0xLrwjdfGR2KOEoi0&country.x=US&locale.x=US
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=aivars.lauzis@gmail.com&lc=US&item_name=Donation+for+Google+Analytics+Event+Wordpres+Plugin+Support+And+Development&no_note=0&cn=&currency_code=USD&bn=PP-DonationsBF:btn_donateCC_LG.gif:NonHosted" target="_blank">Donate via Paypal</a>
 
 == Todo log ==
 
@@ -21,6 +21,13 @@ Paypal: https://www.paypal.com/donate/?token=qqE_BWPb2BtCwWAWh92scW9C6Q2Fj2PVXtm
 
 
 ...
+0.9.x(-6) Color codes show on front.
+
+0.9.x(-5) Help text on front.
+
+0.9.x(-4) Plugin related settigns disable if plugin not detected (?) 
+
+0.9.x(-3) Additional debug levels, less noizy and possible to block going to garget could be front end switch. On / Off.
 
 0.9.x(-2) Translations po/mo files
 
@@ -36,7 +43,12 @@ Paypal: https://www.paypal.com/donate/?token=qqE_BWPb2BtCwWAWh92scW9C6Q2Fj2PVXtm
 
 1.0.3 New features 
 
+1.0.4 Issu with outgoing links thats are without http(s):// for examle href="www.google.lv" 
 
+
+== Known issues (that are worth mention)==
+
+1. Form submission tracking, there is possible to pass without triggering Form used event. Field change is trigered only after lost focus, to that field. Have to think about better implementation.
 
 == Changelog ==
 

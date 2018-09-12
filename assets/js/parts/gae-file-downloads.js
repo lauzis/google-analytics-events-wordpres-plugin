@@ -7,7 +7,5 @@ if (!self.hasClass("gae-events")){
         self.addClass("gae-events");
         self.addClass("gae-events-file-downloads");
     };
-
-    debug_message("Assigned click events for downloadable files");
 }
 

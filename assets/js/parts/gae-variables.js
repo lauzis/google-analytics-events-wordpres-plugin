@@ -25,7 +25,9 @@ if (typeof GAE_SCRIPT_TYPE === "undefined"){
     }
 }
 
-
+if (typeof(GAE_TIME_TRIGGER_TRESHOLD)==="undefined"){
+    var GAE_TIME_TRIGGER_TRESHOLD = [gae-time-trigger-treshold];
+}
 
 if (typeof contact_page_link === "undefined"){
     var contact_page_link="";
@@ -41,7 +43,5 @@ var tracked_form_values = [];
 
 //gravity forms class for tracking value and sending it to when form is succesfull
 var value_tracking_selector = '.ga-track-value select, .ga-track-value input, select.ga-track-value, input.ga-track-value';
-
-var click_tracking_elements = '.kad-btn, .ga-track-click, .yop_poll_vote_button, .btn-cta, .cta-btn';
 
 var HOST = document.location.hostname;
