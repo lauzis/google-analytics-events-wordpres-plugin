@@ -43,7 +43,16 @@ Wordpress plugin that sets basic google analytics events for webpage
 
 1.0.3 New features 
 
-1.0.4 Issu with outgoing links thats are without http(s):// for examle href="www.google.lv" 
+1.0.4 Issue with outgoing links thats are without http(s):// for examle href="www.google.lv" 
+
+1.0.5 Comma seperated field redo
+
+1.0.6 Custom link tracking, allow to add titles for links to use in event.
+
+1.0.7 Histry retracking, sometimes usefull for contact forms to see from what section user arrived, to see if some section
+generates more leads.
+
+1.0.6 Write help/about how to check what code is in page, maybe write test script, that tries to figure out
 
 
 == Known issues (that are worth mention)==
