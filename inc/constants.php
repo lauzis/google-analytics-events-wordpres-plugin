@@ -2,7 +2,7 @@
 
 
 // some definition we will use
-define( 'gae_PUGIN_NAME', 'Google Analytcs Events');
+define( 'gae_PUGIN_NAME', 'Google Analytics Events');
 define( 'gae_PLUGIN_DIRECTORY', 'google-analytics-events');
 define( 'gae_PLUGIN_PATH',  WP_CONTENT_DIR.'/plugins/'.gae_PLUGIN_DIRECTORY);
 define( 'gae_PLUGIN_URL',  WP_CONTENT_URL.'/plugins/'.gae_PLUGIN_DIRECTORY);
