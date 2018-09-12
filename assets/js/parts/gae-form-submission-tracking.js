@@ -8,6 +8,7 @@ $( "form" ).each(function(){
             var self = $(this);
             var formId = self.attr("id");
             var gravityFormId = get_gravity_form_id(formId);
+            var mailchimpFormId = get_mail_chimp_id(formId);
             var category = self.data("gaCategory");
             var action = self.data("gaAction");
             var label = self.data("gaLabel");
@@ -25,14 +26,19 @@ $( "form" ).each(function(){
             if (!value){
                 value = null;
             }
+
+            //special cases of forms
             if (gravityFormId){
                 label = "Gravity form "+gravityFormId;
+            }
+            if (mailchimpFormId){
+                label = "Mailchimp form "+mailchimpFormId;
             }
 
             send_event(category, action, label, value)
 
         });
         self.addClass("gae-event");
-        self.addClass("gae-event-form-submition");
+        self.addClass("gae-event-form-submission");
     }
 });

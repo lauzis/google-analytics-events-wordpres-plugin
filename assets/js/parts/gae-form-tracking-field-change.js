@@ -15,6 +15,7 @@ $("form").each(function(){
 
     let form = $(this);
     let gravityFormId=get_gravity_form_id(form.attr("id"));
+    let mailChimpId=get_mail_chimp_id(form.attr("id"));
     let form_id = null;
 
     if (gravityFormId){
@@ -34,6 +35,7 @@ $("form").each(function(){
                 let input_id = input.attr("id") ? input.attr("id") : input.attr("name");
                 let form_id = input.data("formId");
                 let gravityFormId= get_gravity_form_id(form_id);
+                let mailChimpId = get_mail_chimp_id(form_id);
 
                 var category = input.data("gaCategory");
                 var action = input.data("gaAction");
@@ -52,8 +54,13 @@ $("form").each(function(){
                 if (!value){
                     value = null;
                 }
+
+                //special cases of rorms
                 if (gravityFormId){
                     label = "Gravity form used "+gravityFormId;
+                }
+                if (mailChimpId){
+                    label = "Mailchimp form used "+mailChimpId;
                 }
 
 

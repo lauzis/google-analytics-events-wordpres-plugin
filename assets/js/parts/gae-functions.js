@@ -345,8 +345,8 @@ function debug_message(message){
     if (GAE_DEBUG_LEVEL>1) {
 
         if (typeof GAE_DEBUG === "object" && typeof GAE_DEBUG.showMessage==="function"){
-
-            GAE_DEBUG.showMessage(message);;
+            GAE_DEBUG.showMessage(message);
+            console.log(message);
         }
     }
 
@@ -363,4 +363,19 @@ function get_gravity_form_id(formId){
         return formId.replace("gform_","");
     }
     return null;
+}
+
+
+function get_mail_chimp_id(formId){
+    //mc4wp-form-1
+
+    if (typeof(formId)==="undefined"){
+        return null;
+    }
+
+    if (formId.indexOf("mc4wp-")>-1){
+        return formId.replace("mc4wp-","").replace("form-","");
+    }
+    return null;
+
 }
