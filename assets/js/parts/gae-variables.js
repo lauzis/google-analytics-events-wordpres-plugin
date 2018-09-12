@@ -33,8 +33,6 @@ if (typeof contact_page_link === "undefined"){
     var contact_page_link="";
 }
 
-//TODO if not defined have to read body class?
-// fallback to body class
 if (typeof lang === "undefined"){
     var lang="en";
 }
