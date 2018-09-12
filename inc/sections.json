@@ -367,7 +367,7 @@
 {
   "id":"mailchimp-success-tracking",
   "title":"Mailchimp",
-  "description":"",
+  "description":"The tracker works with mailchimp-for-wp plugin. Other plugins not tested/implemented",
   "fields": [
     {
       "id":"gae-mailchimp",
