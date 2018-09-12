@@ -2,8 +2,7 @@
 Wordpress plugin that sets basic google analytics events for webpage
 
 == Donate ==
-
-Paypal: 
+ 
 
 [Paypal](https://www.paypal.me/Lauzis)
 
