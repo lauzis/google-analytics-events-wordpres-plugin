@@ -31,7 +31,7 @@ body {
     border-style:dashed !important;
     border-color:darkred;
     border-width: 3px !important;
-    cursor:not-allowed !important;
+    /*cursor:not-allowed !important;*/
 }
 
 .gae-events-social-links{
@@ -55,6 +55,10 @@ body {
 }
 
 .gae-events-custom-element-tracking {
+    border-color:magenta;
+}
+
+.gae-event-form-submission {
     border-color:magenta;
 }
 

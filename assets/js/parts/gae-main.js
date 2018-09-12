@@ -37,10 +37,10 @@ jQuery(function ($) {
     //[gae-search]
 
     //[gae-mailchimp]
-
+    //[gae-form-tracking-gravity-success]
     //[gae-form-tracking-field-change]
     //[gae-form-submission-tracking]
-    //[gae-form-tracking-gravity-success]
+
 
     //[gae-time-trigger]
 
