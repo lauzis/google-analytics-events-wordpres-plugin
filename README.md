@@ -3,11 +3,15 @@ Wordpress plugin that sets basic google analytics events for webpage
 
 == Donate ==
 
-Paypal: https://www.paypal.com/donate/?token=qqE_BWPb2BtCwWAWh92scW9C6Q2Fj2PVXtmU9Q9Vl2onvas1sOVcW0xLrwjdfGR2KOEoi0&country.x=US&locale.x=US
+Paypal: https://www.paypal.me/Lauzis
+
+BTC: 3FtCcedzVcuQEBWTbbjLQBgWiBbNgT8cQG
+
+BCH: qr3ed287kxc9ncukadceanfkqtshaqvg0g68j57pjz
+
+ETH: 0xc9681216a25Ac99500482Bd419b4644882a31471
 
 == Todo log ==
-
-0.9.6 Fill the missing code parts
 
 0.9.7 Check todos in the code 
 
@@ -39,6 +43,13 @@ Paypal: https://www.paypal.com/donate/?token=qqE_BWPb2BtCwWAWh92scW9C6Q2Fj2PVXtm
 
 
 == Changelog ==
+
+0.9.6 Fill the missing code parts
+ - implemented tracking of froms subimtions, for field use, gravity forms success, mailchim success
+ - removed some noise from debug
+ - added console log outputs also
+ - some styling done
+ - most traackers tested
 
 0.9.5 Debug settings implementation frontend
  - css that shows the elements that will trigger ga event

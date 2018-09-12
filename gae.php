@@ -3,7 +3,7 @@
 Plugin Name: GAE - Google analytics events wordpress plugin
 Plugin URI: https://github.com/lauzis
 Description: The plugin that adds some basic events to the site, to track clikcs on cta buttons and forms.
-Version: 0.9.1
+Version: 0.9.6
 Author: Aivars Lauzis
 Author URI: https://github.com/lauzis
 License: GPL3
@@ -12,7 +12,8 @@ License: GPL3
 /*
 		Aivars Lauzis  (email : lauzis@inbox.lv)
 		This plugin is started by using plugin template (EPT plugin)
-		EPT - Empty Plugin Template
+		EPT - Empty Plugin Template.
+        At current stage, there not much left of initial plugin, but anyway wanted to shout out for the guy/guys.
 		http://1manfactory.com/ept
 		Author: Juergen Schulze, 1manfactory@gmail.com
 		Author URI: http://1manfactory.com
