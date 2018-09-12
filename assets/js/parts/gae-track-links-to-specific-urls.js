@@ -15,6 +15,5 @@ if (!self.hasClass("gae-events")){
             });
         }
     }
-    debug_message("Assigned click events on links with specific targets");
 }
 

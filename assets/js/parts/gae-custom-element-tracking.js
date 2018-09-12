@@ -35,5 +35,3 @@ if (track_elements.length){
 
     });
 }
-
-debug_message("Assigned click events to custom elements");

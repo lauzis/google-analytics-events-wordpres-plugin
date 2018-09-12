@@ -33,8 +33,5 @@ if (!self.hasClass("gae-events")){
     if (social_link_tracker_added){
         //skipp looping cause we already added the event
     };
-
-
-    debug_message("Assigned click events on social links");
 }
 

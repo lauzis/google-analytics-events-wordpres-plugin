@@ -29,6 +29,3 @@ $('a[href^="tel:"]').click(function(){
 
 $('a[href^="tel:"]').addClass("gae-event");
 $('a[href^="tel:"]').addClass("gae-event-contact-links");
-
-
-debug_message("Assigned click events to contact links");
