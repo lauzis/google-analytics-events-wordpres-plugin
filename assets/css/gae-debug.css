@@ -24,7 +24,7 @@ body {
 }
 
 #gae-info-close {
-    padding-right:10px;
+    margin-right:10px;
 }
 
 .gae-event {
@@ -34,7 +34,7 @@ body {
     /*cursor:not-allowed !important;*/
 }
 
-.gae-events-social-links{
+.gae-event-social-links{
     border-color:darkblue;
 }
 
@@ -42,23 +42,44 @@ body {
     border-color:darkorange;
 }
 
-.gae-events-file-downloads {
+.gae-event-file-downloads {
     border-color:black;
 }
 
-.gae-events-outgoing-links {
+.gae-event-outgoing-links {
     border-color:red;
 }
 
-.gae-events-urls-by-destination {
+.gae-event-urls-by-destination {
     border-color:darkgreen;
 }
 
-.gae-events-custom-element-tracking {
+.gae-event-custom-element-tracking {
     border-color:magenta;
 }
 
 .gae-event-form-submission {
-    border-color:magenta;
+    border-color:deepskyblue;
 }
 
+
+.gae-colors {
+    width:100%;
+    position:fixed;
+    bottom:0px;
+    border-style:solid;
+    border-color:black;
+    border-width: 0;
+    border-top-width: 1px;
+    background-color:white;
+}
+.gae-colors ul li{
+    list-style: none;
+    margin-right:5%;
+    margin-bottom:10px;
+    float:left;
+    width:20%;
+    text-align:center;
+    padding:0px;
+    font-weight: bold;
+}

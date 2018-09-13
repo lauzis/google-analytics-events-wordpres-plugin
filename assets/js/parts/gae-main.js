@@ -1,5 +1,7 @@
 //[gae-variables]
+
 //[gae-functions]
+
 
 jQuery(function ($) {
 
@@ -9,13 +11,11 @@ jQuery(function ($) {
 
     //[gae-contact-links]
 
-    //Links tracking
     $('a').each(function () {
         var self = $(this);
-
-        if (!self.hasClass("gae-events")) {
-            var url = self.attr("href");
-            var text = get_link_text(self);
+        var url = self.attr("href");
+        var text = get_link_text(self);
+        if (!self.hasClass("gae-event")&& typeof(url)!=="undefined") {
 
             //[gae-track-links-to-specific-urls]
 

@@ -29,6 +29,7 @@ $( "form" ).each(function(){
 
             //special cases of forms
             if (gravityFormId){
+                self.addClass("gae-form-tracking-gravity-success");
                 label = "Gravity form "+gravityFormId;
             }
             if (mailchimpFormId){

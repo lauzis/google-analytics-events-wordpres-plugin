@@ -260,10 +260,11 @@ function json2array(json){
 }
 
 
-function push_history(title){
+function push_history(title)
+{
 
     // storring last 5 urls
-    var allowed_lenght =3;
+    var allowed_lenght=3;
     title = title || document.location.href;
     var h_titles =getCookie("history");
     if (h_titles.length>0){
@@ -287,9 +288,8 @@ function push_history(title){
         h_titles.shift();
     }
 
-    h_titles.push(url);
+    h_titles.push(title);
     setCookie("history",JSON.stringify(h_titles));
-
 }
 
 

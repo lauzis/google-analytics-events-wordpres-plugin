@@ -3,6 +3,6 @@ if(self.data("gaCategory") && self.data("gaAction") && self.data("gaLabel")){
     self.click(function(){
         send_event(self.data("gaCategory"), self.data("gaAction"), self.data("gaLabel"));
     });
-    self.addClass("gae-events");
-    self.addClass("gae-events-custom-links");
+    self.addClass("gae-event");
+    self.addClass("gae-event-custom-links");
 };

@@ -58,6 +58,7 @@ $("form").each(function(){
                 //special cases of rorms
                 if (gravityFormId){
                     label = "Gravity form used "+gravityFormId;
+                    self.addClass("gae-form-tracking-gravity-success");
                 }
                 if (mailChimpId){
                     label = "Mailchimp form used "+mailChimpId;
