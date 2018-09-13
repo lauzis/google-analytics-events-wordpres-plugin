@@ -27,10 +27,10 @@ body {
     padding-right:10px;
 }
 
-.gae-events {
-    border-style:dashed !important;
+.gae-event {
+    border-style:dashed;
     border-color:darkred;
-    border-width: 3px !important;
+    border-width: 3px;
     /*cursor:not-allowed !important;*/
 }
 
@@ -39,7 +39,7 @@ body {
 }
 
 .gae-event-contact-links{
-    background-color:darkorange;
+    border-color:darkorange;
 }
 
 .gae-events-file-downloads {
