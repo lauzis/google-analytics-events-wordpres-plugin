@@ -17,7 +17,7 @@ $( "form" ).each(function(){
 
             });
             self.addClass("gae-event");
-            self.addClass("gae-event-search-submit");
+            self.addClass("gae-event-search");
 
             self.find('input[name="s"]').change(function(){
 

@@ -6,7 +6,7 @@ if (!self.hasClass("gae-event")){
     for(gaeD2T  in gae_destinations_to_track) {
         if (url===gae_destinations_to_track[gaeD2T]){
             self.addClass("gae-event");
-            self.addClass("gae-event-urls-by-destination");
+            self.addClass("gae-event-links-to-specific-urls");
 
             self.click(function(){
                 var self = $(this);

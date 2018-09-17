@@ -23,40 +23,66 @@ body {
     display:block;
 }
 
-#gae-info-close {
+.gae-info-close {
     margin-right:10px;
 }
 
 .gae-event {
-    border-style:dashed;
+    border-style:dashed !important;
     border-color:darkred;
-    border-width: 3px;
+    border-width: 3px !important;
     /*cursor:not-allowed !important;*/
-}
-
-.gae-event-social-links{
-    border-color:darkblue;
 }
 
 .gae-event-contact-links{
     border-color:darkorange;
 }
 
+.gae-event-custom-element-tracking {
+    border-color:magenta;
+}
+
+.gae-event-custom-links {
+    border-color:darkgray;
+}
+
 .gae-event-file-downloads {
     border-color:black;
+}
+
+.gae-event-form-submission-tracking{
+    border-color:firebrick;
+}
+
+.gae-event-form-tracking-field-change{
+    border-color:greenyellow !important;
+}
+
+.gae-form-tracking-gravity-success{
+    border-color:limegreen;
+}
+
+.gae-mailchimp{
+    border-color:darkgreen;
 }
 
 .gae-event-outgoing-links {
     border-color:red;
 }
 
-.gae-event-urls-by-destination {
-    border-color:darkgreen;
+.gae-event-search{
+    border-color:brown;
 }
 
-.gae-event-custom-element-tracking {
-    border-color:magenta;
+.gae-event-social-links{
+    border-color:darkblue;
 }
+
+.gae-event-links-to-specific-urls {
+    border-color:cyan;
+}
+
+
 
 .gae-event-form-submission {
     border-color:deepskyblue;
@@ -73,13 +99,50 @@ body {
     border-top-width: 1px;
     background-color:white;
 }
-.gae-colors ul li{
-    list-style: none;
-    margin-right:5%;
-    margin-bottom:10px;
+
+.gae-colors .gae-info-close{
+    padding:10px;
+}
+
+.gae-colors .gae-info-content {
+    margin:0 auto;
+    display:block;
+    position:relative;
+    width:auto;
     float:left;
-    width:20%;
+    background-color:white;
+    padding:0 20px;
+}
+.gae-colors .gae-info-content p {
+    margin:30px 10px;
+}
+
+.gae-colors ul {
+    position:relative;
+    float:left;
+    display:block;
+    width:auto;
+    margin:auto 0;
+    background-color:white;
+}
+
+.gae-colors ul li{
+
+    list-style: none;
+    margin:5px 10px;
+    float:left;
+    width:14%;
     text-align:center;
     padding:0px;
     font-weight: bold;
+    font-size:10px;
+}
+.gae-event-switch{
+    cursor:pointer;
+}
+
+
+.gae-event.gae-hide-color {
+    border-width: 3px;
+    border-color:transparent !important;
 }

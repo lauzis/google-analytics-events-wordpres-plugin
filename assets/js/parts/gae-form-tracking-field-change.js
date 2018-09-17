@@ -76,7 +76,7 @@ $("form").each(function(){
 
             });
             input.addClass("gae-event");
-            input.addClass("gae-event-form-field-change");
+            input.addClass("gae-event-form-tracking-field-change");
         }
 
     });

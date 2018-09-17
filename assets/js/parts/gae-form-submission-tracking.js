@@ -34,12 +34,13 @@ $( "form" ).each(function(){
             }
             if (mailchimpFormId){
                 label = "Mailchimp form "+mailchimpFormId;
+                self.addClass("gae-mailchimp");
             }
 
             send_event(category, action, label, value)
 
         });
         self.addClass("gae-event");
-        self.addClass("gae-event-form-submission");
+        self.addClass("gae-event-form-submission-tracking");
     }
 });
