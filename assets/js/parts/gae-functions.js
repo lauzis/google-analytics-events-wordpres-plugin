@@ -144,6 +144,7 @@ function get_social_profile_links()
     social_links.push({"url":"draugiem.lv","title":"Draugiem Lv"});
     social_links.push({"url":"instagram.com","title":"Instagram"});
     social_links.push({"url":"pinterest.com","title":"Pinterest"});
+    social_links.push({"url":"plus.google.com","title":"Google +"});
     return social_links;
 
 }
