@@ -18,20 +18,19 @@ function get_element_position(jq_object){
             case "HEADER":
             case "header":
                 position="Header";
-                break;
+                return position;
 
             case "FOOTER":
             case "footer":
                 position="Footer";
-                break;
+                return position;
 
             case "ASIDE":
             case "aside":
                 position="Sidebar";
-                break;
+                return position;
         }
     });
-
 
     return position;
 
