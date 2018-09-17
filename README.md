@@ -59,7 +59,9 @@ ETH: 0xc9681216a25Ac99500482Bd419b4644882a31471
 1.0.7 Histry retracking, sometimes usefull for contact forms to see from what section user arrived, to see if some section
 generates more leads.
 
-1.0.6 Write help/about how to check what code is in page, maybe write test script, that tries to figure out
+1.0.8 Write help/about how to check what code is in page, maybe write test script, that tries to figure out
+
+1.0.9 Posibility switch off/on tracking from frontend?
 
 
 == Known issues (that are worth mention)==
