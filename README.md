@@ -15,9 +15,7 @@ BCH: qr3ed287kxc9ncukadceanfkqtshaqvg0g68j57pjz
 ETH: 0xc9681216a25Ac99500482Bd419b4644882a31471
 
 == Todo log ==
-
-0.9.7 Check todos in the code 
-
+ 
 0.9.8 Give someone to test, get feedback
     - setup
     - changing settings
@@ -69,6 +67,10 @@ generates more leads.
 1. Form submission tracking, there is possible to pass without triggering Form used event. Field change is trigered only after lost focus, to that field. Have to think about better implementation.
 
 == Changelog ==
+
+0.9.7 Check todos in the code
+ - some todos resolved some moved to todo/feature list of readme
+ - color debug panel added to switch on of the colors
 
 0.9.6 Fill the missing code parts
  - implemented tracking of froms subimtions, for field use, gravity forms success, mailchim success
