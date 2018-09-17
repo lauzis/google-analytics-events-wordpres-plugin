@@ -6,7 +6,7 @@ if (track_elements.length){
 
         var self = $(this);
 
-        if (!self.hasClass("gae-events")){
+        if (!self.hasClass("gae-event")){
             self.on("click",function(){
 
                 var self = $(this);
@@ -29,8 +29,8 @@ if (track_elements.length){
 
                 send_event(category, action, label, value)
             });
-            self.addClass("gae-events");
-            self.addClass("gae-events-custom-element-tracking");
+            self.addClass("gae-event");
+            self.addClass("gae-event-custom-element-tracking");
         }
 
     });

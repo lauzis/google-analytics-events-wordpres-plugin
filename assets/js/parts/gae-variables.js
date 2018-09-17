@@ -29,16 +29,6 @@ if (typeof(GAE_TIME_TRIGGER_TRESHOLD)==="undefined"){
     var GAE_TIME_TRIGGER_TRESHOLD = [gae-time-trigger-treshold];
 }
 
-if (typeof contact_page_link === "undefined"){
-    var contact_page_link="";
-}
-
-//TODO if not defined have to read body class?
-// fallback to body class
-if (typeof lang === "undefined"){
-    var lang="en";
-}
-
 var tracked_form_values = [];
 
 //gravity forms class for tracking value and sending it to when form is succesfull

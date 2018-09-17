@@ -216,7 +216,6 @@ class Gae_Admin
     {
         $options_updated = false;
         $sections = json_decode(file_get_contents(gae_INCLUDES_PATH . "/sections.json"), true);
-        //todo write help about how to check what code is in page, maybe write test script, that tries to figure out
 
         foreach ($sections as $sk => $s) {
 

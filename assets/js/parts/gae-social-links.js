@@ -1,4 +1,4 @@
-if (!self.hasClass("gae-events")){
+if (!self.hasClass("gae-event")){
     
     var social_links = get_social_profile_links();
     var social_link_tracker_added = false;
@@ -24,8 +24,8 @@ if (!self.hasClass("gae-events")){
                 social_link_click = true;
 
             });
-            self.addClass("gae-events");
-            self.addClass("gae-events-social-links");
+            self.addClass("gae-event");
+            self.addClass("gae-event-social-links");
             social_link_tracker_added = true;
         }
     }

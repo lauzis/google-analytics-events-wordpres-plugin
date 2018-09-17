@@ -7,7 +7,7 @@ function get_element_position(jq_object){
 
     var position = "";
     position = jq_object.data("gaPosition");
-    if (position.length>0){
+    if (typeof(position)!=="undefined" && position.length>0){
         return position;
     }
 
@@ -18,20 +18,19 @@ function get_element_position(jq_object){
             case "HEADER":
             case "header":
                 position="Header";
-                break;
+                return position;
 
             case "FOOTER":
             case "footer":
                 position="Footer";
-                break;
+                return position;
 
             case "ASIDE":
             case "aside":
                 position="Sidebar";
-                break;
+                return position;
         }
     });
-
 
     return position;
 
@@ -144,6 +143,7 @@ function get_social_profile_links()
     social_links.push({"url":"draugiem.lv","title":"Draugiem Lv"});
     social_links.push({"url":"instagram.com","title":"Instagram"});
     social_links.push({"url":"pinterest.com","title":"Pinterest"});
+    social_links.push({"url":"plus.google.com","title":"Google +"});
     return social_links;
 
 }
@@ -260,19 +260,18 @@ function json2array(json){
 }
 
 
-//TODO UPDATE HIOSTORY PUSH
-//NOW ITS MORE as  TITLE PUSH
-function push_history(url){
+function push_history(title)
+{
 
     // storring last 5 urls
-    var allowed_lenght =3;
-    url = url || document.location.href;
-    var history_urls =getCookie("history");
-    if (history_urls.length>0){
+    var allowed_lenght=3;
+    title = title || document.location.href;
+    var h_titles =getCookie("history");
+    if (h_titles.length>0){
         try {
-            var tmp = JSON.parse(history_urls);
-            history_urls = json2array(tmp);
-            if (url==history_urls[history_urls.length-1]){
+            var tmp = JSON.parse(h_titles)
+            h_titles = json2array(tmp);
+            if (title==h_titles[history_urls.length-1]){
                 //the last url in history is the same url
                 // probabbly user refreshed page
                 return;
@@ -281,17 +280,16 @@ function push_history(url){
             return;
         }
     } else {
-        history_urls = [];
+        h_titles = [];
     }
 
     //removing if more history than expo
-    if (history_urls.length>allowed_lenght){
-        history_urls.shift();
+    if (h_titles.length>allowed_lenght){
+        h_titles.shift();
     }
 
-    history_urls.push(url);
-    setCookie("history",JSON.stringify(history_urls));
-
+    h_titles.push(title);
+    setCookie("history",JSON.stringify(h_titles));
 }
 
 
