@@ -7,7 +7,7 @@ function get_element_position(jq_object){
 
     var position = "";
     position = jq_object.data("gaPosition");
-    if (position.length>0){
+    if (typeof(position)!=="undefined" && position.length>0){
         return position;
     }
 

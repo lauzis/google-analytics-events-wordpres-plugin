@@ -71,6 +71,7 @@ generates more leads.
 0.9.7 Check todos in the code
  - some todos resolved some moved to todo/feature list of readme
  - color debug panel added to switch on of the colors
+ - some js fixes, in event tracker
 
 0.9.6 Fill the missing code parts
  - implemented tracking of froms subimtions, for field use, gravity forms success, mailchim success
