@@ -11,7 +11,7 @@ var GAE_DEBUG = {
         el.classList.remove(class_name);
     },
     showMessage : function(message){
-        this.addInfoElement("  ".this.messageNr+": "+message);
+        this.addInfoElement(this.messageNr+": "+message);
         this.messageNr++;
     },
     appendHtml: function(el, str) {
@@ -42,11 +42,11 @@ var GAE_DEBUG = {
             },
             {
                 id: 'gae-event-form-submission-tracking',
-                name: 'Form use tracking'
+                name: 'Form submission'
             },
             {
                 id: 'gae-event-form-tracking-field-change',
-                name: 'Form use tracking'
+                name: 'On field change'
             },
             {
                 id: 'gae-event-form-tracking-gravity-success',
@@ -95,11 +95,8 @@ var GAE_DEBUG = {
         obj.parentElement.remove();
     },
     showHideColors : function(eventType){
-        console.log(eventType);
         jQuery('.'+eventType).each( function(){
             var self = jQuery(this);
-            console.log("self",self);
-            console.log("selfClass",self.attr("class"));
             if (self.hasClass("gae-hide-color")){
                 self.removeClass("gae-hide-color");
             } else {
@@ -108,6 +105,7 @@ var GAE_DEBUG = {
         });
     },
     addInfoElement: function(message){
+        console.log("adding element to html");
         this.appendHtml(document.body,this.getInfoTemplate(message));
     },
     addColorElement: function(){
