@@ -136,17 +136,17 @@
   ]
 },
 {
-  "id":"form-tracking",
-  "title":"Forms tracking",
-  "description":"Enable this if you want to see when someone tries to submit some form. If you have some forms in your website, this will help you track if users actually are using your forms. Sometimes it helps also to find some bugs with forms, you see that users ar trying to send form, but you dont have any antires. Maybe there is some problem with forms.",
+  "id":"search",
+  "title":"Wordpress search form tracking",
+  "description":"Wordpress search form tracking",
   "fields": [
     {
-      "id":"gae-form-tracking",
-      "title":"Enable form submition tracking",
+      "id":"gae-search",
+      "title":"Enable wordpress search form tracking",
       "type":"select",
       "value":"",
       "placeholder":"",
-      "default_value":"1",
+      "default_value":"0",
       "options":[
         {
           "value":"1",
@@ -157,10 +157,17 @@
           "title":"Disable"
         }
       ]
-    },
+    }
+  ]
+},
+{
+  "id":"form-tracking",
+  "title":"Forms tracking",
+  "description":"Enable this if you want to see when someone tries to submit some form. If you have some forms in your website, this will help you track if users actually are using your forms. Sometimes it helps also to find some bugs with forms, you see that users ar trying to send form, but you dont have any antires. Maybe there is some problem with forms.",
+  "fields": [
     {
-      "id":"gae-form-tracking-gravity",
-      "title":"Enable gravity forms tracking",
+      "id":"gae-form-tracking-field-change",
+      "title":"Enable form fields tracking",
       "type":"select",
       "value":"",
       "placeholder":"",
@@ -177,8 +184,26 @@
       ]
     },
     {
-      "id":"gae-form-tracking-field-change",
-      "title":"Enable form fields tracking",
+      "id":"gae-form-submission-tracking",
+      "title":"Enable form submission tracking",
+      "type":"select",
+      "value":"",
+      "placeholder":"",
+      "default_value":"1",
+      "options":[
+        {
+          "value":"1",
+          "title":"Enable"
+        },
+        {
+          "value":"0",
+          "title":"Disable"
+        }
+      ]
+    },
+    {
+      "id":"gae-form-tracking-gravity-success",
+      "title":"Enable gravity forms success tracking",
       "type":"select",
       "value":"",
       "placeholder":"",
@@ -250,7 +275,7 @@
 {
   "id":"outgoing-links",
   "title":"Outgoing Links",
-  "description":"Enable this if you want to see how often outgoing links are clicked. This will track when users are leaving your site via autgoing links in content. This sometimes also helps to track some links that could be by mistake.",
+  "description":"Enable this if you want to see how often outgoing links are clicked. This will track when users are leaving your site via outgoing links in content. Sometimes helps to find some links that could be by mistake. If social link tracking is switched off, then all the social links (if any) are considered as outgoing.",
   "fields": [
     {
       "id":"gae-outgoing-links",
@@ -296,7 +321,7 @@
         ]
       },
       {
-        "id":"gae-track-links-to-specific-urls",
+        "id":"gae-track-links-to-specific-urls-list",
         "title":"Add urls you want to track (comma seperated)",
         "type":"textarea",
         "value":"",
@@ -336,6 +361,31 @@
       "value":"",
       "placeholder":".btn,cta-btn,button",
       "default_value":".kad-btn, .ga-track-click, .yop_poll_vote_button, .btn-cta, .cta-btn .btn, .cta-btn, button"
+    }
+  ]
+},
+{
+  "id":"mailchimp-success-tracking",
+  "title":"Mailchimp",
+  "description":"The tracker works with mailchimp-for-wp plugin. Other plugins not tested/implemented",
+  "fields": [
+    {
+      "id":"gae-mailchimp",
+      "title":"Enable mailchimp success tracking",
+      "type":"select",
+      "value":"",
+      "placeholder":"",
+      "default_value":"1",
+      "options":[
+        {
+          "value":"1",
+          "title":"Enable"
+        },
+        {
+          "value":"0",
+          "title":"Disable"
+        }
+      ]
     }
   ]
 },

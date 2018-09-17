@@ -9,7 +9,7 @@ $('a[href^="mailto:"]').click(function(){
 
     send_event('Contacts', "Email address clicked"+ click_position, selected_email.trim());
 
-})
+});
 
 $('a[href^="mailto:"]').addClass("gae-event");
 $('a[href^="mailto:"]').addClass("gae-event-contact-links");
@@ -22,12 +22,13 @@ $('a[href^="tel:"]').click(function(){
     var selected_phone = self.attr("href");
     selected_phone = selected_phone.replace("tel:","");
     var click_position=get_element_position(self);
+    if (typeof(click_position)==="undefined"){
+        click_position="";
+    }
 
     send_event("Contacts", "Phone number clicked "+ click_position, selected_phone.trim());
 
 });
+
 $('a[href^="tel:"]').addClass("gae-event");
 $('a[href^="tel:"]').addClass("gae-event-contact-links");
-
-
-debug_message("Assigned click events to contact links");

@@ -7,7 +7,7 @@ function get_element_position(jq_object){
 
     var position = "";
     position = jq_object.data("gaPosition");
-    if (position.length>0){
+    if (typeof(position)!=="undefined" && position.length>0){
         return position;
     }
 
@@ -18,20 +18,19 @@ function get_element_position(jq_object){
             case "HEADER":
             case "header":
                 position="Header";
-                break;
+                return position;
 
             case "FOOTER":
             case "footer":
                 position="Footer";
-                break;
+                return position;
 
             case "ASIDE":
             case "aside":
                 position="Sidebar";
-                break;
+                return position;
         }
     });
-
 
     return position;
 
@@ -139,7 +138,12 @@ function get_social_profile_links()
     social_links.push({"url":"facebook.com","title":"Facebook"});
     social_links.push({"url":"twitter.com","title":"Twitter"});
     social_links.push({"url":"linkedin.com","title":"LinkedIn"});
-    social_links.push({"url":"youtube.com","title":"Youtube"});
+    social_links.push({"url":"youtube.com/user/","title":"Youtube User"});
+    social_links.push({"url":"youtube.com/channel/","title":"Youtube Channel"});
+    social_links.push({"url":"draugiem.lv","title":"Draugiem Lv"});
+    social_links.push({"url":"instagram.com","title":"Instagram"});
+    social_links.push({"url":"pinterest.com","title":"Pinterest"});
+    social_links.push({"url":"plus.google.com","title":"Google +"});
     return social_links;
 
 }
@@ -164,6 +168,43 @@ function get_link_text(jquery_obj){
     if(jquery_obj.attr("alt")){
         text = jquery_obj.attr("alt");
         return text.trim();
+    }
+
+    if (jquery_obj.prop("tagName")==="form" || jquery_obj.prop("tagName")==="FORM"){
+
+        let h1 = jquery_obj.find("h1");
+        if (h1.length>0){
+            return h1.text();
+        }
+        let h2 = jquery_obj.find("h2");
+        if (h2.length>0){
+            return h2.text();
+        }
+        let h3 = jquery_obj.find("h3");
+        if (h3.length>0){
+            return h3.text();
+        }
+        let formName = jquery_obj.attr("name");
+        if (formName){
+            return formName;
+        }
+
+        let formID = jquery_obj.attr("id");
+        if (formID){
+            return formID;
+        }
+
+        let formRole = jquery_obj.attr("role");
+        if (formRole){
+            return formRole;
+        }
+
+        let submitBtn = jquery_obj.find('input[type=submit]');
+        if (submitBtn.length>0){
+            return submitBtn.first().text();
+        }
+        return "unknown form"
+
     }
 
     if(text){
@@ -219,19 +260,18 @@ function json2array(json){
 }
 
 
-//TODO UPDATE HIOSTORY PUSH
-//NOW ITS MORE as  TITLE PUSH
-function push_history(url){
+function push_history(title)
+{
 
     // storring last 5 urls
-    var allowed_lenght =3;
-    url = url || document.location.href;
-    var history_urls =getCookie("history");
-    if (history_urls.length>0){
+    var allowed_lenght=3;
+    title = title || document.location.href;
+    var h_titles =getCookie("history");
+    if (h_titles.length>0){
         try {
-            var tmp = JSON.parse(history_urls);
-            history_urls = json2array(tmp);
-            if (url==history_urls[history_urls.length-1]){
+            var tmp = JSON.parse(h_titles)
+            h_titles = json2array(tmp);
+            if (title==h_titles[history_urls.length-1]){
                 //the last url in history is the same url
                 // probabbly user refreshed page
                 return;
@@ -240,17 +280,16 @@ function push_history(url){
             return;
         }
     } else {
-        history_urls = [];
+        h_titles = [];
     }
 
     //removing if more history than expo
-    if (history_urls.length>allowed_lenght){
-        history_urls.shift();
+    if (h_titles.length>allowed_lenght){
+        h_titles.shift();
     }
 
-    history_urls.push(url);
-    setCookie("history",JSON.stringify(history_urls));
-
+    h_titles.push(title);
+    setCookie("history",JSON.stringify(h_titles));
 }
 
 
@@ -302,10 +341,39 @@ function send_event(category, action, label, value){
 function debug_message(message){
 
     if (GAE_DEBUG_LEVEL>1) {
-        console.log(message);
+
         if (typeof GAE_DEBUG === "object" && typeof GAE_DEBUG.showMessage==="function"){
-            GAE_DEBUG.showMessage(message)
+            GAE_DEBUG.showMessage(message);
+            console.log(message);
         }
     }
 
 };
+
+
+function get_gravity_form_id(formId){
+
+    if (typeof(formId)==="undefined"){
+        return null;
+    }
+
+    if (formId.indexOf("gform_")>-1){
+        return formId.replace("gform_","");
+    }
+    return null;
+}
+
+
+function get_mail_chimp_id(formId){
+    //mc4wp-form-1
+
+    if (typeof(formId)==="undefined"){
+        return null;
+    }
+
+    if (formId.indexOf("mc4wp-")>-1){
+        return formId.replace("mc4wp-","").replace("form-","");
+    }
+    return null;
+
+}

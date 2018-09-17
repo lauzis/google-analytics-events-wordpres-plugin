@@ -3,7 +3,7 @@
 Plugin Name: GAE - Google analytics events wordpress plugin
 Plugin URI: https://github.com/lauzis
 Description: The plugin that adds some basic events to the site, to track clikcs on cta buttons and forms.
-Version: 0.9.6
+Version: 0.9.7
 Author: Aivars Lauzis
 Author URI: https://github.com/lauzis
 License: GPL3

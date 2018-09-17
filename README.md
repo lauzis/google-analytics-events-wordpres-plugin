@@ -2,8 +2,11 @@
 Wordpress plugin that sets basic google analytics events for webpage
 
 == Donate ==
+ 
 
-Paypal: https://www.paypal.me/Lauzis
+[Paypal](https://www.paypal.me/Lauzis)
+
+[Paypal Wp Plugin Support](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=aivars.lauzis@gmail.com&lc=US&item_name=Donation+for+Google+Analytics+Event+Wordpres+Plugin+Support+And+Development&no_note=0&cn=&currency_code=USD&bn=PP-DonationsBF:btn_donateCC_LG.gif:NonHosted)  
 
 BTC: 3FtCcedzVcuQEBWTbbjLQBgWiBbNgT8cQG
 
@@ -12,9 +15,7 @@ BCH: qr3ed287kxc9ncukadceanfkqtshaqvg0g68j57pjz
 ETH: 0xc9681216a25Ac99500482Bd419b4644882a31471
 
 == Todo log ==
-
-0.9.7 Check todos in the code 
-
+ 
 0.9.8 Give someone to test, get feedback
     - setup
     - changing settings
@@ -25,6 +26,13 @@ ETH: 0xc9681216a25Ac99500482Bd419b4644882a31471
 
 
 ...
+0.9.x(-6) Color codes show on front.
+
+0.9.x(-5) Help text on front.
+
+0.9.x(-4) Plugin related settigns disable if plugin not detected (?) 
+
+0.9.x(-3) Additional debug levels, less noizy and possible to block going to garget could be front end switch. On / Off.
 
 0.9.x(-2) Translations po/mo files
 
@@ -40,9 +48,30 @@ ETH: 0xc9681216a25Ac99500482Bd419b4644882a31471
 
 1.0.3 New features 
 
+1.0.4 Issue with outgoing links thats are without http(s):// for examle href="www.google.lv" 
 
+1.0.5 Comma seperated field redo
+
+1.0.6 Custom link tracking, allow to add titles for links to use in event.
+
+1.0.7 Histry retracking, sometimes usefull for contact forms to see from what section user arrived, to see if some section
+generates more leads.
+
+1.0.8 Write help/about how to check what code is in page, maybe write test script, that tries to figure out
+
+1.0.9 Posibility switch off/on tracking from frontend?
+
+
+== Known issues (that are worth mention)==
+
+1. Form submission tracking, there is possible to pass without triggering Form used event. Field change is trigered only after lost focus, to that field. Have to think about better implementation.
 
 == Changelog ==
+
+0.9.7 Check todos in the code
+ - some todos resolved some moved to todo/feature list of readme
+ - color debug panel added to switch on of the colors
+ - some js fixes, in event tracker
 
 0.9.6 Fill the missing code parts
  - implemented tracking of froms subimtions, for field use, gravity forms success, mailchim success

@@ -1,4 +1,4 @@
-<div class="acp-form-field" id="acp-form-field-<?= $id ?>">
+<div class="gae-form-field" id="gae-form-field-<?= $id ?>">
 
   <label for="<?= $id ?>">
     <?= $title ?>
@@ -11,7 +11,7 @@
   ><?= $value ? $value : $default_value; ?></textarea>
 
   <?php if ($description): ?>
-    <p class="acp-form-field-description"><?= $description ?></p>
+    <p class="gae-form-field-description"><?= $description ?></p>
   <?php endif; ?>
 
 </div>

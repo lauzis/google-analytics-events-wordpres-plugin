@@ -1,13 +1,11 @@
-if (!self.hasClass("gae-events")){
+if (!self.hasClass("gae-event")){
     if (is_file(url)){
         self.click(function(){
             var text = get_link_text(self);
             send_event("File download",'File download clicked', text);
         });
-        self.addClass("gae-events");
-        self.addClass("gae-events-file-downloads");
+        self.addClass("gae-event");
+        self.addClass("gae-event-file-downloads");
     };
-
-    debug_message("Assigned click events for downloadable files");
 }
 
