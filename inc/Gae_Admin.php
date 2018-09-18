@@ -2,10 +2,10 @@
 
 class Gae_Admin
 {
-
-    // uninstalling
-
+    
     public static $folder_that_should_be_writable = [gae_GENERATE_PATH, gae_LOG_PATH];
+    private static $messages= [];
+
 
     public static function uninstall()
     {
@@ -31,11 +31,11 @@ class Gae_Admin
             if (!is_dir($folder) || !is_writable($folder)) {
                 if (!is_dir($folder)) {
                     if (!mkdir($folder, 0777, true)) {
-                        self::message(sprintf(__("Google Analytics Events (GAE) Error: Could not create folder %s", EMU2_I18N_DOMAIN) . " " . __("Php process should be allowed to write to that folder.", EMU2_I18N_DOMAIN), $folder), "error");
+                        self::add_message(sprintf(__("Google Analytics Events (GAE) Error: Could not create folder %s", EMU2_I18N_DOMAIN) . " " . __("Php process should be allowed to write to that folder.", EMU2_I18N_DOMAIN), $folder), "error");
                     }
                 }
                 if (!is_writable($folder)) {
-                    self::message(sprintf(__("Google Analytics Events (GAE) Error: Can't write to folder %s", EMU2_I18N_DOMAIN) . " " . __("Php process should be allowed to write to that folder.", EMU2_I18N_DOMAIN), $folder), "error");
+                    self::add_message(sprintf(__("Google Analytics Events (GAE) Error: Can't write to folder %s", EMU2_I18N_DOMAIN) . " " . __("Php process should be allowed to write to that folder.", EMU2_I18N_DOMAIN), $folder), "error");
                 }
             }
         }
@@ -130,7 +130,7 @@ class Gae_Admin
         if (!is_dir(gae_GENERATE_PATH) || !file_exists(gae_GENERATE_PATH)) {
             mkdir(gae_GENERATE_PATH, 0655, true);
             if (!is_writable(gae_GENERATE_PATH)) {
-                Gae_Admin::message("Cant write to file, in directory:" . gae_GENERATE_PATH, "error");
+                Gae_Admin::add_message("Cant write to file, in directory:" . gae_GENERATE_PATH, "error");
             }
         }
 
@@ -177,7 +177,7 @@ class Gae_Admin
                 if (is_writable($result_file_path)) {
                     if (file_put_contents($result_file_path, $combined_js_content)) {
                         Gae_Logger::write_log("Result saved to: $result_file_path ", __FUNCTION__, __LINE__);
-                        self::message("Result saved to: $result_file_path " . gae_GENERATE_PATH, "success");
+                        self::add_message("Result saved to: $result_file_path " . gae_GENERATE_PATH, "success");
                     } else {
                         Gae_Logger::write_log("FAILED (can be ignored) save to: $result_file_path ", __FUNCTION__, __LINE__);
                     };
@@ -188,14 +188,14 @@ class Gae_Admin
 
             if (is_writable(dirname($result_file_upload_path))) {
                 if (file_put_contents($result_file_upload_path, $combined_js_content)) {
-                    self::message("Result saved to: $result_file_upload_path " . gae_GENERATE_PATH, "success");
+                    self::add_message("Result saved to: $result_file_upload_path " . gae_GENERATE_PATH, "success");
                     Gae_Logger::write_log("Result saved to: $result_file_upload_path ", __FUNCTION__, __LINE__);
                 } else {
-                    self::message("Cant save the generated file. $result_file_upload_path . The folder / file should be writable by php and accessible - readable publicly.", "error");
+                    self::add_message("Cant save the generated file. $result_file_upload_path . The folder / file should be writable by php and accessible - readable publicly.", "error");
                     Gae_Logger::write_log("FAILED save to: $result_file_upload_path ", __FUNCTION__, __LINE__);
                 };
             } else {
-                self::message("Folder is not writable. " . dirname($result_file_upload_path), "error");
+                self::add_message("Folder is not writable. " . dirname($result_file_upload_path), "error");
                 Gae_Logger::write_log("FAILED file is not writable: $result_file_upload_path ", __FUNCTION__, __LINE__);
             }
         }
@@ -204,11 +204,9 @@ class Gae_Admin
     }
 
 
-    public static function message($text, $type = "success")
+    public static function add_message($text, $type = "success")
     {
-        ?>
-        <div id="message" class="<?= $type ?>"><?= $text ?></div>
-        <?php
+        array_push(self::$messages,["type"=>$type, "message" =>$text]);
     }
 
 
@@ -307,5 +305,27 @@ class Gae_Admin
         return $is_ga;
 
     }
+
+    private static function print_message($id, $message, $type){
+
+        ?>
+        <div id="message-<?= $id; ?>" class="gae-message notice notice-<?= $type; ?> is-dismissible">
+            <p>
+                <?= $message; ?>
+            </p>
+            <button type="button" class="notice-dismiss">
+                <span class="screen-reader-text">Dismiss this notice.</span>
+            </button>
+        </div>
+        <?php
+    }
+
+
+    public static function print_all_messages(){
+        foreach(self::$messages as $id => $message){
+            self::print_message($id,$message["message"],$message["type"]);
+        }
+    }
+
 
 }

@@ -2,7 +2,11 @@
   <?php Gae_Admin::generate_combined(); ?>
   <?php $sections = Gae_Admin::get_sections(); ?>
   <h1><?php _e('Google analytics settings',gae_PUGIN_NAME); ?> - <?php print gae_PUGIN_NAME ." ". gae_CURRENT_VERSION; ?></h1>
+  <?php Gae_Admin::print_all_messages(); ?>
   <p>To setup goals for you website, you need to have collect events on the page. This plugin sets some basic events, that should be collected. Bellow there is several sections that can be enabled or disabled seperatly.</p>
+
+
+
 
   <?php if (Gae_Admin::show_donation_block()) : ?>
   <?php include(gae_INCLUDES_PATH."/donation.php"); ?>
