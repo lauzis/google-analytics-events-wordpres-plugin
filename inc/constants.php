@@ -27,7 +27,7 @@ define( 'gae_GENERATE_PATH', str_replace('\\', '/', $uloads_dir["basedir"].'/gae
 define( 'gae_GENERATE_FILE', gae_GENERATE_PATH.'gae.js');
 define( 'gae_GENERATE_URL', $uloads_dir["baseurl"].'/gae/gae.js');
 
-define( 'gae_LOG_PATH', str_replace('\\', '/', WP_CONTENT_DIR).'/gae-logs/');
+define( 'gae_LOG_PATH', str_replace('\\', '/', $uloads_dir["basedir"].'/gae-logs/'));
 define( 'gae_DEBUG', false);		# never use debug mode on productive systems
 // i18n plugin domain for language files
 define( 'EMU2_I18N_DOMAIN', 'gae' );

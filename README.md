@@ -26,7 +26,7 @@ ETH: 0xc9681216a25Ac99500482Bd419b4644882a31471
 
 
 ...
-0.9.x(-6) Color codes show on front.
+0.9.x(-6) Check install uninstall scripts
 
 0.9.x(-5) Help text on front.
 
@@ -38,7 +38,7 @@ ETH: 0xc9681216a25Ac99500482Bd419b4644882a31471
 
 0.9.x(-1) Donate links
 
-0.9.x Proof reeding, fixing the pigeon English
+0.9.x Proof reading, fixing the pigeon English
 
 1.0.0 Publishing, drinking beer
 
@@ -60,6 +60,8 @@ generates more leads.
 1.0.8 Write help/about how to check what code is in page, maybe write test script, that tries to figure out
 
 1.0.9 Posibility switch off/on tracking from frontend?
+
+1.0.10 Possibility to change log path, that it would be the uploads dir.
 
 
 == Known issues (that are worth mention)==

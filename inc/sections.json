@@ -400,10 +400,10 @@
       "type":"select",
       "value":"",
       "placeholder":"",
-      "default_value":"disbaled",
+      "default_value":"disabled",
       "options":[
         {
-          "value":"disbaled",
+          "value":"disabled",
           "title":"Disabled"
         },
         {

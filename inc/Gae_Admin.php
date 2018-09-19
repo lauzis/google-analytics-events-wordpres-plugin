@@ -4,15 +4,17 @@ class Gae_Admin
 {
     
     public static $folder_that_should_be_writable = [gae_GENERATE_PATH, gae_LOG_PATH];
-    private static $messages= [];
+    private static $messages = [];
+    private static $permissionFailure = false;
 
 
     public static function uninstall()
     {
-        # delete all data stored
-        delete_option('gae_option_3');
-        // delete log files and folder only if needed
-        if (function_exists('gae_deleteLogFolder')) gae_deleteLogFolder();
+        //TODO
+//        # delete all data stored
+//        delete_option('gae_option_3');
+//        // delete log files and folder only if needed
+//        if (function_exists('gae_deleteLogFolder')) gae_deleteLogFolder();
     }
 
 
@@ -28,14 +30,23 @@ class Gae_Admin
         # check for folder
 
         foreach (self::$folder_that_should_be_writable as $folder) {
+            if (self::$permissionFailure){
+                break;
+            }
             if (!is_dir($folder) || !is_writable($folder)) {
                 if (!is_dir($folder)) {
-                    if (!mkdir($folder, 0777, true)) {
-                        self::add_message(sprintf(__("Google Analytics Events (GAE) Error: Could not create folder %s", EMU2_I18N_DOMAIN) . " " . __("Php process should be allowed to write to that folder.", EMU2_I18N_DOMAIN), $folder), "error");
+                    if (!is_writable(dirname($folder)) || !is_writable($folder)) {
+                        self::add_message(sprintf(__("Could not create folder %s", EMU2_I18N_DOMAIN) . " " . __("Webserver should be allwoed to write there. Or you could create this folder by yourself.", EMU2_I18N_DOMAIN), $folder), "error");
+                        self::$permissionFailure = true;
+                        return false;
+                    } else {
+                        mkdir($folder, 0777, true);
                     }
                 }
                 if (!is_writable($folder)) {
-                    self::add_message(sprintf(__("Google Analytics Events (GAE) Error: Can't write to folder %s", EMU2_I18N_DOMAIN) . " " . __("Php process should be allowed to write to that folder.", EMU2_I18N_DOMAIN), $folder), "error");
+                    self::add_message(sprintf(__("Can't write to folder %s", EMU2_I18N_DOMAIN) . " " . __("Webserver should be allowed to write to that directory/file.", EMU2_I18N_DOMAIN), $folder), "error");
+                    self::$permissionFailure = true;
+                    return false;
                 }
             }
         }
@@ -61,8 +72,6 @@ class Gae_Admin
 
     }
 
-
-// check if debug is activated
     public static function debug()
     {
         # only run debug on localhost
@@ -127,12 +136,21 @@ class Gae_Admin
 
         Gae_Logger::write_log("Regenerating scrtip start.=========", __FUNCTION__, __LINE__);
 
-        if (!is_dir(gae_GENERATE_PATH) || !file_exists(gae_GENERATE_PATH)) {
-            mkdir(gae_GENERATE_PATH, 0655, true);
-            if (!is_writable(gae_GENERATE_PATH)) {
-                Gae_Admin::add_message("Cant write to file, in directory:" . gae_GENERATE_PATH, "error");
+        if (!self::$permissionFailure){
+            if (!is_dir(gae_GENERATE_PATH) || !file_exists(gae_GENERATE_PATH)) {
+                if (!is_writable(dirname(gae_GENERATE_PATH))){
+                    Gae_Admin::add_message("Cant create/write into direcotry:" . dirname(gae_GENERATE_PATH).". Web server should be allowed to write to the folder to generate combined js file for inclusion.", "error");
+                    self::$permissionFailure = true;
+                } else {
+                    mkdir(gae_GENERATE_PATH, 0655, true);
+                    if (!is_writable(gae_GENERATE_PATH)) {
+                        Gae_Admin::add_message("Cant write file in directory:" . gae_GENERATE_PATH." web server should be allowed to write to the folder to generate combined js file for inclusion.", "error");
+                        self::$permissionFailure = true;
+                    }
+                }
             }
         }
+
 
         if (isset($_POST["option_page"]) && $_POST["option_page"] == 'gae-settings-group') {
             //combining the scritps
@@ -176,8 +194,8 @@ class Gae_Admin
                 Gae_Logger::write_log("Trying save regenerated file to subfolder.=========", __FUNCTION__, __LINE__);
                 if (is_writable($result_file_path)) {
                     if (file_put_contents($result_file_path, $combined_js_content)) {
-                        Gae_Logger::write_log("Result saved to: $result_file_path ", __FUNCTION__, __LINE__);
-                        self::add_message("Result saved to: $result_file_path " . gae_GENERATE_PATH, "success");
+                        Gae_Logger::write_log("Result, combined file saved to: $result_file_path ", __FUNCTION__, __LINE__);
+                        self::add_message("Result, combined file saved to: $result_file_path " . gae_GENERATE_PATH, "success");
                     } else {
                         Gae_Logger::write_log("FAILED (can be ignored) save to: $result_file_path ", __FUNCTION__, __LINE__);
                     };
@@ -186,18 +204,21 @@ class Gae_Admin
                 }
             }
 
-            if (is_writable(dirname($result_file_upload_path))) {
-                if (file_put_contents($result_file_upload_path, $combined_js_content)) {
-                    self::add_message("Result saved to: $result_file_upload_path " . gae_GENERATE_PATH, "success");
-                    Gae_Logger::write_log("Result saved to: $result_file_upload_path ", __FUNCTION__, __LINE__);
+            if (!self::$permissionFailure){
+                if (is_writable(dirname($result_file_upload_path))) {
+                    if (file_put_contents($result_file_upload_path, $combined_js_content)) {
+                        self::add_message("Result, combined file saved to: $result_file_upload_path " . gae_GENERATE_PATH, "success");
+                        Gae_Logger::write_log("Result, combined file saved to: $result_file_upload_path ", __FUNCTION__, __LINE__);
+                    } else {
+                        self::add_message("Cant save the generated file. $result_file_upload_path . The folder / file should be writable by php and accessible - readable publicly.", "error");
+                        Gae_Logger::write_log("FAILED save to: $result_file_upload_path ", __FUNCTION__, __LINE__);
+                    };
                 } else {
-                    self::add_message("Cant save the generated file. $result_file_upload_path . The folder / file should be writable by php and accessible - readable publicly.", "error");
-                    Gae_Logger::write_log("FAILED save to: $result_file_upload_path ", __FUNCTION__, __LINE__);
-                };
-            } else {
-                self::add_message("Folder is not writable. " . dirname($result_file_upload_path), "error");
-                Gae_Logger::write_log("FAILED file is not writable: $result_file_upload_path ", __FUNCTION__, __LINE__);
+                    self::add_message("Folder is not writable. " . dirname($result_file_upload_path), "error");
+                    Gae_Logger::write_log("FAILED file is not writable: $result_file_upload_path ", __FUNCTION__, __LINE__);
+                }
             }
+
         }
 
         Gae_Logger::write_log("Regenerating script end.=========", __FUNCTION__, __LINE__);
@@ -206,7 +227,7 @@ class Gae_Admin
 
     public static function add_message($text, $type = "success")
     {
-        array_push(self::$messages,["type"=>$type, "message" =>$text]);
+        array_push(self::$messages,["type"=>$type, "message" =>"GAE: ".$text]);
     }
 
 
