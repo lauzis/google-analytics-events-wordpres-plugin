@@ -3,7 +3,12 @@
   <?php $sections = Gae_Admin::get_sections(); ?>
   <h1><?php _e('Google analytics settings',gae_PUGIN_NAME); ?> - <?php print gae_PUGIN_NAME ." ". gae_CURRENT_VERSION; ?></h1>
   <?php Gae_Admin::print_all_messages(); ?>
-  <p>To setup goals for you website, you need to have collect events on the page. This plugin sets some basic events, that should be collected. Bellow there is several sections that can be enabled or disabled seperatly.</p>
+  <p>
+      To setup goals for you website, you have to collect events on the page. Usually events are added via google tag manager, or hardcoded in the page.
+      This plugin sets some basic events, that should be collected, also possible to add some custom events, for your custome elements.
+      Bellow there is several sections that can be enabled or disabled separately.
+      More about event and event tracking read <a href="https://wpflow.com/what-is-google-analytics-event-tracking/" target="_blank">here</a>.
+  </p>
 
 
 

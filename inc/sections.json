@@ -1,8 +1,8 @@
 [
   {
-  "id":"analytics-scirpt",
-  "title":"Analytics scirpt",
-  "description":"Anding analytics code to the header, if you have already analytics code in the page leave this value to 'Analytcs code already added' ",
+  "id":"analytics-script",
+  "title":"Analytics script",
+  "description":"Adding analytics code to the header, if you have already analytics code in the page leave this value to 'Don`t add, code already added manually'",
   "fields": [
     {
       "id":"gae-script-type",
@@ -21,11 +21,11 @@
         },
         {
           "value":"added-idk",
-          "title":"Don`t add, its there but i dont know what style"
+          "title":"Don`t add, its there but i don`t know what style"
         },
         {
           "value":"tag-manager",
-          "title":"Tag manager style code (recomended)"
+          "title":"Tag manager style code (recommended)"
         },
         {
           "value":"analytics",
@@ -48,14 +48,14 @@
       "value":"",
       "placeholder":"UA-XXX-X",
       "default_value":"",
-      "description":"As you will test, all events and clicks will be sent to google analytics. As this could potentially scew statistics its recomended to create seperate google analytics view so that you can safely test all events. This id will be used only if the debug mode is on."
+      "description":"When you will test to make sure that all events are sent to google analytics by actually triggering those events. This could potentially skew statistics. So it is recommended to create separate google analytics view for safe testing. This id will be used only if the debug mode is on, and you can restrict debug mode to the particular ip address."
     }
   ]
 },
 {
   "id":"time-trigger",
   "title":"Time trigger (bounce rate)",
-  "description":"By default in google analytics if page is visited and then browser closed or user navigates to different/other website, the visit would count as a bounced. Cause there was no event, after the visit. So in some cases its usuful to send time triggered event that user would not count as a bounced. For examle if user is on site 30sek, probabbly he is reading content, so this user should not count as bounced even if he went away afterwards.",
+  "description":"By default in google analytics bounce counted if user visits your page and after that moves away to different site or closes browser/tab even if user have spent reading the article half hour. <br/>The particular situation would count as bounced visit cause after entering the site there was no other event happening on site. In some cases its useful to send time triggered event, then users visit would not count as a bounced visit. <br/>For example if user is on site 30 sek, probably he is reading content, so this user should not count as bounced even if he went away afterwards, or closed browser/tab.",
   "fields": [
     {
       "id":"gae-time-trigger",
@@ -76,8 +76,8 @@
       ]
     },
     {
-      "id":"gae-time-trigger-treshold",
-      "title":"Time trigger treshold (seconds)",
+      "id":"gae-time-trigger-threshold",
+      "title":"Time trigger threshold (seconds)",
       "type":"text",
       "value":"",
       "placeholder":"30",
@@ -113,7 +113,7 @@
 {
   "id":"social-links",
   "title":"Social Links",
-  "description":"Enable this if you want to see how often social links are clicked on your website. This will track links containing social links facebook, twitter, google + .",
+  "description":"Enable this if you want to see how often links to social profiles are clicked on your website. This will track links containing social networks facebook, twitter, google+.",
   "fields": [
     {
       "id":"gae-social-links",

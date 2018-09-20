@@ -25,8 +25,8 @@ if (typeof GAE_SCRIPT_TYPE === "undefined"){
     }
 }
 
-if (typeof(GAE_TIME_TRIGGER_TRESHOLD)==="undefined"){
-    var GAE_TIME_TRIGGER_TRESHOLD = [gae-time-trigger-treshold];
+if (typeof(GAE_TIME_TRIGGER_THRESHOLD)==="undefined"){
+    var GAE_TIME_TRIGGER_THRESHOLD = [gae-time-trigger-threshold];
 }
 
 var tracked_form_values = [];
