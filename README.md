@@ -63,6 +63,8 @@ generates more leads.
 
 1.0.10 Possibility to change log path, that it would be the uploads dir.
 
+1.0.11 Move file extension settings outside.    
+
 
 == Known issues (that are worth mention)==
 
