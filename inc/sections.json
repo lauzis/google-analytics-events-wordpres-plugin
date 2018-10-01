@@ -48,14 +48,14 @@
       "value":"",
       "placeholder":"UA-XXX-X",
       "default_value":"",
-      "description":"When you will test to make sure that all events are sent to google analytics by actually triggering those events. This could potentially skew statistics. So it is recommended to create separate google analytics view for safe testing. This id will be used only if the debug mode is on, and you can restrict debug mode to the particular ip address."
+      "description":"For testing purposes we advice to create separate view in google analytics, so that organic events and statistics would not be impacted by your or your team test clicks. This id will be used only if the debug mode is on, and you can restrict debug mode to the particular ip address."
     }
   ]
 },
 {
   "id":"time-trigger",
   "title":"Time trigger (bounce rate)",
-  "description":"By default in google analytics bounce counted if user visits your page and after that moves away to different site or closes browser/tab even if user have spent reading the article half hour. <br/>The particular situation would count as bounced visit cause after entering the site there was no other event happening on site. In some cases its useful to send time triggered event, then users visit would not count as a bounced visit. <br/>For example if user is on site 30 sek, probably he is reading content, so this user should not count as bounced even if he went away afterwards, or closed browser/tab.",
+  "description":"By default bounce view/visit counted in google analytics if user visits your page and after that moves away to different site or closes browser/tab even if user have spent half hour of reading the article. <br/>In case of time triggered event user will not be counted as bounced after it have been triggered. You can increase, decrease or switch it off completely.",
   "fields": [
     {
       "id":"gae-time-trigger",
@@ -113,7 +113,7 @@
 {
   "id":"social-links",
   "title":"Social Links",
-  "description":"Enable this if you want to see how often links to social profiles are clicked on your website. This will track links containing social networks facebook, twitter, google+.",
+  "description":"Enable this if you want to see how often links to social profiles are clicked on your website. This will track links containing social networks facebook, twitter, google+, pinterest, linked in",
   "fields": [
     {
       "id":"gae-social-links",
@@ -163,7 +163,7 @@
 {
   "id":"form-tracking",
   "title":"Forms tracking",
-  "description":"Enable this if you want to see when someone tries to submit some form. If you have some forms in your website, this will help you track if users actually are using your forms. Sometimes it helps also to find some bugs with forms, you see that users ar trying to send form, but you dont have any antires. Maybe there is some problem with forms.",
+  "description":"Enable this if you want to see when someone tries to submit some form (if you have any). It will help you track if users actually are using your forms. Sometimes it helps also to find some bugs with forms, you see that users are trying to send form, but you don't have any entries. Maybe there is some problem with forms.",
   "fields": [
     {
       "id":"gae-form-tracking-field-change",
@@ -224,7 +224,7 @@
 {
   "id":"file-downloads",
   "title":"File downloads",
-  "description":"Enable this if you want to see how often files that are linked in content are opened/downloaded.",
+  "description":"Enable this if you want to see how often files that are are opened/downloaded. It will track files with such extensions: pdf, doc, docx, zip, xls, xslx, odt, ods, ppt, pptx",
   "fields": [
     {
       "id":"gae-file-downloads",
@@ -249,8 +249,8 @@
 {
   "id":"custom-links",
   "title":"Custome Links",
-  "description":"If you want track custom link that does not fit into other categories (social links, outgoing links, links to file...), then please add some special attributes ( data-ga-category, data-ga-actio, data-ga-label) to those links. As we are using ourselves this plugin, we have built in attributes that we are tracking. So if you want to track some particluar link, you should add data attributes, see the example. ",
-  "example":"<a href=\"link to somehting or place\" data-ga-category=\"Shopping cart\" data-ga-action=\"Clicked\" data-ga-label=\"In Header\">Click me </a>",
+  "description":"If you want track custom link that does not fit into other categories (social links, outgoing links, links to file...), then add special attributes (data-ga-category, data-ga-action, data-ga-label) to those links. These attributes are for more advanced wordpress users / developers who are building their custom theme or elements.See example.<br/>If you don't have such elements, don't bother switching this setting on. Leave it disabled. ",
+  "example":"<a href=\"link to something or some site\" data-ga-category=\"Shopping cart\" data-ga-action=\"Clicked\" data-ga-label=\"In Header\">Click me </a>",
   "fields": [
     {
       "id":"gae-custom-links",
@@ -275,7 +275,7 @@
 {
   "id":"outgoing-links",
   "title":"Outgoing Links",
-  "description":"Enable this if you want to see how often outgoing links are clicked. This will track when users are leaving your site via outgoing links in content. Sometimes helps to find some links that could be by mistake. If social link tracking is switched off, then all the social links (if any) are considered as outgoing.",
+  "description":"Enable this if you want to see how often outgoing links are clicked. It will track users that are leaving your site via outgoing links in site. Sometimes helps to find some links in content that could be there by mistake. If social link tracking is switched off, then all the social links (if any) are considered as outgoing.",
   "fields": [
     {
       "id":"gae-outgoing-links",
@@ -300,7 +300,7 @@
   {
     "id":"specific-links",
     "title":"Specific Link Destination",
-    "description":"Enable this if you want to track links leading to some custom url. For example, in page there could be several links to 'about us' page and you wana track all these links how ofthen they are visited.",
+    "description":"Enable this if you want to track links leading to some custom url. For example, in page there could be several links to 'about us' page and you want track all these links how often they are visited.",
     "fields": [
       {
         "id":"gae-track-links-to-specific-urls",
@@ -335,6 +335,7 @@
   "id":"custom-element-tracking",
   "title":"Custom element click tracking",
   "description":"Enable this if you want to track some custom elements, by css class or id",
+  "example":".button, #cart, header",
   "fields": [
     {
       "id":"gae-custom-element-tracking",
@@ -356,7 +357,7 @@
     },
     {
       "id":"gae-custom-element-tracking-class",
-      "title":"Add class, id to be tracked (comma seperated)",
+      "title":"Add tag, class or id to be tracked (comma separated)",
       "type":"text",
       "value":"",
       "placeholder":".btn,cta-btn,button",
