@@ -65,6 +65,7 @@ generates more leads.
 
 1.0.11 Move file extension settings outside.    
 
+1.0.12 Debug only for admin, or admin loged in
 
 == Known issues (that are worth mention)==
 
