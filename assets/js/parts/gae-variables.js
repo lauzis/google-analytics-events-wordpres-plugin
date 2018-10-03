@@ -20,7 +20,7 @@ if (typeof GAE_SCRIPT_TYPE === "undefined"){
         if (GAE_SCRIPT_TYPE===-1){
             debug_message("We could not find the gtag/ga, must be that google analytics script is not included!");
         } else {
-            debug_message("We found whatm we, need. Analytics "+function_name+"() detected!");
+            debug_message("We found what we, need. Analytics "+function_name+"() detected!");
         }
     }
 }
@@ -35,3 +35,67 @@ var tracked_form_values = [];
 var value_tracking_selector = '.ga-track-value select, .ga-track-value input, select.ga-track-value, input.ga-track-value';
 
 var HOST = document.location.hostname;
+
+
+const GAE_SECTIONS = [
+    {
+        id: 'gae-event-contact-links',
+        name: 'Contact Links',
+        enabled: [gae-event-contact-links]
+    },
+    {
+        id: 'gae-event-custom-element-tracking',
+        name: 'Custom elements by selector',
+        enabled: [gae-event-custom-element-tracking]
+    },
+    {
+        id: 'gae-event-custom-links',
+        name: 'Custom links by special attributes',
+        enabled: [gae-event-custom-links]
+    },
+    {
+        id: 'gae-event-file-downloads',
+        name: 'File downloads',
+        enabled: [gae-event-file-downloads]
+    },
+    {
+        id: 'gae-event-form-submission-tracking',
+        name: 'Form submission',
+        enabled: [gae-event-form-submission-tracking]
+    },
+    {
+        id: 'gae-event-form-tracking-field-change',
+        name: 'On field change',
+        enabled: [gae-event-form-tracking-field-change]
+    },
+    {
+        id: 'gae-event-form-tracking-gravity-success',
+        name: 'Gravity form tracking',
+        enabled: [gae-event-form-tracking-gravity-success]
+    },
+    {
+        id: 'gae-event-mailchimp',
+        name: 'Mailchimp success',
+        enabled: [gae-event-mailchimp]
+    },
+    {
+        id: 'gae-event-outgoing-links',
+        name: 'Outgoing links',
+        enabled: [gae-event-outgoing-links]
+    },
+    {
+        id: 'gae-event-search',
+        name: 'Search submit',
+        enabled: [gae-event-search]
+    },
+    {
+        id: 'gae-event-social-links',
+        name: 'Social links',
+        enabled: [gae-event-social-links]
+    },
+    {
+        id: 'gae-event-links-to-specific-urls',
+        name: 'Specific urls',
+        enabled: [gae-event-track-links-to-specific-urls]
+    }
+];
