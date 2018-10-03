@@ -190,6 +190,16 @@ class Gae_Admin
                 $combined_js_content = str_replace("//[$js_part]", $js_part_content, $combined_js_content);
             }
 
+            foreach ($all_js_parts as $js_part) {
+                if (isset($_POST[$js_part]) && $_POST[$js_part]) {
+                    $js_part = str_replace("gae","gae-event",$js_part);
+                    $combined_js_content = str_replace("[$js_part]", 1, $combined_js_content);
+                } else {
+                    $js_part = str_replace("gae","gae-event",$js_part);
+                    $combined_js_content = str_replace("[$js_part]", 0, $combined_js_content);
+                }
+            }
+
             if (self::debug()) {
                 Gae_Logger::write_log("Trying save regenerated file to subfolder.=========", __FUNCTION__, __LINE__);
                 if (is_writable($result_file_path)) {
