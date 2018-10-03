@@ -1,3 +1,49 @@
+var GAE_STORAGE = {
+    isEnabled: function(){
+        let storage = window.sessionStorage;
+        if (typeof(storage) !== "undefined") {
+            return true;
+        }
+        return false;
+    },
+    get:function (id) {
+        let local_id = "gae-"+id;
+        let storage = window.sessionStorage;
+        if (typeof(storage) !== "undefined") {
+            if (typeof window.sessionStorage[local_id]==="undefined"){
+                return this.getDefaultValue(id)
+            } else {
+                return window.sessionStorage[local_id];
+            }
+        } else {
+            this.getDefaultValue(id);
+        }
+    },
+    set: function (id, value){
+        console.log("setting vaue:",id,":",value);
+        let local_id = "gae-"+id;
+        let storage = window.sessionStorage;
+        if (typeof(storage) !== "undefined") {
+            // Code for localStorage/sessionStorage.
+            window.sessionStorage[local_id]=value;
+            return true;
+        } else {
+            // Sorry! No Web Storage support..
+            return false;
+        }
+    },
+    getDefaultValue(id){
+        let local_id = "gae-"+id;
+        if (typeof this.defaultValues[id]==="undefined"){
+            console.log("no default value for :",id);
+            return null;
+        } else {
+            return this.defaultValues[id];
+        }
+    }
+}
+
+
 var GAE_DEBUG = {
 
     messageNr:1,
@@ -22,77 +68,58 @@ var GAE_DEBUG = {
         }
     },
     getColorInfoTemplate: function(){
+         let show = "";
 
-        const sections = [
-            {
-                id: 'gae-event-contact-links',
-                name: 'Contact Links'
-            },
-            {
-                id: 'gae-event-custom-element-tracking',
-                name: 'Custom elements by selector'
-            },
-            {
-                id: 'gae-event-custom-links',
-                name: 'Custom links by special attributes'
-            },
-            {
-                id: 'gae-event-file-downloads',
-                name: 'File downloads'
-            },
-            {
-                id: 'gae-event-form-submission-tracking',
-                name: 'Form submission'
-            },
-            {
-                id: 'gae-event-form-tracking-field-change',
-                name: 'On field change'
-            },
-            {
-                id: 'gae-event-form-tracking-gravity-success',
-                name: 'Gravity form tracking'
-            },
-            {
-                id: 'gae-event-mailchimp',
-                name: 'Mailchimp success'
-            },
-            {
-                id: 'gae-event-outgoing-links',
-                name: 'Outgoing links'
-            },
-            {
-                id: 'gae-event-search',
-                name: 'Search submit'
-            },
-            {
-                id: 'gae-event-social-links',
-                name: 'Social links'
-            },
-            {
-                id: 'gae-event-links-to-specific-urls',
-                name: 'Specific urls'
-            }
-        ];
+         if (GAE_STORAGE.get("showColorBox")===1){
+             show=" show";
+         }
 
-         let html='<div class="gae-colors show"><a class="gae-info-close" onclick="GAE_DEBUG.closeInfo(this);" href="#close">Close</a><div class="gae-info-content"><ul>';
+         var sections = GAE_SECTIONS;
+         let html='<div class="gae-colors'+show+'">' +
+             '<a class="gae-info-close" onclick="GAE_DEBUG.hideColorBox(this);" href="#close">Close Color Sheet</a>' +
+             '<a class="gae-info-open" onclick="GAE_DEBUG.showColorBox(this);" href="#open">Open Color Sheet</a>' +
+             '<div class="gae-info-content"><ul>';
 
          let x=null;
-         for (x in sections){
-             html+='<li onclick="GAE_DEBUG.showHideColors(\''+sections[x].id+'\');" id="'+sections[x].id+'" class="gae-event-switch gae-event '+sections[x].id+'">'+sections[x].name+'</li>';
+         for (x in sections) {
+             if (sections[x].enabled){
+                 html+='<li onclick="GAE_DEBUG.showHideColors(\''+sections[x].id+'\');" id="'+sections[x].id+'" class="gae-event-switch gae-event '+sections[x].id+'">'+sections[x].name+'</li>';
+             }
          }
          html+='</ul>'+
              '<p>' +
-             'If you "switch off" some or all items, it does not switch off element tracking! This is just visual debug tool! To Find what elements ar tracked!!' +
-             'If you want to switch some element trakcing of, you have to do it via administration, plugin settings.'+
+             'Note, that If you "switch off" some or all trackers, it does not switch off element tracking! ' +
+             'This is just visual debug tool! To Find what elements are tracked in page! ' +
+             'Also not all tracked elements can be displayed (example is time triggered event). ' +
+             'If you want to switch some element tracking off, you have to do it via administration, plugin settings, at least in current version of plugin.' +
+             ''+
              '</p>'+
              '</div></div>';
         return html;
     },
     getInfoTemplate: function(message){
-        return '<div class="gae-info show gae-info-'+this.messageNr+'"><a class="gae-info-close" onclick="GAE_DEBUG.closeInfo(this);" href="#close">Close</a><span class="gae-info-text">'+message+'</span></div>';
+            if (GAE_STORAGE.isEnabled()){
+                
+            }
+            return '<div class="gae-info show gae-info-'+this.messageNr+'">' +
+                        '<a class="gae-info-close" onclick="GAE_DEBUG.closeInfo(this);" href="#close">Close</a>' +
+                        '<span class="gae-info-text">'+message+'</span>' +
+                        '<a class="gae-info-close-forever" onclick="GAE_DEBUG.closeInfoForEver(this);" href="#close-for-ever">Dont show this message again</a>' +
+                    '</div>';
+
     },
     closeInfo : function(obj){
         obj.parentElement.remove();
+    },
+    showColorBox : function(obj){
+        GAE_STORAGE.set("showColorBox",1);
+        var self = jQuery(obj.parentElement);
+        self.addClass("show");
+    },
+    hideColorBox : function(obj){
+        GAE_STORAGE.set("showColorBox",0);
+        var self = jQuery(obj.parentElement);
+        self.removeClass("show");
     },
     showHideColors : function(eventType){
         jQuery('.'+eventType).each( function(){
@@ -105,7 +132,6 @@ var GAE_DEBUG = {
         });
     },
     addInfoElement: function(message){
-        console.log("adding element to html");
         this.appendHtml(document.body,this.getInfoTemplate(message));
     },
     addColorElement: function(){
@@ -117,7 +143,6 @@ var GAE_DEBUG = {
     }
 
 }
-
 
 
 GAE_DEBUG.init();
