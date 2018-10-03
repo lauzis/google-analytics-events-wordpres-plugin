@@ -1,5 +1,5 @@
 body {
-    border-width:6px;
+    border-width:2px;
     border-color:red;
     border-style:solid;
 }
@@ -84,7 +84,6 @@ body {
 }
 
 
-
 .gae-event-form-submission {
     border-color:deepskyblue;
 }
@@ -97,13 +96,43 @@ body {
     border-style:solid;
     border-color:black;
     border-width: 0;
-    border-top-width: 1px;
+    border-top-width: 3px;
     background-color:white;
+    box-shadow: 0 -5px 30px black;
+    z-index:999777;
 }
 
-.gae-colors .gae-info-close{
-    padding:10px;
+.gae-colors a{
+    color:firebrick;
 }
+.gae-colors a:hover{
+    color:darkred;
+}
+
+.gae-colors .gae-info-close {
+    padding:10px;
+    display:none;
+    font-size:16px;
+    line-height:20px;
+}
+
+.gae-colors .gae-info-open {
+    padding:10px;
+    font-size:16px;
+    line-height:20px;
+    display: block;
+}
+
+.gae-colors.show .gae-info-close {
+    padding:10px;
+    display:block;
+}
+
+.gae-colors.show .gae-info-open {
+    padding:10px;
+    display:none;
+}
+
 
 .gae-colors .gae-info-content {
     margin:0 auto;
@@ -114,6 +143,15 @@ body {
     background-color:white;
     padding:0 20px;
 }
+
+.gae-colors .gae-info-content{
+    display:none;
+}
+
+.gae-colors.show .gae-info-content{
+    display:block;
+}
+
 .gae-colors .gae-info-content p {
     margin:30px 10px;
 }
@@ -122,7 +160,7 @@ body {
     position:relative;
     float:left;
     display:block;
-    width:auto;
+    width:100%;
     margin:auto 0;
     background-color:white;
 }
@@ -138,7 +176,7 @@ body {
     font-weight: bold;
     font-size:10px;
 }
-.gae-event-switch{
+.gae-event-switch {
     cursor:pointer;
 }
 
