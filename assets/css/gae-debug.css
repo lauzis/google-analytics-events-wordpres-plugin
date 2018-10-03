@@ -116,6 +116,7 @@ body {
     display:none;
     font-size:16px;
     line-height:20px;
+    float:left;
 }
 
 .gae-colors .gae-info-open {
