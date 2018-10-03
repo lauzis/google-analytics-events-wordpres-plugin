@@ -1,4 +1,7 @@
 var GAE_STORAGE = {
+    defaultValues:{
+
+    },
     isEnabled: function(){
         let storage = window.sessionStorage;
         if (typeof(storage) !== "undefined") {
@@ -98,17 +101,32 @@ var GAE_DEBUG = {
         return html;
     },
     getInfoTemplate: function(message){
+            let closeForEverButton = "";
+
             if (GAE_STORAGE.isEnabled()){
-                
+                if (GAE_STORAGE.get(message)){
+                    return null;
+                }
+
+                closeForEverButton='<a class="gae-info-close gae-info-close-forever" onclick="GAE_DEBUG.closeInfoForEver(this,\''+message+'\');" href="#close-for-ever">Close for ever</a>';
             }
             return '<div class="gae-info show gae-info-'+this.messageNr+'">' +
-                        '<a class="gae-info-close" onclick="GAE_DEBUG.closeInfo(this);" href="#close">Close</a>' +
                         '<span class="gae-info-text">'+message+'</span>' +
-                        '<a class="gae-info-close-forever" onclick="GAE_DEBUG.closeInfoForEver(this);" href="#close-for-ever">Dont show this message again</a>' +
+                        '<a class="gae-info-close" onclick="GAE_DEBUG.closeInfo(this);" href="#close">Close</a>' +
+                        closeForEverButton +
                     '</div>';
-
     },
     closeInfo : function(obj){
+        obj.parentElement.remove();
+    },
+    closeInfoForEver : function(obj,message){
+
+        console.log("------------");
+        console.log("close info for ever!");
+        console.log(message);
+        console.log("------------");
+
+        GAE_STORAGE.set(message,1);
         obj.parentElement.remove();
     },
     showColorBox : function(obj){
