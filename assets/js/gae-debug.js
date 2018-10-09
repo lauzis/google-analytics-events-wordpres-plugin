@@ -142,19 +142,23 @@ var GAE_DEBUG = {
         GAE_STORAGE.set("showColorBox",1);
         var self = jQuery(obj.parentElement);
         self.addClass("show");
+        jQuery("body").addClass("gae-colorBoxOpened");
     },
     hideColorBox : function(obj){
         GAE_STORAGE.set("showColorBox",0);
         var self = jQuery(obj.parentElement);
         self.removeClass("show");
+        jQuery("body").removeClass("gae-colorBoxOpened");
     },
     showHideColors : function(eventType){
         console.log(eventType);
         if (GAE_STORAGE.isEnabled()){
-            if (parseInt(GAE_STORAGE.set("hideColor_"+eventType,0),10)===1){
+            if (parseInt(GAE_STORAGE.get("hideColor_"+eventType),10)===0){
                 jQuery('.'+eventType).addClass("gae-hide-color");
+                GAE_STORAGE.set("hideColor_"+eventType,1);
             } else {
-                jQuery('.'+eventType).hideClass("gae-hide-color");
+                jQuery('.'+eventType).removeClass("gae-hide-color");
+                GAE_STORAGE.set("hideColor_"+eventType,0);
             }
         } else{
             jQuery('.'+eventType).each( function(){
@@ -168,7 +172,6 @@ var GAE_DEBUG = {
                 }
             });
         }
-
     },
     addInfoElement: function(message){
         this.appendHtml(document.body,this.getInfoTemplate(message));
