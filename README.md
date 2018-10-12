@@ -24,21 +24,15 @@ ETH: 0xc9681216a25Ac99500482Bd419b4644882a31471
 
 0.9.9 Bug fixing
 
+0.9.9 Proof reading, fixing the pigeon English
 
-...
-0.9.x(-6) Check install uninstall scripts
+0.9.10 Check install uninstall scripts
 
-0.9.x(-5) Help text on front.
+0.9.11 Help text on front.
 
-0.9.x(-4) Plugin related settigns disable if plugin not detected (?) 
+0.9.12 Translations po/mo files
 
-0.9.x(-3) Additional debug levels, less noizy and possible to block going to garget could be front end switch. On / Off.
-
-0.9.x(-2) Translations po/mo files
-
-0.9.x(-1) Donate links
-
-0.9.x Proof reading, fixing the pigeon English
+0.9.13 Donate links
 
 1.0.0 Publishing, drinking beer
 
