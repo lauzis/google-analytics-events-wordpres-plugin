@@ -41,7 +41,11 @@ jQuery(function ($) {
     //[gae-form-tracking-field-change]
     //[gae-form-submission-tracking]
 
-
     //[gae-time-trigger]
 
+    if (typeof(GAE_DEBUG)!=="undefined"){
+        GAE_DEBUG.init();
+    }
+
 });
+

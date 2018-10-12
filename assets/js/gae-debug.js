@@ -101,6 +101,7 @@ var GAE_DEBUG = {
                  hide_colors="";
                  if (GAE_STORAGE.isEnabled() && parseInt(GAE_STORAGE.get("hideColor_"+sections[x].id),10)===1){
                     hide_colors=" gae-hide-color";
+                    this.showHideColors(sections[x].id,0);
                  }
                  html+='<li onclick="GAE_DEBUG.showHideColors(\''+sections[x].id+'\');" id="'+sections[x].id+'" class="gae-event-switch gae-event '+sections[x].id+hide_colors+'">'+sections[x].name+'</li>';
              }
@@ -150,10 +151,15 @@ var GAE_DEBUG = {
         self.removeClass("show");
         jQuery("body").removeClass("gae-colorBoxOpened");
     },
-    showHideColors : function(eventType){
-        console.log(eventType);
+    showHideColors : function(eventType, forceOn){
+
         if (GAE_STORAGE.isEnabled()){
-            if (parseInt(GAE_STORAGE.get("hideColor_"+eventType),10)===0){
+            var showColor = !(parseInt(GAE_STORAGE.get("hideColor_"+eventType),10)===0);
+            if (typeof(forceOn)!=="undefined"){
+                showColor = (forceOn === 1);
+            }
+
+            if (!showColor){
                 jQuery('.'+eventType).addClass("gae-hide-color");
                 GAE_STORAGE.set("hideColor_"+eventType,1);
             } else {
@@ -185,6 +191,3 @@ var GAE_DEBUG = {
     }
 
 }
-
-
-GAE_DEBUG.init();
