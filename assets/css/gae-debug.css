@@ -31,7 +31,7 @@ body {
 }
 
 .gae-event {
-    border-style:dashed !important;
+    border-style:dotted !important;
     border-color:darkred;
     border-width: 3px !important;
     /*cursor:not-allowed !important;*/
@@ -74,7 +74,7 @@ body {
 }
 
 .gae-event-search{
-    border-color:brown;
+    border-color:pink !important;
 }
 
 .gae-event-social-links{
@@ -189,7 +189,7 @@ body {
 
 .gae-event.gae-hide-color {
     border-width: 3px;
-    border-color:transparent !important;
+    border-color: transparent !important;
 }
 
 .gae-colorBoxOpened{
