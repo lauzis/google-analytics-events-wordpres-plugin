@@ -7,22 +7,34 @@ class Gae_Admin
     private static $messages = [];
     private static $permissionFailure = false;
 
-
     public static function uninstall()
     {
-        //TODO
-//        # delete all data stored
-//        delete_option('gae_option_3');
-//        // delete log files and folder only if needed
-//        if (function_exists('gae_deleteLogFolder')) gae_deleteLogFolder();
+        // removing options
+        self::remove_sections_options();
+        // removing files
+        array_map('unlink', glob(gae_GENERATE_PATH."*.*"));
+        array_map('unlink', glob(gae_LOG_PATH."*.*"));
+        //removing dirs
+        rmdir(gae_GENERATE_PATH);
+        rmdir(gae_LOG_PATH);
     }
 
+    public static function activate()
+    {
+        //TODO
+        // would be nice to show message with link to settings page 
+    }
+
+    public static function deactivate(){
+        // for now do nothing. dont want lose settings yet.
+    }
 
     public static function init()
     {
         //register settings
         //gea_register_scripts();
         self::add_scripts();
+
     }
 
     public static function check_folder_access_rights()
@@ -51,7 +63,6 @@ class Gae_Admin
             }
         }
     }
-
 
     public static function create_menu()
     {
@@ -126,7 +137,6 @@ class Gae_Admin
             "gae-time-trigger"
         ];
     }
-
 
     public static function generate_combined()
     {
@@ -233,12 +243,22 @@ class Gae_Admin
         Gae_Logger::write_log("Regenerating script end.=========", __FUNCTION__, __LINE__);
     }
 
-
     public static function add_message($text, $type = "success")
     {
         array_push(self::$messages,["type"=>$type, "message" =>"GAE: ".$text]);
     }
 
+    private static function remove_sections_options(){
+        $sections = json_decode(file_get_contents(gae_INCLUDES_PATH . "/sections.json"), true);
+
+        foreach ($sections as $sk => $s) {
+
+            foreach ($s["fields"] as $fk => $f) {
+                $sections[$sk]["fields"][$fk]["value"] = get_option($f["id"]);
+                delete_option($f["id"]);
+            }
+        }
+    }
 
     public static function get_sections()
     {
@@ -264,19 +284,16 @@ class Gae_Admin
         return $sections;
     }
 
-
     public static function is_settings_page()
     {
         //// TODO: check if we are on settings page to load addtional css
         return true;
     }
 
-
     public static function add_css()
     {
         echo '<link id="' . gae_PLUGIN_DIRECTORY . '" rel="stylesheet" href="' . gae_CSS_URL . '/gae-admin.css' . '" type="text/css" media="all" />';
     }
-
 
     public static function add_scripts()
     {
@@ -286,7 +303,6 @@ class Gae_Admin
             }
         }
     }
-
 
     public static function add_settings_link_to_plugin_list($links)
     {
@@ -299,13 +315,11 @@ class Gae_Admin
         return $links;
     }
 
-
     public static function show_donation_block()
     {
         //todo check the last interaction ignore for a while
         return true;
     }
-
 
     public static function script_type()
     {
@@ -350,12 +364,10 @@ class Gae_Admin
         <?php
     }
 
-
     public static function print_all_messages(){
         foreach(self::$messages as $id => $message){
             self::print_message($id,$message["message"],$message["type"]);
         }
     }
-
 
 }

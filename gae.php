@@ -38,9 +38,9 @@ function gae_set_lang_file() {
 }
 gae_set_lang_file();
 
-register_activation_hook(__FILE__, 'Gae_Admin::gae_activate');
-register_deactivation_hook(__FILE__, 'Gae_Admin::gae_deactivate');
-register_uninstall_hook(__FILE__, 'Gae_Admin::gae_uninstall');
+register_activation_hook(__FILE__, 'Gae_Admin::activate');
+register_deactivation_hook(__FILE__, 'Gae_Admin::deactivate');
+register_uninstall_hook(__FILE__, 'Gae_Admin::uninstall');
 
 require_once("inc/hooks.php");
 
