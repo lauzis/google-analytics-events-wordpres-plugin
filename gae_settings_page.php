@@ -1,4 +1,5 @@
 <div class="<?= gae_PLUGIN_DIRECTORY ?>">
+    <?php Gae_Admin::settings_page_visited(); ?>
     <?php Gae_Admin::generate_combined(); ?>
     <?php $sections = Gae_Admin::get_sections(); ?>
     <h1><?php _e('Google analytics settings', gae_PUGIN_NAME); ?>

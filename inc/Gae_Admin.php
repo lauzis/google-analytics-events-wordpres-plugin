@@ -26,7 +26,7 @@ class Gae_Admin
     }
 
     public static function deactivate(){
-        // for now do nothing. dont want lose settings yet.
+        update_option("gae-settings-page-visited",0);
     }
 
     public static function init()
@@ -62,6 +62,16 @@ class Gae_Admin
                 }
             }
         }
+
+    }
+
+
+    public static function get_settings_page_url(){
+        return esc_url(get_admin_url(null, 'options-general.php?page='.self::get_settings_page_relative_path()));
+    }
+
+    public static function get_settings_page_relative_path(){
+        return gae_PLUGIN_DIRECTORY . '/gae_settings_page.php';
     }
 
     public static function create_menu()
@@ -71,8 +81,9 @@ class Gae_Admin
         add_options_page(
                 __('Google Analytics Events', EMU2_I18N_DOMAIN), //'My Options',
                 __("Google Analytics Events", EMU2_I18N_DOMAIN), //'My Plugin',
-                "manage_options", //cap
-                gae_PLUGIN_DIRECTORY . '/gae_settings_page.php'//file
+                "manage_options",
+                self::get_settings_page_relative_path()
+
         );
         // or create sub menu page
         $parent_slug = "index.php";    # For Dashboard
@@ -309,9 +320,7 @@ class Gae_Admin
         if (ģae_DONATION_SHOW_LINKS) {
             $links[] = '<a target="_blank" href="' . gae_DONATION_URL . '">Donate</a>';
         }
-        $links[] = '<a href="' . esc_url(get_admin_url(null, 'options-general.php?page=google-analytics-events/gae_settings_page.php')) . '">Settings</a>';
-
-        ///$links[] = '<a href="http://wp-buddy.com" target="_blank">More plugins by WP-Buddy</a>';
+        $links[] = '<a href="' . self::get_settings_page_url() . '">Settings</a>';
         return $links;
     }
 
@@ -350,7 +359,7 @@ class Gae_Admin
 
     }
 
-    private static function print_message($id, $message, $type){
+    public static function print_message($id, $message, $type){
 
         ?>
         <div id="message-<?= $id; ?>" class="gae-message notice notice-<?= $type; ?> is-dismissible">
@@ -370,4 +379,11 @@ class Gae_Admin
         }
     }
 
+    public static function settings_page_visited(){
+        update_option("gae-settings-page-visited",1);
+    }
+
+    public static function is_settings_page_visited(){
+        return get_option("gae-settings-page-visited");
+    }
 }
