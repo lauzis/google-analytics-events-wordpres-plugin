@@ -1,4 +1,4 @@
-<div class="<?= gae_PLUGIN_DIRECTORY ?>">
+<div class="<?= gae_PLUGIN_DIRECTORY_NAME ?>">
     <?php Gae_Admin::settings_page_visited(); ?>
     <?php Gae_Admin::generate_combined(); ?>
     <?php $sections = Gae_Admin::get_sections(); ?>
@@ -42,8 +42,19 @@
 
     <form method="post" action="" autocomplete="off">
         <?php settings_fields('gae-settings-group'); ?>
+        <?php $count_of_sections = count($sections); ?>
+        <?php $counter=0; ?>
+
         <?php foreach ($sections as $section): ?>
+            <?php $counter++; ?>
             <?php $enabled=""; ?>
+            <?php
+            if ($counter===$count_of_sections){
+                $last=" ".gae_PLUGIN_DIRECTORY_NAME."-section-last";
+            } else {
+                $last="";
+            }
+            ?>
             <?php foreach($section["fields"] as $field){
 
                 if (in_array($field["value"],$enabled_values) && ($field["type"]=="switch" || $field["type"]=="select")){
@@ -52,8 +63,9 @@
                 } elseif (in_array($field["value"],$disabled_values) && ($field["type"]=="switch" || $field["type"]=="select")) {
                     $enabled=" section-disabled";
                 }
+
             } ?>
-            <section id="<?= $section["id"] ?>" class="<?= gae_PLUGIN_DIRECTORY ?>-section<?= $enabled ?>">
+            <section id="<?= $section["id"] ?>" class="<?= gae_PLUGIN_DIRECTORY_NAME ?>-section<?= $enabled ?><?= $last ?>">
 
                 <h2 id="section-<?= $section["id"] ?>" class="section-title"><?= $section["title"]; ?></h2>
                 <p class="<?= gae_PLUGIN_DIRECTORY ?>-description">
@@ -65,7 +77,7 @@
                     </code>
                 <?php endif; ?>
 
-                <ul id="section-<?= $section["id"] ?>-content" class="<?= gae_PLUGIN_DIRECTORY ?>-content">
+                <ul id="section-<?= $section["id"] ?>-content" class="<?= gae_PLUGIN_DIRECTORY_NAME ?>-content">
                     <?php foreach ($section["fields"] as $field): ?>
                         <?php $title = $field["title"] ?>
                         <?php $id = $field["id"] ?>
@@ -84,7 +96,7 @@
 
             </section>
         <?php endforeach; ?>
-        <section class="submit">
+        <section class="<?= gae_PLUGIN_DIRECTORY_NAME ?>-submit">
             <input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>"/>
         </section>
     </form>
