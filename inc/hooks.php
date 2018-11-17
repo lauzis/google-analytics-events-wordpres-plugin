@@ -22,6 +22,9 @@ if (!Gae_Admin::is_settings_page_visited()){
     });
 }
 
+add_action( 'admin_enqueue_scripts', 'Gae_Admin::add_scripts' );
+
+
 //-------------------------------- Frontend hooks hooks --------------------
 add_action('wp_enqueue_scripts','Gae_Frontend::add_scripts');
 add_action('wp_head','Gae_Frontend::add_inline_scripts',0);

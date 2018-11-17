@@ -33,7 +33,7 @@ class Gae_Admin
     {
         //register settings
         //gea_register_scripts();
-        self::add_scripts();
+        //self::add_scripts();
 
     }
 
@@ -313,6 +313,7 @@ class Gae_Admin
                 add_action('admin_head', 'Gae_Admin::add_css');
             }
         }
+        wp_enqueue_script( 'gae_admin_script',  gae_JS_URL. '/gae-admin.js' );
     }
 
     public static function add_settings_link_to_plugin_list($links)
@@ -385,5 +386,38 @@ class Gae_Admin
 
     public static function is_settings_page_visited(){
         return get_option("gae-settings-page-visited");
+    }
+
+    public static function get_translation($text, $params=[]){
+
+        if (gae_DEVELOPER){
+            $translationIdsFile = gae_GENERATE_PATH.gae_PLUGIN_DIRECTORY_NAME.".serialized.php";
+            $translationIds = [];
+            $changed = false;
+            if (file_exists($translationIdsFile )){
+                $translationIds = unserialize(file_get_contents($translationIdsFile));
+            }
+
+
+            if (!isset($translationIds[$text])){
+                $translationIds[$text]=$text;
+                $changed=true;
+            }
+            foreach($params as $item){
+                if (!isset($translationIds[$item])){
+                    $translationIds[$item]=$item;
+                    $changed=true;
+                }
+            }
+            if ($changed){
+                file_put_contents($translationIdsFile, serialize($translationIds) );
+            }
+
+
+        }
+
+        $text = __($text,gae_PLUGIN_DIRECTORY_NAME);
+        $text = vprintf($text,$params);
+        return $text;
     }
 }
