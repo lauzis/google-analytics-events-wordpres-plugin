@@ -1,3 +1,8 @@
+form.google-analytics-events{
+    padding-left:30px;
+    padding-right:30px;
+}
+
 .google-analytics-events > h1{
   padding:30px 30px 30px 30px;
 
@@ -10,48 +15,45 @@
 
 .google-analytics-events-submit {
   padding:30px 30px 30px 0;
-  margin-left:30px;
-  margin-right:30px;
   overflow:hidden;
   height:40px;
 }
 .google-analytics-events-section {
-  padding:30px 30px;
-  margin-left:30px;
-  margin-right:30px;
-  border-style:solid;
-  border-color:gray;
-  border-width:0;
-  border-top-width: 1px;
-  border-left-width: 1px;
-  border-right-width: 1px;
-  overflow:hidden;
-  height:40px;
-  border-radius: 10px 10px 0 0;
-  position:relative;
-  margin-top:-10px;
-  background-color:white;
-  background-image: linear-gradient(to bottom left,  white 80%, black );
+    position:relative;
+    width:100%;
 }
-
-
 
 .google-analytics-events-section > h1 {
   line-height: 26px;
 }
 
-.google-analytics-events-section > h2 {
-  font-size:26px;
-  padding:0px;
-  margin:10px 0px 20px 0px;
+.google-analytics-events-section h2.section-title {
+  font-size:18px;
+  padding:0 0 0 20px;
+  margin:0;
   cursor:pointer;
+  line-height: 40px;
 }
+
+
+.closed .toggle-indicator::before {
+  content:"\f140" !important;
+}
+
 
 .google-analytics-events-section code {
   padding:10px;
   font-family: monospace;
   display:block;
 }
+
+
+.google-analytics-events-section .inside
+{
+    padding-left:30px;
+    padding-right:30px;
+}
+
 
 .google-analytics-events-description {
   padding:0 30px;
@@ -99,6 +101,7 @@
   border-style:solid;
   border-width:1px;
   max-width: 500px;
+  border-color:#000;
 }
 .gae-form-field > textarea {
   min-height:200px;
@@ -116,18 +119,23 @@
   margin:20px 20px 20px 0;
 }
 
-.section-disabled {
-  background-color:#f0c0c0;
-  background-image: linear-gradient(to bottom left,  #f0c0c0 80%, black);
+.section-disabled h2{
+    color:darkred;
 }
-.section-enabled {
-  background-color:#c8eec8;
-  background-image: linear-gradient(to bottom left,  #c8eec8 80%, black );
+.section-enabled h2{
+    color:darkgreen;
+}
+
+.section-disabled h2:after {
+   color:darkred;
+    content:" (Off)";
+}
+.section-enabled h2:after{
+    color:darkgreen;
+    content:" (On)";
 }
 
 .section-open {
-  height:auto;
-  background-image: none;
 }
 
 

@@ -1,4 +1,5 @@
 <div class="<?= gae_PLUGIN_DIRECTORY_NAME ?>">
+
     <?php Gae_Admin::settings_page_visited(); ?>
     <?php Gae_Admin::generate_combined(); ?>
     <?php $sections = Gae_Admin::get_sections(); ?>
@@ -6,13 +7,13 @@
         - <?php print gae_PUGIN_NAME . " " . gae_CURRENT_VERSION; ?></h1>
     <?php Gae_Admin::print_all_messages(); ?>
     <p>
-        To setup goals for you website, you have to collect events on the page. Usually events are added via google tag
+        <?= Gae_Admin::get_translation('To setup goals <for></for> you website, you have to collect events on the page. Usually events are added via google tag
         manager, or hardcoded in the page.
         This plugin sets some basic events, that should be collected, also possible to add some custom events, for your
         custome elements.
         Bellow there is several sections that can be enabled or disabled separately.
-        More about event and event tracking read <a href="https://wpflow.com/what-is-google-analytics-event-tracking/"
-                                                    target="_blank">here</a>.
+        More about event and event tracking read <a href="%s"
+                                                    target="_blank">%s</a>',['https://wpflow.com/what-is-google-analytics-event-tracking/',"here"]); ?>
     </p>
 
 
@@ -40,7 +41,7 @@
 
     ?>
 
-    <form method="post" action="" autocomplete="off">
+    <form method="post" action="" class="<?= gae_PLUGIN_DIRECTORY_NAME ?>" autocomplete="off">
         <?php settings_fields('gae-settings-group'); ?>
         <?php $count_of_sections = count($sections); ?>
         <?php $counter=0; ?>
@@ -59,61 +60,59 @@
 
                 if (in_array($field["value"],$enabled_values) && ($field["type"]=="switch" || $field["type"]=="select")){
                     $enabled=" section-enabled";
+                    $onOff="true";
                     break;
                 } elseif (in_array($field["value"],$disabled_values) && ($field["type"]=="switch" || $field["type"]=="select")) {
                     $enabled=" section-disabled";
+                    $onOff="false";
                 }
 
             } ?>
-            <section id="<?= $section["id"] ?>" class="<?= gae_PLUGIN_DIRECTORY_NAME ?>-section<?= $enabled ?><?= $last ?>">
+            <div id="<?= $section["id"] ?>" class="postbox-container <?= gae_PLUGIN_DIRECTORY_NAME ?>-section<?= $enabled ?><?= $last ?>">
+                <div class="meta-box-sortables closed">
+                    <div id="<?= $section["id"] ?>-" class="postbox <?= $section["id"] ?> ">
 
-                <h2 id="section-<?= $section["id"] ?>" class="section-title"><?= $section["title"]; ?></h2>
-                <p class="<?= gae_PLUGIN_DIRECTORY ?>-description">
-                    <?= $section["description"]; ?>
-                </p>
-                <?php if (!empty($section["example"])): ?>
-                    <code class="<?= gae_PLUGIN_DIRECTORY ?>-code">
-                        <?= htmlentities($section["example"]); ?>
-                    </code>
-                <?php endif; ?>
+                        <button type="button" class="handlediv section-title" aria-expanded="false">
+                            <span class="screen-reader-text">Toggle panel: <?= $section["title"]; ?></span>
+                            <span class="toggle-indicator" aria-hidden="true"></span>
+                        </button>
 
-                <ul id="section-<?= $section["id"] ?>-content" class="<?= gae_PLUGIN_DIRECTORY_NAME ?>-content">
-                    <?php foreach ($section["fields"] as $field): ?>
-                        <?php $title = $field["title"] ?>
-                        <?php $id = $field["id"] ?>
-                        <?php $value = $field["value"] ?>
-                        <?php $default_value = $field["default_value"] ?>
-                        <?php $placeholder = !empty($field["placeholder"]) ? $field["placeholder"] : "" ?>
-                        <?php $options = !empty($field["options"]) ? $field["options"] : [] ?>
-                        <?php $description = !empty($field["description"]) ? $field["description"] : "" ?>
-                        <?php if ($id === "gea-debug-ip") {
-                            $description .= "<br/>You current ip address is: " . $_SERVER["REMOTE_ADDR"];
-                        }
-                        ?>
-                        <li><?php require(gae_INCLUDES_PATH . "/fields/" . $field["type"] . ".php"); ?></li>
-                    <?php endforeach; ?>
-                </ul>
+                        <h2 id="section-<?= $section["id"] ?>" class="hndle section-title"><span><?= $section["title"]; ?></span></h2>
 
-            </section>
+                        <div class="inside">
+                            <p class="<?= gae_PLUGIN_DIRECTORY ?>-description">
+                                <?= Gae_Admin::get_translation($section["description"]); ?>
+                            </p>
+                            <?php if (!empty($section["example"])): ?>
+                                <code class="<?= gae_PLUGIN_DIRECTORY ?>-code">
+                                    <?= htmlentities($section["example"]); ?>
+                                </code>
+                            <?php endif; ?>
+
+                            <ul id="section-<?= $section["id"] ?>-content" class="<?= gae_PLUGIN_DIRECTORY_NAME ?>-content">
+                                <?php foreach ($section["fields"] as $field): ?>
+                                    <?php $title = $field["title"] ?>
+                                    <?php $id = $field["id"] ?>
+                                    <?php $value = $field["value"] ?>
+                                    <?php $default_value = $field["default_value"] ?>
+                                    <?php $placeholder = !empty($field["placeholder"]) ? $field["placeholder"] : "" ?>
+                                    <?php $options = !empty($field["options"]) ? $field["options"] : [] ?>
+                                    <?php $description = !empty($field["description"]) ? $field["description"] : "" ?>
+                                    <?php if ($id === "gea-debug-ip") {
+                                        $description .= "<br/>You current ip address is: " . $_SERVER["REMOTE_ADDR"];
+                                    }
+                                    ?>
+                                    <li><?php require(gae_INCLUDES_PATH . "/fields/" . $field["type"] . ".php"); ?></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         <?php endforeach; ?>
         <section class="<?= gae_PLUGIN_DIRECTORY_NAME ?>-submit">
             <input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>"/>
         </section>
     </form>
 
-    <script>
-        jQuery(document).ready(function(){
-            jQuery('.section-title').click(function(){
-                console.log("clieck");
-                var self =  jQuery(this).parent();
-                if (self.hasClass("section-open")){
-                    self.removeClass("section-open");
-                } else {
-                    self.addClass("section-open");
-                }
-            });
-
-            jQuery('.google-analytics-events-section').last().addClass("section-open");
-        });
-    </script>
 </div>
