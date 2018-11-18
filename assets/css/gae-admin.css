@@ -127,12 +127,20 @@ form.google-analytics-events{
 }
 
 .section-disabled h2:after {
+    padding-right:10px;
+    position: relative;
+    top:3px;
+    font-family: dashicons;
    color:darkred;
-    content:" (Off)";
+    content:"\f335";
 }
 .section-enabled h2:after{
+    padding-right:10px;
+    position: relative;
+    top:4px;
+    font-family: dashicons;
     color:darkgreen;
-    content:" (On)";
+    content:"\f147";
 }
 
 .section-open {
