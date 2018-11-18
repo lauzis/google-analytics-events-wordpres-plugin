@@ -11,7 +11,7 @@
                     <?php if ((strlen($value)>0 && $value===$o["value"]) || (empty($value) && $default_value===$o["value"])): ?>
                         selected="selected"
                     <?php endif; ?>
-                        value="<?= $o["value"] ?>"><?= $o["title"] ?></option>
+                        value="<?= $o["value"] ?>"><?= Gae_Admin::get_translation($o["title"]) ?></option>
             <?php endforeach; ?>
         </select>
     </div>
