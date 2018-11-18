@@ -3,7 +3,7 @@
     <?php Gae_Admin::settings_page_visited(); ?>
     <?php Gae_Admin::generate_combined(); ?>
     <?php $sections = Gae_Admin::get_sections(); ?>
-    <h1><?php _e('Google analytics settings', gae_PUGIN_NAME); ?>
+    <h1><?= Gae_Admin::get_translation('Google analytics settings'); ?>
         - <?php print gae_PUGIN_NAME . " " . gae_CURRENT_VERSION; ?></h1>
     <?php Gae_Admin::print_all_messages(); ?>
     <p>
@@ -15,7 +15,6 @@
         More about event and event tracking read <a href="%s"
                                                     target="_blank">%s</a>',['https://wpflow.com/what-is-google-analytics-event-tracking/',"here"]); ?>
     </p>
-
 
     <?php if (Gae_Admin::show_donation_block()) : ?>
         <?php include(gae_INCLUDES_PATH . "/donation.php"); ?>
@@ -49,15 +48,16 @@
         <?php foreach ($sections as $section): ?>
             <?php $counter++; ?>
             <?php $enabled=""; ?>
-            <?php
-            if ($counter===$count_of_sections){
-                $last=" ".gae_PLUGIN_DIRECTORY_NAME."-section-last";
-            } else {
-                $last="";
-            }
-            ?>
-            <?php foreach($section["fields"] as $field){
 
+            <?php
+                if ($counter===$count_of_sections){
+                    $last=" ".gae_PLUGIN_DIRECTORY_NAME."-section-last";
+                } else {
+                    $last="";
+                }
+            ?>
+
+            <?php foreach($section["fields"] as $field){
                 if (in_array($field["value"],$enabled_values) && ($field["type"]=="switch" || $field["type"]=="select")){
                     $enabled=" section-enabled";
                     $onOff="true";
@@ -68,21 +68,29 @@
                 }
 
             } ?>
+
             <div id="<?= $section["id"] ?>" class="postbox-container <?= gae_PLUGIN_DIRECTORY_NAME ?>-section<?= $enabled ?><?= $last ?>">
+
                 <div class="meta-box-sortables closed">
                     <div id="<?= $section["id"] ?>-" class="postbox <?= $section["id"] ?> ">
 
                         <button type="button" class="handlediv section-title" aria-expanded="false">
-                            <span class="screen-reader-text">Toggle panel: <?= $section["title"]; ?></span>
+                            <span class="screen-reader-text">Toggle panel: <?= Gae_Admin::get_translation($section["title"]); ?></span>
                             <span class="toggle-indicator" aria-hidden="true"></span>
                         </button>
 
-                        <h2 id="section-<?= $section["id"] ?>" class="hndle section-title"><span><?= $section["title"]; ?></span></h2>
+                        <h2 id="section-<?= $section["id"] ?>" class="hndle section-title">
+                            <span>
+                                <?= Gae_Admin::get_translation($section["title"]); ?>
+                            </span>
+                        </h2>
 
                         <div class="inside">
+
                             <p class="<?= gae_PLUGIN_DIRECTORY ?>-description">
                                 <?= Gae_Admin::get_translation($section["description"]); ?>
                             </p>
+
                             <?php if (!empty($section["example"])): ?>
                                 <code class="<?= gae_PLUGIN_DIRECTORY ?>-code">
                                     <?= htmlentities($section["example"]); ?>
@@ -91,13 +99,13 @@
 
                             <ul id="section-<?= $section["id"] ?>-content" class="<?= gae_PLUGIN_DIRECTORY_NAME ?>-content">
                                 <?php foreach ($section["fields"] as $field): ?>
-                                    <?php $title = $field["title"] ?>
+                                    <?php $title = Gae_Admin::get_translation($field["title"]) ?>
                                     <?php $id = $field["id"] ?>
                                     <?php $value = $field["value"] ?>
                                     <?php $default_value = $field["default_value"] ?>
-                                    <?php $placeholder = !empty($field["placeholder"]) ? $field["placeholder"] : "" ?>
+                                    <?php $placeholder = !empty($field["placeholder"]) ? Gae_Admin::get_translation($field["placeholder"]) : "" ?>
                                     <?php $options = !empty($field["options"]) ? $field["options"] : [] ?>
-                                    <?php $description = !empty($field["description"]) ? $field["description"] : "" ?>
+                                    <?php $description = !empty($field["description"]) ? Gae_Admin::get_translation($field["description"]) : "" ?>
                                     <?php if ($id === "gea-debug-ip") {
                                         $description .= "<br/>You current ip address is: " . $_SERVER["REMOTE_ADDR"];
                                     }
@@ -106,12 +114,14 @@
                                 <?php endforeach; ?>
                             </ul>
                         </div>
+
                     </div>
                 </div>
+
             </div>
         <?php endforeach; ?>
         <section class="<?= gae_PLUGIN_DIRECTORY_NAME ?>-submit">
-            <input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>"/>
+            <input type="submit" class="button-primary" value="<?= Gae_Admin::get_translation('Save Changes') ?>"/>
         </section>
     </form>
 

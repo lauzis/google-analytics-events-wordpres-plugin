@@ -390,11 +390,12 @@ class Gae_Admin
 
     public static function get_translation($text, $params=[]){
 
+
         if (gae_DEVELOPER){
             $translationIdsFile = gae_GENERATE_PATH.gae_PLUGIN_DIRECTORY_NAME.".serialized.php";
             $translationIds = [];
             $changed = false;
-            if (file_exists($translationIdsFile )){
+            if (file_exists($translationIdsFile)){
                 $translationIds = unserialize(file_get_contents($translationIdsFile));
             }
 
@@ -412,12 +413,16 @@ class Gae_Admin
             if ($changed){
                 file_put_contents($translationIdsFile, serialize($translationIds) );
             }
-
-
         }
 
         $text = __($text,gae_PLUGIN_DIRECTORY_NAME);
-        $text = vprintf($text,$params);
+
+        if (is_array($params)){
+            $text = vsprintf($text,$params);
+        } elseif (!empty($params)){
+            $text = sprintf($text,$params);
+        }
+        //
         return $text;
     }
 }
