@@ -7,11 +7,12 @@
         - <?php print gae_PUGIN_NAME . " " . gae_CURRENT_VERSION; ?></h1>
     <?php Gae_Admin::print_all_messages(); ?>
     <p>
-        <?= Gae_Admin::get_translation('To setup goals <for></for> you website, you have to collect events on the page. Usually events are added via google tag
-        manager, or hardcoded in the page.
-        This plugin sets some basic events, that should be collected, also possible to add some custom events, for your
-        custome elements.
-        Bellow there is several sections that can be enabled or disabled separately.
+        <?= Gae_Admin::get_translation('Google analytics events are addtional collected data that "hapens" on your website. Ussually and mostly events ar trigered by some user action - click, scroll, form submition.<br/>
+        In Google analytics itself events can be used to to setup goals for you website. Events can be added to webpage elements via google tag
+            manager, or hardcoded in the page.<br/>
+        This plugin sets some basic events, that should be collected on most websites, and plugin allows to add some custom events, for your
+        custome elements.<br/>
+        There are several sections below, that can be enabled or disabled separately.<br/>
         More about event and event tracking read <a href="%s"
                                                     target="_blank">%s</a>',['https://wpflow.com/what-is-google-analytics-event-tracking/',"here"]); ?>
     </p>
@@ -93,7 +94,7 @@
 
                             <?php if (!empty($section["example"])): ?>
                                 <code class="<?= gae_PLUGIN_DIRECTORY ?>-code">
-                                    <?= htmlentities($section["example"]); ?>
+                                    <?= htmlentities(Gae_Admin::get_translation($section["example"])); ?>
                                 </code>
                             <?php endif; ?>
 
@@ -107,7 +108,7 @@
                                     <?php $options = !empty($field["options"]) ? $field["options"] : [] ?>
                                     <?php $description = !empty($field["description"]) ? Gae_Admin::get_translation($field["description"]) : "" ?>
                                     <?php if ($id === "gea-debug-ip") {
-                                        $description .= "<br/>You current ip address is: " . $_SERVER["REMOTE_ADDR"];
+                                        $description .= Gae_Admin::get_translation("<br/>You current ip address is: ") . $_SERVER["REMOTE_ADDR"];
                                     }
                                     ?>
                                     <li><?php require(gae_INCLUDES_PATH . "/fields/" . $field["type"] . ".php"); ?></li>
@@ -122,7 +123,11 @@
         <?php endforeach; ?>
         <section class="<?= gae_PLUGIN_DIRECTORY_NAME ?>-submit">
             <input type="submit" class="button-primary" value="<?= Gae_Admin::get_translation('Save Changes') ?>"/>
+            <?php if (gae_DEVELOPER): ?>
+                <a href="<?= Gae_Admin::get_settings_page_url() ?>&generate-pot-file" class="button-secondary"><?= Gae_Admin::get_translation('Generate Translation Template') ?></a>
+            <?php endif ?>
         </section>
+
     </form>
 
 </div>

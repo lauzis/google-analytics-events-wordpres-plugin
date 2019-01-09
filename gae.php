@@ -44,3 +44,6 @@ register_uninstall_hook(__FILE__, 'Gae_Admin::uninstall');
 
 require_once("inc/hooks.php");
 
+if (gae_DEVELOPER && isset($_GET["generate-pot-file"])){
+    Gae_Admin::generate_pot_file();
+}
