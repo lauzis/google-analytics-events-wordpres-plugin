@@ -61,6 +61,8 @@ generates more leads.
 
 1.0.12 Debug only for admin, or admin loged in
 
+1.0.13 Some addmin text will be hard to reach for translations, should get them out of ifs branches assing to variables - get translations beforehand, and use those in places, or do something similar. Or do it standart way, Without using custom function, cause custom function needed only to retrieve texts from json config file.
+
 == Known issues (that are worth mention)==
 
 1. Form submission tracking, there is possible to pass without triggering Form used event. Field change is trigered only after lost focus, to that field. Have to think about better implementation.

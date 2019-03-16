@@ -2,7 +2,7 @@
   {
   "id":"analytics-script",
   "title":"Analytics script",
-  "description":"Adding analytics code to the header, if you have analytics code in the page, then leave this value to 'Don`t add, code added manually, already'. <br/> If you are not sure if analytics code is in the website, please check this <a target=_blank href=www.google.lv >wepbage</a>, that shows what tracking, ecommerce scripts you have on the website",
+  "description":"Adding analytics code to the header, if you have analytics code in the page, then leave this value to 'Don`t add, code added manually, already'. <br/> If you are not sure if analytics code is in the website, please check this <a target=_blank href=http://www.gachecker.com >wepbage</a>, by entering your website url service will check if youo have analytics tracking code placed, and which version.",
   "fields": [
     {
       "id":"gae-script-type",
@@ -325,7 +325,7 @@
         "title":"Add urls you want to track (comma seperated)",
         "type":"textarea",
         "value":"",
-        "placeholder":"http://somesite.com/about-us,\n http://partner.site.com",
+        "placeholder":"http://somesite.com/about-us,\nhttp://partner.site.com",
         "default_value":""
       }
     ]

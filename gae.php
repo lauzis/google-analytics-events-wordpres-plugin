@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: GAE - Google analytics events wordpress plugin
-Plugin URI: https://github.com/lauzis
+Plugin URI: https://github.com/lauzis/google-analytics-events-wordpres-plugin
 Description: The plugin that adds some basic events to the site, to track clikcs on cta buttons and forms.
 Version: 0.9.7
 Author: Aivars Lauzis
@@ -28,6 +28,7 @@ require_once("inc/Gae_Frontend.php");
 function gae_set_lang_file() {
 	# set the language file
 	$currentLocale = get_locale();
+
 	if(!empty($currentLocale)) {
 		$moFile = dirname(__FILE__) . "/lang/" . $currentLocale . ".mo";
 		if (@file_exists($moFile) && is_readable($moFile)) {

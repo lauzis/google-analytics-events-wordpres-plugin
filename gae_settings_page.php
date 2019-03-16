@@ -41,7 +41,7 @@
 
     ?>
 
-    <form method="post" action="" class="<?= gae_PLUGIN_DIRECTORY_NAME ?>" autocomplete="off">
+    <form method="post" action="<?= Gae_Admin::get_settings_page_url() ?>" class="<?= gae_PLUGIN_DIRECTORY_NAME ?>" autocomplete="off">
         <?php settings_fields('gae-settings-group'); ?>
         <?php $count_of_sections = count($sections); ?>
         <?php $counter=0; ?>
@@ -76,11 +76,11 @@
                     <div id="<?= $section["id"] ?>-" class="postbox <?= $section["id"] ?> ">
 
                         <button type="button" class="handlediv section-title" aria-expanded="false">
-                            <span class="screen-reader-text">Toggle panel: <?= Gae_Admin::get_translation($section["title"]); ?></span>
+                            <span class="screen-reader-text"><?= Gae_Admin::get_translation("Toggle panel"); ?>: <?= Gae_Admin::get_translation($section["title"]); ?></span>
                             <span class="toggle-indicator" aria-hidden="true"></span>
                         </button>
 
-                        <h2 id="section-<?= $section["id"] ?>" class="hndle section-title">
+                        <h2 id="section-<?= $section["id"] ?>" class="section-title">
                             <span>
                                 <?= Gae_Admin::get_translation($section["title"]); ?>
                             </span>

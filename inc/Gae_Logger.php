@@ -100,22 +100,32 @@ class Gae_Logger
         $logFile = gae_LOG_PATH . 'gae-' . date("Y-m") . ".log";
         $timeStamp = date("d/M/Y:H:i:s O");
 
-        if (file_exists($logFile)){
-            if (!is_writable($logFile)){
+        //dirrectory exists
+        if (file_exists(dirname($logFile))){
+            if (!is_writable(dirname($logFile))){
+                Gae_Admin::add_message("Could not create log file! Please, check if directory " . dirname($logFile) . " or/and file " . $logFile . " is writable to the php process, web server!","error");
+                self::$permissionsProblem=true;
+                return false;
+            } else {
+                touch($logFile);
+                chmod($logFile,0777);
+            }
+        } else {
+            //no dirrectory....
+            //try to create
+
+            $fileCreated = @mkdir(dirname($logFile),0755,true);
+            $fileCreated = $fileCreated && @touch($logFile);
+            chmod($logFile,0777);
+            if (!$fileCreated){
                 Gae_Admin::add_message("Could not create log file! Please, check if directory " . dirname($logFile) . " or/and file " . $logFile . " is writable to the php process, web server!","error");
                 self::$permissionsProblem=true;
                 return false;
             }
-        } else {
-            if (file_exists(dirname($logFile))){
-                if (!is_writable(dirname($logFile))){
-                    Gae_Admin::add_message("Could not create log file! Please, check if directory " . dirname($logFile) . " or/and file " . $logFile . " is writable to the php process, web server!","error");
-                    self::$permissionsProblem=true;
-                    return false;
-                }
-            }
         }
-        if (file_exists($logFile) && !is_writable($logFile)){
+
+        // fixe exists but is not writable
+        if (!file_exists($logFile) || !is_writable($logFile)){
             Gae_Admin::add_message("Could not create log file! Please, check if directory " . dirname($logFile) . " or/and file " . $logFile . " is writable to the php process, web server!","error");
             self::$permissionsProblem=true;
             return false;
