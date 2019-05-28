@@ -458,7 +458,6 @@ class Gae_Admin
         return $text;
     }
 
-
     public static function generate_pot_file()
     {
         if (gae_DEVELOPER) {

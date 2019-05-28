@@ -15,12 +15,6 @@ BCH: qr3ed287kxc9ncukadceanfkqtshaqvg0g68j57pjz
 ETH: 0xc9681216a25Ac99500482Bd419b4644882a31471
 
 == Todo log ==
- 
-0.9.8 Give someone to test, get feedback
-    - setup
-    - changing settings
-    - debugging mode
-    - debugging mode by ip
 
 0.9.9 Bug fixing
 
@@ -63,11 +57,19 @@ generates more leads.
 
 1.0.13 Some addmin text will be hard to reach for translations, should get them out of ifs branches assing to variables - get translations beforehand, and use those in places, or do something similar. Or do it standart way, Without using custom function, cause custom function needed only to retrieve texts from json config file.
 
+1.0.14 Collapse all.
+
 == Known issues (that are worth mention)==
 
 1. Form submission tracking, there is possible to pass without triggering Form used event. Field change is trigered only after lost focus, to that field. Have to think about better implementation.
 
 == Changelog ==
+
+0.9.8 Give someone to test, get feedback
+    - setup
+    - changing settings
+    - debugging mode
+    - debugging mode by ip
 
 0.9.7 Check todos in the code
  - some todos resolved some moved to todo/feature list of readme
