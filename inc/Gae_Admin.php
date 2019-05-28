@@ -395,17 +395,33 @@ class Gae_Admin
         return get_option("gae-settings-page-visited");
     }
 
+    public static function get_translation_count(){
+        $translationIdsFile = gae_TRANSLATION_IDS_FILE;
+        $translationIds = [];
+        if (file_exists($translationIdsFile)) {
+            $translationIds = unserialize(file_get_contents($translationIdsFile));
+        }
+        return count($translationIds);
+    }
+
     public static function get_translation($text, $params = [])
     {
 
         if (gae_DEVELOPER) {
 
             $text_id = strip_tags($text);
-            $translationIdsFile = gae_GENERATE_PATH . gae_PLUGIN_DIRECTORY_NAME . ".serialized.php";
+            $translationIdsFile = gae_TRANSLATION_IDS_FILE;
             $translationIds = [];
             $changed = false;
             if (file_exists($translationIdsFile)) {
                 $translationIds = unserialize(file_get_contents($translationIdsFile));
+            } else {
+                if (@touch($translationIdsFile)){
+                    chmod($translationIdsFile, 0777);
+                } else{
+                    self::add_message(sprintf(self::get_translation("Could not create file %s"),$translationIdsFile));
+                }
+
             }
 
 
@@ -413,13 +429,18 @@ class Gae_Admin
                 $translationIds[$text] = $text;
                 $changed = true;
             }
-            foreach ($params as $item) {
-                if (!isset($translationIds[$item])) {
-                    $translationIds[$item] = $item;
-                    $changed = true;
+
+            if (is_array($params)){
+                foreach ($params as $item) {
+                    if (!isset($translationIds[$item])) {
+                        $translationIds[$item] = $item;
+                        $changed = true;
+                    }
                 }
             }
+
             if ($changed) {
+
                 if (is_writable($translationIdsFile)){
                     file_put_contents($translationIdsFile, serialize($translationIds));
                 }
@@ -465,7 +486,7 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-3: lang\n"
 
 ';
-            $translationIdsFile = gae_GENERATE_PATH . gae_PLUGIN_DIRECTORY_NAME . ".serialized.php";
+            $translationIdsFile = gae_TRANSLATION_IDS_FILE;
             $potFile = gae_GENERATE_PATH . gae_PLUGIN_DIRECTORY_NAME . ".pot";
             $potFileUrl = gae_GENERATE_URL.gae_PLUGIN_DIRECTORY_NAME.".pot";
 
@@ -498,7 +519,8 @@ msgstr ""
             file_put_contents($potFile, $pot_header);
             foreach ($translationIds as $k => $value) {
                 $potText = '
-msgid "' . $translationIds[$k] . '"
+                
+msgid "' . htmlspecialchars(str_replace(array("\r\n", "\r", "\n"),"",$translationIds[$k])) . '"
 msgstr ""
 ';
                 file_put_contents($potFile, $potText, FILE_APPEND);

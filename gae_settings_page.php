@@ -7,14 +7,14 @@
         - <?php print gae_PUGIN_NAME . " " . gae_CURRENT_VERSION; ?></h1>
     <?php Gae_Admin::print_all_messages(); ?>
     <p>
-        <?= Gae_Admin::get_translation('Google analytics events are addtional collected data that "hapens" on your website. Ussually and mostly events ar trigered by some user action - click, scroll, form submition.<br/>
+        <?= Gae_Admin::get_translation("Google analytics events are addtional collected data that 'happens' on your website. Ussually and mostly events ar trigered by some user action - click, scroll, form submition.<br/>
         In Google analytics itself events can be used to to setup goals for you website. Events can be added to webpage elements via google tag
             manager, or hardcoded in the page.<br/>
         This plugin sets some basic events, that should be collected on most websites, and plugin allows to add some custom events, for your
         custome elements.<br/>
         There are several sections below, that can be enabled or disabled separately.<br/>
-        More about event and event tracking read <a href="%s"
-                                                    target="_blank">%s</a>',['https://wpflow.com/what-is-google-analytics-event-tracking/',"here"]); ?>
+        More about event and event tracking read <a href='%s'
+                                                    target='_blank'>%s</a>",['https://wpflow.com/what-is-google-analytics-event-tracking/',"here"]); ?>
     </p>
 
     <?php if (Gae_Admin::show_donation_block()) : ?>
@@ -124,7 +124,9 @@
         <section class="<?= gae_PLUGIN_DIRECTORY_NAME ?>-submit">
             <input type="submit" class="button-primary" value="<?= Gae_Admin::get_translation('Save Changes') ?>"/>
             <?php if (gae_DEVELOPER): ?>
-                <a href="<?= Gae_Admin::get_settings_page_url() ?>&generate-pot-file" class="button-secondary"><?= Gae_Admin::get_translation('Generate Translation Template') ?></a>
+                <a href="<?= Gae_Admin::get_settings_page_url() ?>&generate-pot-file" class="button-secondary">
+                    <?= Gae_Admin::get_translation('Generate Translation Template') ?> <?= sprintf(Gae_Admin::get_translation("(Collected %s items)"),Gae_Admin::get_translation_count()); ?></a>
+
             <?php endif ?>
         </section>
 
