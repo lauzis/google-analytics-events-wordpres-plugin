@@ -15,30 +15,18 @@ BCH: qr3ed287kxc9ncukadceanfkqtshaqvg0g68j57pjz
 ETH: 0xc9681216a25Ac99500482Bd419b4644882a31471
 
 == Todo log ==
- 
-0.9.8 Give someone to test, get feedback
-    - setup
-    - changing settings
-    - debugging mode
-    - debugging mode by ip
 
 0.9.9 Bug fixing
 
+0.9.9 Proof reading, fixing the pigeon English
 
-...
-0.9.x(-6) Color codes show on front.
+0.9.10 Check install uninstall scripts
 
-0.9.x(-5) Help text on front.
+0.9.11 Help text on front.
 
-0.9.x(-4) Plugin related settigns disable if plugin not detected (?) 
+0.9.12 Translations po/mo files
 
-0.9.x(-3) Additional debug levels, less noizy and possible to block going to garget could be front end switch. On / Off.
-
-0.9.x(-2) Translations po/mo files
-
-0.9.x(-1) Donate links
-
-0.9.x Proof reeding, fixing the pigeon English
+0.9.13 Donate links
 
 1.0.0 Publishing, drinking beer
 
@@ -61,12 +49,27 @@ generates more leads.
 
 1.0.9 Posibility switch off/on tracking from frontend?
 
+1.0.10 Possibility to change log path, that it would be the uploads dir.
+
+1.0.11 Move file extension settings outside.    
+
+1.0.12 Debug only for admin, or admin loged in
+
+1.0.13 Some addmin text will be hard to reach for translations, should get them out of ifs branches assing to variables - get translations beforehand, and use those in places, or do something similar. Or do it standart way, Without using custom function, cause custom function needed only to retrieve texts from json config file.
+
+1.0.14 Collapse all.
 
 == Known issues (that are worth mention)==
 
 1. Form submission tracking, there is possible to pass without triggering Form used event. Field change is trigered only after lost focus, to that field. Have to think about better implementation.
 
 == Changelog ==
+
+0.9.8 Give someone to test, get feedback
+    - setup
+    - changing settings
+    - debugging mode
+    - debugging mode by ip
 
 0.9.7 Check todos in the code
  - some todos resolved some moved to todo/feature list of readme

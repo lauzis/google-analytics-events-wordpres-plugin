@@ -1,22 +1,23 @@
 body {
-    border-width:6px;
+    border-width:2px;
     border-color:red;
     border-style:solid;
 }
 .gae-info {
     position:fixed;
+    top:50px;
+    padding:20px;
     width:80%;
     background-color:#ffffff;
     color:#1a1a1a;
     right:0px;
-    padding:20px;
-    top:50px;
     border-radius: 5px 0 0 5px;
     border-color:#1a1a1a;
     border-style:solid;
     border-width:1px;
     box-shadow: 3px 3px 5px 6px #ccc;
     display:none;
+    z-index:999666;
 }
 
 .show {
@@ -25,10 +26,12 @@ body {
 
 .gae-info-close {
     margin-right:10px;
+    margin-left:10px;
+    float:right;
 }
 
 .gae-event {
-    border-style:dashed !important;
+    border-style:dotted !important;
     border-color:darkred;
     border-width: 3px !important;
     /*cursor:not-allowed !important;*/
@@ -71,7 +74,7 @@ body {
 }
 
 .gae-event-search{
-    border-color:brown;
+    border-color:pink !important;
 }
 
 .gae-event-social-links{
@@ -81,7 +84,6 @@ body {
 .gae-event-links-to-specific-urls {
     border-color:cyan;
 }
-
 
 
 .gae-event-form-submission {
@@ -96,13 +98,44 @@ body {
     border-style:solid;
     border-color:black;
     border-width: 0;
-    border-top-width: 1px;
+    border-top-width: 3px;
     background-color:white;
+    box-shadow: 0 -5px 30px black;
+    z-index:999777;
 }
 
-.gae-colors .gae-info-close{
-    padding:10px;
+.gae-colors a{
+    color:firebrick;
 }
+.gae-colors a:hover{
+    color:darkred;
+}
+
+.gae-colors .gae-info-close {
+    padding:10px;
+    display:none;
+    font-size:16px;
+    line-height:20px;
+    float:left;
+}
+
+.gae-colors .gae-info-open {
+    padding:10px;
+    font-size:16px;
+    line-height:20px;
+    display: block;
+}
+
+.gae-colors.show .gae-info-close {
+    padding:10px;
+    display:block;
+}
+
+.gae-colors.show .gae-info-open {
+    padding:10px;
+    display:none;
+}
+
 
 .gae-colors .gae-info-content {
     margin:0 auto;
@@ -113,36 +146,51 @@ body {
     background-color:white;
     padding:0 20px;
 }
+
+.gae-colors .gae-info-content{
+    display:none;
+}
+
+.gae-colors.show .gae-info-content{
+    display:block;
+}
+
 .gae-colors .gae-info-content p {
-    margin:30px 10px;
+    padding:20px 0;
+    font-size:12px;
+    display:block;
 }
 
 .gae-colors ul {
-    position:relative;
-    float:left;
     display:block;
-    width:auto;
+    width:100%;
+    height:autp;
+    overflow:hidden;
     margin:auto 0;
-    background-color:white;
 }
 
 .gae-colors ul li{
+    display:block;
+    position:relative;
 
     list-style: none;
     margin:5px 10px;
     float:left;
     width:14%;
     text-align:center;
-    padding:0px;
+    padding:0;
     font-weight: bold;
     font-size:10px;
 }
-.gae-event-switch{
+.gae-event-switch {
     cursor:pointer;
 }
 
-
 .gae-event.gae-hide-color {
     border-width: 3px;
-    border-color:transparent !important;
+    border-color: transparent !important;
+}
+
+.gae-colorBoxOpened{
+    padding-bottom:200px;
 }

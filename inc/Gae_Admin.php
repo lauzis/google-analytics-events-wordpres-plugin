@@ -3,24 +3,39 @@
 class Gae_Admin
 {
 
-    // uninstalling
-
     public static $folder_that_should_be_writable = [gae_GENERATE_PATH, gae_LOG_PATH];
+    private static $messages = [];
+    private static $permissionFailure = false;
 
     public static function uninstall()
     {
-        # delete all data stored
-        delete_option('gae_option_3');
-        // delete log files and folder only if needed
-        if (function_exists('gae_deleteLogFolder')) gae_deleteLogFolder();
+        // removing options
+        self::remove_sections_options();
+        // removing files
+        array_map('unlink', glob(gae_GENERATE_PATH . "*.*"));
+        array_map('unlink', glob(gae_LOG_PATH . "*.*"));
+        //removing dirs
+        rmdir(gae_GENERATE_PATH);
+        rmdir(gae_LOG_PATH);
     }
 
+    public static function activate()
+    {
+        //TODO
+        // would be nice to show message with link to settings page 
+    }
+
+    public static function deactivate()
+    {
+        update_option("gae-settings-page-visited", 0);
+    }
 
     public static function init()
     {
         //register settings
         //gea_register_scripts();
-        self::add_scripts();
+        //self::add_scripts();
+
     }
 
     public static function check_folder_access_rights()
@@ -28,29 +43,50 @@ class Gae_Admin
         # check for folder
 
         foreach (self::$folder_that_should_be_writable as $folder) {
+            if (self::$permissionFailure) {
+                break;
+            }
             if (!is_dir($folder) || !is_writable($folder)) {
                 if (!is_dir($folder)) {
-                    if (!mkdir($folder, 0777, true)) {
-                        self::message(sprintf(__("Google Analytics Events (GAE) Error: Could not create folder %s", EMU2_I18N_DOMAIN) . " " . __("Php process should be allowed to write to that folder.", EMU2_I18N_DOMAIN), $folder), "error");
+                    if (!is_writable(dirname($folder)) || !is_writable($folder)) {
+                        self::add_message(sprintf(self::get_translation("Could not create folder %s. Webserver should be allwoed to write there. Or you could create this folder by yourself."), $folder), "error");
+                        self::$permissionFailure = true;
+                        return false;
+                    } else {
+                        mkdir($folder, 0777, true);
                     }
                 }
                 if (!is_writable($folder)) {
-                    self::message(sprintf(__("Google Analytics Events (GAE) Error: Can't write to folder %s", EMU2_I18N_DOMAIN) . " " . __("Php process should be allowed to write to that folder.", EMU2_I18N_DOMAIN), $folder), "error");
+                    self::add_message(sprintf(self::get_translation("Can't write to folder %s. Webserver should be allowed to write to that directory/file."), $folder), "error");
+                    self::$permissionFailure = true;
+                    return false;
                 }
             }
         }
+
     }
 
+
+    public static function get_settings_page_url()
+    {
+        return esc_url(get_admin_url(null, 'options-general.php?page=' . self::get_settings_page_relative_path()));
+    }
+
+    public static function get_settings_page_relative_path()
+    {
+        return gae_PLUGIN_DIRECTORY . '/gae_settings_page.php';
+    }
 
     public static function create_menu()
     {
 
         // or create options menu page
         add_options_page(
-                __('Google Analytics Events', EMU2_I18N_DOMAIN), //'My Options',
-                __("Google Analytics Events", EMU2_I18N_DOMAIN), //'My Plugin',
-                "manage_options", //cap
-                gae_PLUGIN_DIRECTORY . '/gae_settings_page.php'//file
+            self::get_translation('Google Analytics Events'), //'My Options',
+            self::get_translation("Google Analytics Events"), //'My Plugin',
+            "manage_options",
+            self::get_settings_page_relative_path()
+
         );
         // or create sub menu page
         $parent_slug = "index.php";    # For Dashboard
@@ -61,8 +97,6 @@ class Gae_Admin
 
     }
 
-
-// check if debug is activated
     public static function debug()
     {
         # only run debug on localhost
@@ -118,21 +152,29 @@ class Gae_Admin
         ];
     }
 
-
     public static function generate_combined()
     {
 
         $result_file_path = gae_PLUGIN_PATH . "/js/gae-combined.js";
         $result_file_upload_path = gae_GENERATE_FILE;
 
-        Gae_Logger::write_log("Regenerating scrtip start.=========", __FUNCTION__, __LINE__);
+        Gae_Logger::write_log("Regenerating script start.=========", __FUNCTION__, __LINE__);
 
-        if (!is_dir(gae_GENERATE_PATH) || !file_exists(gae_GENERATE_PATH)) {
-            mkdir(gae_GENERATE_PATH, 0655, true);
-            if (!is_writable(gae_GENERATE_PATH)) {
-                Gae_Admin::message("Cant write to file, in directory:" . gae_GENERATE_PATH, "error");
+        if (!self::$permissionFailure) {
+            if (!is_dir(gae_GENERATE_PATH) || !file_exists(gae_GENERATE_PATH)) {
+                if (!is_writable(dirname(gae_GENERATE_PATH))) {
+                    Gae_Admin::add_message(sprintf(self::get_translation("Cant create/write into directory: %s  Web server should be allowed to write to the folder to generate combined js file for inclusion."),  dirname(gae_GENERATE_PATH) ), "error");
+                    self::$permissionFailure = true;
+                } else {
+                    mkdir(gae_GENERATE_PATH, 0655, true);
+                    if (!is_writable(gae_GENERATE_PATH)) {
+                        Gae_Admin::add_message(sprintf(self::get_translation("Cant write into directory file: %s  Web server should be allowed to write to the folder to generate combined js file for inclusion."),  gae_GENERATE_PATH ), "error");
+                        self::$permissionFailure = true;
+                    }
+                }
             }
         }
+
 
         if (isset($_POST["option_page"]) && $_POST["option_page"] == 'gae-settings-group') {
             //combining the scritps
@@ -172,12 +214,22 @@ class Gae_Admin
                 $combined_js_content = str_replace("//[$js_part]", $js_part_content, $combined_js_content);
             }
 
+            foreach ($all_js_parts as $js_part) {
+                if (isset($_POST[$js_part]) && $_POST[$js_part]) {
+                    $js_part = str_replace("gae", "gae-event", $js_part);
+                    $combined_js_content = str_replace("[$js_part]", 1, $combined_js_content);
+                } else {
+                    $js_part = str_replace("gae", "gae-event", $js_part);
+                    $combined_js_content = str_replace("[$js_part]", 0, $combined_js_content);
+                }
+            }
+
             if (self::debug()) {
                 Gae_Logger::write_log("Trying save regenerated file to subfolder.=========", __FUNCTION__, __LINE__);
                 if (is_writable($result_file_path)) {
                     if (file_put_contents($result_file_path, $combined_js_content)) {
-                        Gae_Logger::write_log("Result saved to: $result_file_path ", __FUNCTION__, __LINE__);
-                        self::message("Result saved to: $result_file_path " . gae_GENERATE_PATH, "success");
+                        Gae_Logger::write_log("Result, combined file saved to: $result_file_path ", __FUNCTION__, __LINE__);
+                        self::add_message(sprintf(self::get_translation("Result, combined file saved to: %s"),$result_file_path), "success");
                     } else {
                         Gae_Logger::write_log("FAILED (can be ignored) save to: $result_file_path ", __FUNCTION__, __LINE__);
                     };
@@ -186,31 +238,42 @@ class Gae_Admin
                 }
             }
 
-            if (is_writable(dirname($result_file_upload_path))) {
-                if (file_put_contents($result_file_upload_path, $combined_js_content)) {
-                    self::message("Result saved to: $result_file_upload_path " . gae_GENERATE_PATH, "success");
-                    Gae_Logger::write_log("Result saved to: $result_file_upload_path ", __FUNCTION__, __LINE__);
+            if (!self::$permissionFailure) {
+                if (is_writable(dirname($result_file_upload_path))) {
+                    if (file_put_contents($result_file_upload_path, $combined_js_content)) {
+                        self::add_message(sprintf(self::get_translation("Result, combined file saved to:  %s",$result_file_upload_path)). gae_GENERATE_PATH, "success");
+                        Gae_Logger::write_log("Result, combined file saved to: $result_file_upload_path ", __FUNCTION__, __LINE__);
+                    } else {
+                        self::add_message(sprintf(self::get_translation("Cant save the generated file: %s. The folder / file should be writable by php and accessible - readable publicly."),$result_file_upload_path ), "error");
+                        Gae_Logger::write_log("FAILED save to: $result_file_upload_path ", __FUNCTION__, __LINE__);
+                    };
                 } else {
-                    self::message("Cant save the generated file. $result_file_upload_path . The folder / file should be writable by php and accessible - readable publicly.", "error");
-                    Gae_Logger::write_log("FAILED save to: $result_file_upload_path ", __FUNCTION__, __LINE__);
-                };
-            } else {
-                self::message("Folder is not writable. " . dirname($result_file_upload_path), "error");
-                Gae_Logger::write_log("FAILED file is not writable: $result_file_upload_path ", __FUNCTION__, __LINE__);
+                    self::add_message(sprintf(self::get_translation("Folder is not writable: %s"), dirname($result_file_upload_path)), "error");
+                    Gae_Logger::write_log("FAILED file is not writable: $result_file_upload_path ", __FUNCTION__, __LINE__);
+                }
             }
-        }
 
+        }
         Gae_Logger::write_log("Regenerating script end.=========", __FUNCTION__, __LINE__);
     }
 
-
-    public static function message($text, $type = "success")
+    public static function add_message($text, $type = "success")
     {
-        ?>
-        <div id="message" class="<?= $type ?>"><?= $text ?></div>
-        <?php
+        array_push(self::$messages, ["type" => $type, "message" => "GAE: " . $text]);
     }
 
+    private static function remove_sections_options()
+    {
+        $sections = json_decode(file_get_contents(gae_INCLUDES_PATH . "/sections.json"), true);
+
+        foreach ($sections as $sk => $s) {
+
+            foreach ($s["fields"] as $fk => $f) {
+                $sections[$sk]["fields"][$fk]["value"] = get_option($f["id"]);
+                delete_option($f["id"]);
+            }
+        }
+    }
 
     public static function get_sections()
     {
@@ -236,19 +299,16 @@ class Gae_Admin
         return $sections;
     }
 
-
     public static function is_settings_page()
     {
         //// TODO: check if we are on settings page to load addtional css
         return true;
     }
 
-
     public static function add_css()
     {
         echo '<link id="' . gae_PLUGIN_DIRECTORY . '" rel="stylesheet" href="' . gae_CSS_URL . '/gae-admin.css' . '" type="text/css" media="all" />';
     }
-
 
     public static function add_scripts()
     {
@@ -257,27 +317,23 @@ class Gae_Admin
                 add_action('admin_head', 'Gae_Admin::add_css');
             }
         }
+        wp_enqueue_script('gae_admin_script', gae_JS_URL . '/gae-admin.js');
     }
-
 
     public static function add_settings_link_to_plugin_list($links)
     {
         if (ģae_DONATION_SHOW_LINKS) {
             $links[] = '<a target="_blank" href="' . gae_DONATION_URL . '">Donate</a>';
         }
-        $links[] = '<a href="' . esc_url(get_admin_url(null, 'options-general.php?page=google-analytics-events/gae_settings_page.php')) . '">Settings</a>';
-
-        ///$links[] = '<a href="http://wp-buddy.com" target="_blank">More plugins by WP-Buddy</a>';
+        $links[] = '<a href="' . self::get_settings_page_url() . '">Settings</a>';
         return $links;
     }
-
 
     public static function show_donation_block()
     {
         //todo check the last interaction ignore for a while
         return true;
     }
-
 
     public static function script_type()
     {
@@ -308,4 +364,167 @@ class Gae_Admin
 
     }
 
+    public static function print_message($id, $message, $type)
+    {
+        ?>
+        <div id="message-<?= $id; ?>" class="gae-message notice notice-<?= $type; ?> is-dismissible">
+            <p>
+                <?= $message; ?>
+            </p>
+            <button type="button" class="notice-dismiss">
+                <span class="screen-reader-text"><?= Gae_Admin::get_translation("Dismiss this notice."); ?></span>
+            </button>
+        </div>
+        <?php
+    }
+
+    public static function print_all_messages()
+    {
+        foreach (self::$messages as $id => $message) {
+            self::print_message($id, $message["message"], $message["type"]);
+        }
+    }
+
+    public static function settings_page_visited()
+    {
+        update_option("gae-settings-page-visited", 1);
+    }
+
+    public static function is_settings_page_visited()
+    {
+        return get_option("gae-settings-page-visited");
+    }
+
+    public static function get_translation_count(){
+        $translationIdsFile = gae_TRANSLATION_IDS_FILE;
+        $translationIds = [];
+        if (file_exists($translationIdsFile)) {
+            $translationIds = unserialize(file_get_contents($translationIdsFile));
+        }
+        return count($translationIds);
+    }
+
+    public static function get_translation($text, $params = [])
+    {
+
+        if (gae_DEVELOPER) {
+
+            $text_id = strip_tags($text);
+            $translationIdsFile = gae_TRANSLATION_IDS_FILE;
+            $translationIds = [];
+            $changed = false;
+            if (file_exists($translationIdsFile)) {
+                $translationIds = unserialize(file_get_contents($translationIdsFile));
+            } else {
+                if (@touch($translationIdsFile)){
+                    chmod($translationIdsFile, 0777);
+                } else{
+                    self::add_message(sprintf(self::get_translation("Could not create file %s"),$translationIdsFile));
+                }
+
+            }
+
+
+            if (!isset($translationIds[$text])) {
+                $translationIds[$text] = $text;
+                $changed = true;
+            }
+
+            if (is_array($params)){
+                foreach ($params as $item) {
+                    if (!isset($translationIds[$item])) {
+                        $translationIds[$item] = $item;
+                        $changed = true;
+                    }
+                }
+            }
+
+            if ($changed) {
+
+                if (is_writable($translationIdsFile)){
+                    file_put_contents($translationIdsFile, serialize($translationIds));
+                }
+            }
+        }
+
+        $text = __($text, EMU2_I18N_DOMAIN);
+
+        if (is_array($params) && count($params)>0) {
+            $text = vsprintf($text, $params);
+        } elseif (!empty($params)) {
+            $text = sprintf($text, $params);
+        }
+        //
+        return $text;
+    }
+
+    public static function generate_pot_file()
+    {
+        if (gae_DEVELOPER) {
+
+            $pot_header = '
+msgid ""
+msgstr ""
+"Project-Id-Version:Google Analytics Events\n"
+"POT-Creation-Date: ' . date("Y-m-d H:i:s") . '\n"
+"PO-Revision-Date: ' . date("Y-m-d H:i:s") . '\n"
+"Last-Translator: Aivars Lauzis\n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.3\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: ;__;_e\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: assets/css\n"
+"X-Poedit-SearchPathExcluded-1: assets/inc/chosen\n"
+"X-Poedit-SearchPathExcluded-2: assets/js\n"
+"X-Poedit-SearchPathExcluded-3: lang\n"
+
+';
+            $translationIdsFile = gae_TRANSLATION_IDS_FILE;
+            $potFile = gae_GENERATE_PATH . gae_PLUGIN_DIRECTORY_NAME . ".pot";
+            $potFileUrl = gae_GENERATE_URL.gae_PLUGIN_DIRECTORY_NAME.".pot";
+
+            $dir_potFile = dirname($potFile);
+
+            if (!is_writable($dir_potFile)){
+                self::add_message("Directory ($dir_potFile) not writable. Could not generate pot file.","error");
+                return false;
+            }
+
+            if (!file_exists($potFile)){
+                if (!@touch($potFile) || !@chmod($potFile,0777)){
+                    self::add_message("Could not create ($potFile). Could not generate pot file.","error");
+                }
+            }
+
+            if (!is_writable($potFile)){
+                self::add_message("File ($potFile) not writable. Could not generate pot file.","error");
+                return false;
+            }
+
+            if (!file_exists($translationIdsFile)){
+                self::add_message("Could not generate POT file no translations collected, cant find file $translationIdsFile","error");
+                return false;
+            }
+
+            if (file_exists($translationIdsFile)) {
+                $translationIds = unserialize(file_get_contents($translationIdsFile));
+            }
+            file_put_contents($potFile, $pot_header);
+            foreach ($translationIds as $k => $value) {
+                $potText = '
+                
+msgid "' . htmlspecialchars(str_replace(array("\r\n", "\r", "\n"),"",$translationIds[$k])) . '"
+msgstr ""
+';
+                file_put_contents($potFile, $potText, FILE_APPEND);
+            }
+            self::add_message("Pot file generated. You will find it here $potFile");
+        }
+    }
 }

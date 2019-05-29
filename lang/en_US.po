@@ -1,0 +1,395 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Google Analytics Events\n"
+"POT-Creation-Date: 2019-05-29 05:38:34\n"
+"PO-Revision-Date: 2019-05-29 08:50+0300\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.3\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: ;__;_e\n"
+"Last-Translator: \n"
+"Language: en_GB\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: assets/css\n"
+"X-Poedit-SearchPathExcluded-1: assets/inc/chosen\n"
+"X-Poedit-SearchPathExcluded-2: assets/js\n"
+"X-Poedit-SearchPathExcluded-3: lang\n"
+
+msgid "Google Analytics Events"
+msgstr "Google Analytics Events"
+
+msgid "Google analytics settings"
+msgstr "Google analytics settings"
+
+msgid ""
+"Google analytics events are addtional collected data that 'happens' on your "
+"website. Ussually and mostly events ar trigered by some user action - click, "
+"scroll, form submition.&lt;br/&gt;        In Google analytics itself events "
+"can be used to to setup goals for you website. Events can be added to "
+"webpage elements via google tag            manager, or hardcoded in the page."
+"&lt;br/&gt;        This plugin sets some basic events, that should be "
+"collected on most websites, and plugin allows to add some custom events, for "
+"your        custome elements.&lt;br/&gt;        There are several sections "
+"below, that can be enabled or disabled separately.&lt;br/&gt;        More "
+"about event and event tracking read &lt;a "
+"href='%s'                                                    "
+"target='_blank'&gt;%s&lt;/a&gt;"
+msgstr ""
+"Google analytics events are addtional collected data that 'happens' on your "
+"website. Ussually and mostly events ar trigered by some user action - click, "
+"scroll, form submition.&lt;br/&gt;        In Google analytics itself events "
+"can be used to to setup goals for you website. Events can be added to "
+"webpage elements via google tag            manager, or hardcoded in the page."
+"&lt;br/&gt;        This plugin sets some basic events, that should be "
+"collected on most websites, and plugin allows to add some custom events, for "
+"your        custome elements.&lt;br/&gt;        There are several sections "
+"below, that can be enabled or disabled separately.&lt;br/&gt;        More "
+"about event and event tracking read &lt;a "
+"href='%s'                                                    "
+"target='_blank'&gt;%s&lt;/a&gt;"
+
+msgid "https://wpflow.com/what-is-google-analytics-event-tracking/"
+msgstr "https://wpflow.com/what-is-google-analytics-event-tracking/"
+
+msgid "here"
+msgstr "here"
+
+msgid "Toggle panel"
+msgstr "Toggle panel"
+
+msgid "Analytics script"
+msgstr "Analytics script"
+
+msgid ""
+"Adding analytics code to the header, if you have analytics code in the page, "
+"then leave this value to 'Don`t add, code added manually, already'. &lt;br/"
+"&gt; If you are not sure if analytics code is in the website, please check "
+"this &lt;a target=_blank href=http://www.gachecker.com &gt;wepbage&lt;/"
+"a&gt;, by entering your website url service will check if youo have "
+"analytics tracking code placed, and which version."
+msgstr ""
+"Adding analytics code to the header, if you have analytics code in the page, "
+"then leave this value to 'Don`t add, code added manually, already'. &lt;br/"
+"&gt; If you are not sure if analytics code is in the website, please check "
+"this &lt;a target=_blank href=http://www.gachecker.com &gt;wepbage&lt;/"
+"a&gt;, by entering your website url service will check if youo have "
+"analytics tracking code placed, and which version."
+
+msgid "Embed analytics code"
+msgstr "Embed analytics code"
+
+msgid "Don`t add, code added manually already (tag manager)"
+msgstr "Don`t add, code added manually already (tag manager)"
+
+msgid "Don`t add, code added manually already  (analytics)"
+msgstr "Don`t add, code added manually already  (analytics)"
+
+msgid "Don`t add, its there but i don`t know what style"
+msgstr "Don`t add, its there but i don`t know what style"
+
+msgid "Tag manager style code (recommended)"
+msgstr "Tag manager style code (recommended)"
+
+msgid "Classic Google analytics code"
+msgstr "Classic Google analytics code"
+
+msgid "Google analytics id"
+msgstr "Google analytics id"
+
+msgid "UA-XXX-X"
+msgstr "UA-XXX-X"
+
+msgid "Google analytics id for debug"
+msgstr "Google analytics id for debug"
+
+msgid ""
+"For testing purposes we advice to create separate view in google analytics, "
+"so that organic events and statistics would not be impacted by your or your "
+"team test clicks. This id will be used only if the debug mode is on, and you "
+"can restrict debug mode to the particular ip address."
+msgstr ""
+"For testing purposes we advice to create separate view in google analytics, "
+"so that organic events and statistics would not be impacted by your or your "
+"team test clicks. This id will be used only if the debug mode is on, and you "
+"can restrict debug mode to the particular ip address."
+
+msgid "Time trigger (bounce rate)"
+msgstr "Time trigger (bounce rate)"
+
+msgid ""
+"By default bounce view/visit counted in google analytics if user visits your "
+"page and after that moves away to different site or closes browser/tab even "
+"if user have spent half hour of reading the article. &lt;br/&gt;This,time "
+"triggered, event user will not be counted as bounced after it has been "
+"triggered. You can increase, decrease or switch it off completely."
+msgstr ""
+"By default bounce view/visit counted in google analytics if user visits your "
+"page and after that moves away to different site or closes browser/tab even "
+"if user have spent half hour of reading the article. &lt;br/&gt;This,time "
+"triggered, event user will not be counted as bounced after it has been "
+"triggered. You can increase, decrease or switch it off completely."
+
+msgid "Enable time trigger"
+msgstr "Enable time trigger"
+
+msgid "Enable"
+msgstr "Enable"
+
+msgid "Disable"
+msgstr "Disable"
+
+msgid "Time trigger threshold (seconds)"
+msgstr "Time trigger threshold (seconds)"
+
+msgid "30"
+msgstr "30"
+
+msgid "Contact Links"
+msgstr "Contact Links"
+
+msgid ""
+"Enable this if you want to see how often contact links are clicked on your "
+"website. This will track links containing email or phone number."
+msgstr ""
+"Enable this if you want to see how often contact links are clicked on your "
+"website. This will track links containing email or phone number."
+
+msgid "Enable contact link tracking"
+msgstr "Enable contact link tracking"
+
+msgid "Social Links"
+msgstr "Social Links"
+
+msgid ""
+"Enable this if you want to track clicks on links to social social profiles. "
+"This will track links containing social networks facebook, twitter, google+, "
+"pinterest, linked in"
+msgstr ""
+"Enable this if you want to track clicks on links to social social profiles. "
+"This will track links containing social networks facebook, twitter, google+, "
+"pinterest, linked in"
+
+msgid "Enable social link tracking"
+msgstr "Enable social link tracking"
+
+msgid "Wordpress search form tracking"
+msgstr "Wordpress search form tracking"
+
+msgid ""
+"Default search form tracking. Will track form submissions, and will pass the "
+"searched keyword to the google analytics."
+msgstr ""
+"Default search form tracking. Will track form submissions, and will pass the "
+"searched keyword to the google analytics."
+
+msgid "Enable wordpress search form tracking"
+msgstr "Enable wordpress search form tracking"
+
+msgid "Forms tracking"
+msgstr "Forms tracking"
+
+msgid ""
+"Enable this if you want to see when someone tries to submit any form (if "
+"website has any). It will help you track if users actually are using your "
+"forms. Sometimes it helps also to find some bugs with forms, you see that "
+"users are trying to send form, but you don't have any entries. Maybe there "
+"is some problem with forms. Or form neads clarification, UI update."
+msgstr ""
+"Enable this if you want to see when someone tries to submit any form (if "
+"website has any). It will help you track if users actually are using your "
+"forms. Sometimes it helps also to find some bugs with forms, you see that "
+"users are trying to send form, but you don't have any entries. Maybe there "
+"is some problem with forms. Or form neads clarification, UI update."
+
+msgid "Enable form fields tracking"
+msgstr "Enable form fields tracking"
+
+msgid "Enable form submission tracking"
+msgstr "Enable form submission tracking"
+
+msgid "Enable gravity forms success tracking"
+msgstr "Enable gravity forms success tracking"
+
+msgid "File downloads"
+msgstr "File downloads"
+
+msgid ""
+"Enable thisto track files that are are opened/downloaded. It will track "
+"files with such extensions: pdf, doc, docx, zip, xls, xslx, odt, ods, ppt, "
+"pptx"
+msgstr ""
+"Enable thisto track files that are are opened/downloaded. It will track "
+"files with such extensions: pdf, doc, docx, zip, xls, xslx, odt, ods, ppt, "
+"pptx"
+
+msgid "Enable file click tracking"
+msgstr "Enable file click tracking"
+
+msgid "Custome Links"
+msgstr "Custome Links"
+
+msgid ""
+"If you want track custom link that does not fit into other categories "
+"(social links, outgoing links, links to file...), then add special "
+"attributes (data-ga-category, data-ga-action, data-ga-label) to those links. "
+"These attributes are for more advanced wordpress users / developers who are "
+"building their custom theme or elements. See example.&lt;br/&gt;If you don't "
+"have such elements, don't bother switching this setting on. Leave it "
+"disabled. "
+msgstr ""
+"If you want track custom link that does not fit into other categories "
+"(social links, outgoing links, links to file...), then add special "
+"attributes (data-ga-category, data-ga-action, data-ga-label) to those links. "
+"These attributes are for more advanced wordpress users / developers who are "
+"building their custom theme or elements. See example.&lt;br/&gt;If you don't "
+"have such elements, don't bother switching this setting on. Leave it "
+"disabled. "
+
+msgid ""
+"&lt;a href=&quot;link to something or some site&quot; data-ga-category=&quot;"
+"Shopping cart&quot; data-ga-action=&quot;Clicked&quot; data-ga-label=&quot;"
+"In Header&quot;&gt;Click me &lt;/a&gt;"
+msgstr ""
+"&lt;a href=&quot;link to something or some site&quot; data-ga-category=&quot;"
+"Shopping cart&quot; data-ga-action=&quot;Clicked&quot; data-ga-label=&quot;"
+"In Header&quot;&gt;Click me &lt;/a&gt;"
+
+msgid "Enable custom link tracking"
+msgstr "Enable custom link tracking"
+
+msgid "Outgoing Links"
+msgstr "Outgoing Links"
+
+msgid ""
+"Enable this for trakcing clicks on outgoing links. It will track users that "
+"are leaving your site via outgoing links in content or elswhere in page. "
+"Sometimes this helps to find some outgoing links in content that could be "
+"there by mistake. &lt;br/&gt; If social link tracking is switched off, then "
+"all the social links (if any) are considered as outgoing."
+msgstr ""
+"Enable this for trakcing clicks on outgoing links. It will track users that "
+"are leaving your site via outgoing links in content or elswhere in page. "
+"Sometimes this helps to find some outgoing links in content that could be "
+"there by mistake. &lt;br/&gt; If social link tracking is switched off, then "
+"all the social links (if any) are considered as outgoing."
+
+msgid "Enable outgoing link tracking"
+msgstr "Enable outgoing link tracking"
+
+msgid "Specific Link Destination"
+msgstr "Specific Link Destination"
+
+msgid ""
+"Enable this if you want to track links leading to some custom url. For "
+"example, in page there could be several links to 'about us' page and you "
+"want track all clicks on these links. This will help which of the links "
+"works better."
+msgstr ""
+"Enable this if you want to track links leading to some custom url. For "
+"example, in page there could be several links to 'about us' page and you "
+"want track all clicks on these links. This will help which of the links "
+"works better."
+
+msgid "Enable specific link tracking"
+msgstr "Enable specific link tracking"
+
+msgid "Add urls you want to track (comma seperated)"
+msgstr "Add urls you want to track (comma seperated)"
+
+msgid "http://somesite.com/about-us,http://partner.site.com"
+msgstr "http://somesite.com/about-us,http://partner.site.com"
+
+msgid "Custom element click tracking"
+msgstr "Custom element click tracking"
+
+msgid ""
+"Enable for tracking clicks on some custom elements, distinguished by css "
+"class or html element's id"
+msgstr ""
+"Enable for tracking clicks on some custom elements, distinguished by css "
+"class or html element's id"
+
+msgid ".button, #cart, header"
+msgstr ".button, #cart, header"
+
+msgid "Enable custom element tracking"
+msgstr "Enable custom element tracking"
+
+msgid "Add tag, class or id to be tracked (comma separated)"
+msgstr "Add tag, class or id to be tracked (comma separated)"
+
+msgid ".btn,cta-btn,button"
+msgstr ".btn,cta-btn,button"
+
+msgid "Mailchimp"
+msgstr "Mailchimp"
+
+msgid ""
+"The tracker works with mailchimp-for-wp plugin. Other plugins not tested/"
+"implemented. Tracks submissions for the newsletters."
+msgstr ""
+"The tracker works with mailchimp-for-wp plugin. Other plugins not tested/"
+"implemented. Tracks submissions for the newsletters."
+
+msgid "Enable mailchimp success tracking"
+msgstr "Enable mailchimp success tracking"
+
+msgid "Debuging"
+msgstr "Debuging"
+
+msgid ""
+"Enable this for testing purposes, to see to what elements events are added "
+"and if they fire at all."
+msgstr ""
+"Enable this for testing purposes, to see to what elements events are added "
+"and if they fire at all."
+
+msgid "Debug the events"
+msgstr "Debug the events"
+
+msgid "Disabled"
+msgstr "Disabled"
+
+msgid "Enable - php log"
+msgstr "Enable - php log"
+
+msgid "Enable - console.log + php log"
+msgstr "Enable - console.log + php log"
+
+msgid "Enable - show on front + console.log + php log"
+msgstr "Enable - show on front + console.log + php log"
+
+msgid "Restrict output by ip (comma separated)"
+msgstr "Restrict output by ip (comma separated)"
+
+msgid "127.0.0.1"
+msgstr "127.0.0.1"
+
+msgid "&lt;br/&gt;You current ip address is: "
+msgstr "&lt;br/&gt;You current ip address is: "
+
+msgid "Save Changes"
+msgstr "Save Changes"
+
+msgid "Generate Translation Template"
+msgstr "Generate Translation Template"
+
+msgid "(Collected %s items)"
+msgstr "(Collected %s items)"
+
+msgid "Result, combined file saved to:  %s"
+msgstr "Result, combined file saved to:  %s"
+
+msgid "Dismiss this notice."
+msgstr "Dismiss this notice."
+
+msgid ""
+"Can't write to folder %s. Webserver should be allowed to write to that "
+"directory/file."
+msgstr ""
+"Can't write to folder %s. Webserver should be allowed to write to that "
+"directory/file."

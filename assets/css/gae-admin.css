@@ -1,26 +1,59 @@
-.google-analytics-events-section {
-  margin-top:60px;
-  padding:0 30px;
+form.google-analytics-events{
+    padding-left:30px;
+    padding-right:30px;
 }
 
+.google-analytics-events > h1{
+  padding:30px 30px 30px 30px;
+
+}
+
+.google-analytics-events > p {
+  padding:0 30px 30px 30px;
+  max-width:560px;
+}
+
+.google-analytics-events-submit {
+  padding:30px 30px 30px 0;
+  overflow:hidden;
+  height:40px;
+}
 .google-analytics-events-section {
-  margin-top:60px;
-  padding:0 30px;
+    position:relative;
+    width:100%;
 }
 
 .google-analytics-events-section > h1 {
-  line-height: 30px;
+  line-height: 26px;
 }
 
-.google-analytics-events-section > h2 {
-  font-size:30px;
+.google-analytics-events-section h2.section-title {
+  font-size:18px;
+  padding:0 0 0 20px;
+  margin:0;
+  cursor:pointer;
+  line-height: 40px;
 }
+
+
+.closed .toggle-indicator::before {
+  content:"\f140" !important;
+}
+
 
 .google-analytics-events-section code {
   padding:10px;
   font-family: monospace;
   display:block;
 }
+
+
+.google-analytics-events-section .inside
+{
+    padding-left:30px;
+    padding-right:30px;
+}
+
 
 .google-analytics-events-description {
   padding:0 30px;
@@ -38,15 +71,37 @@
   margin-top:20px;
 }
 
+.gae-form-field > .gae-form-field-select-wrap{
+  height:auto;
+  padding:0;
+  text-align:left;
+  margin-top:5px;
+  width:100%;
+  border-style:solid;
+  border-width:1px;
+  max-width: 500px;
+  overflow:hidden;
+}
+.gae-form-field > .gae-form-field-select-wrap > select {
+  height:auto;
+  padding:5px 0 5px 5px;
+  text-align:left;
+  margin-top:0;
+  width:100%;
+  border-style:solid;
+  border-width:0;
+}
 .gae-form-field > input,
-.gae-form-field > select,
 .gae-form-field > textarea {
+  height:auto;
   padding:5px 5px;
   text-align:left;
   margin-top:5px;
   width:100%;
   border-style:solid;
+  border-width:1px;
   max-width: 500px;
+  border-color:#000;
 }
 .gae-form-field > textarea {
   min-height:200px;
@@ -57,4 +112,41 @@
   padding:0px;
   margin:0px;
   max-width: 500px;
+}
+
+
+.gae-message{
+  margin:20px 20px 20px 0;
+}
+
+.section-disabled h2{
+    color:darkred;
+}
+.section-enabled h2{
+    color:darkgreen;
+}
+
+.section-disabled h2:after {
+    padding-right:10px;
+    position: relative;
+    top:3px;
+    font-family: dashicons;
+   color:darkred;
+    content:"\f335";
+}
+.section-enabled h2:after{
+    padding-right:10px;
+    position: relative;
+    top:4px;
+    font-family: dashicons;
+    color:darkgreen;
+    content:"\f147";
+}
+
+.section-open {
+}
+
+
+.google-analytics-events-section-last {
+  border-bottom-width:1px;
 }

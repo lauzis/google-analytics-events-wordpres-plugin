@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: GAE - Google analytics events wordpress plugin
-Plugin URI: https://github.com/lauzis
+Plugin URI: https://github.com/lauzis/google-analytics-events-wordpres-plugin
 Description: The plugin that adds some basic events to the site, to track clikcs on cta buttons and forms.
 Version: 0.9.7
 Author: Aivars Lauzis
@@ -28,6 +28,7 @@ require_once("inc/Gae_Frontend.php");
 function gae_set_lang_file() {
 	# set the language file
 	$currentLocale = get_locale();
+
 	if(!empty($currentLocale)) {
 		$moFile = dirname(__FILE__) . "/lang/" . $currentLocale . ".mo";
 		if (@file_exists($moFile) && is_readable($moFile)) {
@@ -38,9 +39,12 @@ function gae_set_lang_file() {
 }
 gae_set_lang_file();
 
-register_activation_hook(__FILE__, 'Gae_Admin::gae_activate');
-register_deactivation_hook(__FILE__, 'Gae_Admin::gae_deactivate');
-register_uninstall_hook(__FILE__, 'Gae_Admin::gae_uninstall');
+register_activation_hook(__FILE__, 'Gae_Admin::activate');
+register_deactivation_hook(__FILE__, 'Gae_Admin::deactivate');
+register_uninstall_hook(__FILE__, 'Gae_Admin::uninstall');
 
 require_once("inc/hooks.php");
 
+if (gae_DEVELOPER && isset($_GET["generate-pot-file"])){
+    Gae_Admin::generate_pot_file();
+}

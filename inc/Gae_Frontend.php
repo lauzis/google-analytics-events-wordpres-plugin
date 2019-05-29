@@ -10,7 +10,7 @@ class Gae_Frontend {
 
     public static function add_scripts(){
 
-        wp_enqueue_script('gae-ga', gae_GENERATE_URL, array('jquery'),gae_CURRENT_VERSION."-".get_option('gae-assets-version'));
+        wp_enqueue_script('gae-ga', gae_GENERATE_FILE_URL, array('jquery'),gae_CURRENT_VERSION."-".get_option('gae-assets-version'));
 
         if (!is_admin() && Gae_Admin::debug() && Gae_Admin::debug() > 2){
           wp_enqueue_style('gae-css', gae_CSS_URL.'/gae-debug.css',array(), gae_CURRENT_VERSION."-".get_option('gae-assets-version'));

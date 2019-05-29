@@ -22,19 +22,19 @@ $( "form" ).each(function(){
             self.find('input[name="s"]').change(function(){
 
                 var search_field = $(this);
-                if (!search_field.hasClass("gae-used")){
+                // if (!search_field.hasClass("gae-used")){
 
                     category = "Search";
                     action = "Search Used";
                     label = search_field.val();
                     value = null;
                     send_event(category, action, label, value)
-                }
-                search_field.addClass("gae-used");
+                //}
+                //search_field.addClass("gae-used");
             });
 
             self.find('input[name="s"]').first().addClass("gae-event");
-            self.find('input[name="s"]').first().addClass("gae-search-used");
+            self.find('input[name="s"]').first().addClass("gae-event-search");
         }
     }
 });

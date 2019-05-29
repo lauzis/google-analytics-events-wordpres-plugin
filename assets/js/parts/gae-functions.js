@@ -71,7 +71,7 @@ function contains(a, obj) {
 
 //the list of downloadable files
 function get_valid_file_extensions(){
-    return ['.pdf','.doc','.docx','.zip','.xls','.xslx'];
+    return ['.pdf','.doc','.docx','.zip','.xls','.xslx','.odt','.ods','.ppt','.pptx'];
 }
 
 
