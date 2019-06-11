@@ -1,4 +1,4 @@
-# Google Analytics Events Wordpres Plugin
+# Events Google Analytics - Wordpres Plugin
 Wordpress plugin that sets basic google analytics events for webpage
 
 == Donate ==

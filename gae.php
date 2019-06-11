@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: GAE - Google analytics events wordpress plugin
+Plugin Name: GAE - Events fro Google analytics - wordpress plugin
 Plugin URI: https://github.com/lauzis/google-analytics-events-wordpres-plugin
-Description: The plugin that adds some basic events to the site, to track clikcs on cta buttons and forms.
-Version: 0.9.7
+Description: The plugin that adds some basic events to the site, to track clicks on cta buttons and forms.
+Version: 0.9.11
 Author: Aivars Lauzis
 Author URI: https://github.com/lauzis
 License: GPL3
