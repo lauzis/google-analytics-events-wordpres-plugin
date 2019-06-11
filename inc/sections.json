@@ -2,7 +2,7 @@
   {
   "id":"analytics-script",
   "title":"Analytics script",
-  "description":"Adding analytics code to the header, if you have analytics code in the page, then leave this value to 'Don`t add, code added manually, already'. <br/> If you are not sure if analytics code is in the website, please check this <a target=_blank href=http://www.gachecker.com >wepbage</a>, by entering your website url service will check if youo have analytics tracking code placed, and which version.",
+  "description":"Adding analytics code to the header. If you have analytics code in the page, then leave this value as 'Don`t add, code added manually, already'. <br/> If you are not sure if analytics code is in the website, please check this <a target=_blank href=http://www.gachecker.com >wepbage</a>, by entering your website url (web address) service will check if you have analytics tracking code placed, and which version it is.",
   "fields": [
     {
       "id":"gae-script-type",
@@ -48,14 +48,14 @@
       "value":"",
       "placeholder":"UA-XXX-X",
       "default_value":"",
-      "description":"For testing purposes we advice to create separate view in google analytics, so that organic events and statistics would not be impacted by your or your team test clicks. This id will be used only if the debug mode is on, and you can restrict debug mode to the particular ip address."
+      "description":"For testing purposes we advice to create separate view in google analytics, so that organic events and statistics would not be impacted by you or your team test clicks. This ID will be used only if the debug mode is on. And you can restrict debug mode to the particular IP address."
     }
   ]
 },
 {
   "id":"time-trigger",
   "title":"Time trigger (bounce rate)",
-  "description":"By default bounce view/visit counted in google analytics if user visits your page and after that moves away to different site or closes browser/tab even if user have spent half hour of reading the article. <br/>This,time triggered, event user will not be counted as bounced after it has been triggered. You can increase, decrease or switch it off completely.",
+  "description":"In google analytics, by default, bounced visit/view is counted when user visits page, does not trigger any event, and leaves the page. <br/> Therefore, in most cases 1 page visits would be counted as bounced visits, even if a user has spent there 3 minutes reading a full article. <br/> To handle such situation time triggered event is meant for. This, time triggered event, will be called and the particular visit will not be counted as bounced anymore. You can increase, decrease the timeout after which the event is called.",
   "fields": [
     {
       "id":"gae-time-trigger",
@@ -88,7 +88,7 @@
 {
   "id":"contact-links",
   "title":"Contact Links",
-  "description":"Enable this if you want to see how often contact links are clicked on your website. This will track links containing email or phone number.",
+  "description":"Enable this if you want to see how often contact links are clicked on your website. This will track links containing email address or phone number.",
   "fields": [
     {
       "id":"gae-contact-links",
@@ -113,7 +113,7 @@
 {
   "id":"social-links",
   "title":"Social Links",
-  "description":"Enable this if you want to track clicks on links to social social profiles. This will track links containing social networks facebook, twitter, google+, pinterest, linked in",
+  "description":"Enable this if you want to track clicks on links to social profiles. This will track links containing social networks facebook, twitter, google+, pinterest, linked in.",
   "fields": [
     {
       "id":"gae-social-links",
@@ -138,7 +138,7 @@
 {
   "id":"search",
   "title":"Wordpress search form tracking",
-  "description":"Default search form tracking. Will track form submissions, and will pass the searched keyword to the google analytics.",
+  "description":"Default search form tracking. It will track form submissions and pass the searched keyword to the google analytics.",
   "fields": [
     {
       "id":"gae-search",
@@ -163,7 +163,7 @@
 {
   "id":"form-tracking",
   "title":"Forms tracking",
-  "description":"Enable this if you want to see when someone tries to submit any form (if website has any). It will help you track if users actually are using your forms. Sometimes it helps also to find some bugs with forms, you see that users are trying to send form, but you don't have any entries. Maybe there is some problem with forms. Or form neads clarification, UI update.",
+  "description":"Enable this if you want to see when someone tries to submit any form (if the website has any). It will help you track if users actually are using your forms. Sometimes it also helps to find some bugs within the forms, as you might see that the users are trying to send a form, but you don't have any entries. Maybe there is either some problems with the forms, the form needs clarification or an UI update.",
   "fields": [
     {
       "id":"gae-form-tracking-field-change",
@@ -224,7 +224,7 @@
 {
   "id":"file-downloads",
   "title":"File downloads",
-  "description":"Enable thisto track files that are are opened/downloaded. It will track files with such extensions: pdf, doc, docx, zip, xls, xslx, odt, ods, ppt, pptx",
+  "description":"Enable this to track files that are opened/downloaded. It will track files with such extensions as: pdf, doc, docx, zip, xls, xslx, odt, ods, ppt, pptx",
   "fields": [
     {
       "id":"gae-file-downloads",
@@ -249,7 +249,7 @@
 {
   "id":"custom-links",
   "title":"Custome Links",
-  "description":"If you want track custom link that does not fit into other categories (social links, outgoing links, links to file...), then add special attributes (data-ga-category, data-ga-action, data-ga-label) to those links. These attributes are for more advanced wordpress users / developers who are building their custom theme or elements. See example.<br/>If you don't have such elements, don't bother switching this setting on. Leave it disabled. ",
+  "description":"If you want to track a custom link that does not fit into other categories (social links, outgoing links, links to a files...), then add special attributes (data-ga-category, data-ga-action, data-ga-label) to those links. These attributes are for more advanced wordpress users / developers who are building their custom theme or elements. See example.<br/> If you don't have such elements, don't bother switching this setting on. Leave it disabled.",
   "example":"<a href=\"link to something or some site\" data-ga-category=\"Shopping cart\" data-ga-action=\"Clicked\" data-ga-label=\"In Header\">Click me </a>",
   "fields": [
     {
@@ -275,7 +275,7 @@
 {
   "id":"outgoing-links",
   "title":"Outgoing Links",
-  "description":"Enable this for trakcing clicks on outgoing links. It will track users that are leaving your site via outgoing links in content or elswhere in page. Sometimes this helps to find some outgoing links in content that could be there by mistake. <br/> If social link tracking is switched off, then all the social links (if any) are considered as outgoing.",
+  "description":"Enable this for tracking clicks on outgoing links. It will track users that are leaving your site via outgoing links in content or elsewhere in the page. Sometimes this helps to find  outgoing links in content that could be there by mistake. <br/> If the social link tracking is switched off, then all the social links (if any) are considered as outgoing.",
   "fields": [
     {
       "id":"gae-outgoing-links",
@@ -300,7 +300,7 @@
   {
     "id":"specific-links",
     "title":"Specific Link Destination",
-    "description":"Enable this if you want to track links leading to some custom url. For example, in page there could be several links to 'about us' page and you want track all clicks on these links. This will help which of the links works better.",
+    "description":"Enable this if you want to track links leading to some custom URL’s. For example, in the page there could be several links to 'about us' page and you want to track all clicks on these links. This will help you to understand which of the links works better, clicked more ofthen.",
     "fields": [
       {
         "id":"gae-track-links-to-specific-urls",
@@ -334,7 +334,7 @@
 {
   "id":"custom-element-tracking",
   "title":"Custom element click tracking",
-  "description":"Enable for tracking clicks on some custom elements, distinguished by css class or html element's id",
+  "description":"Enable for tracking clicks on some custom elements, distinguished by css class or html element's ID",
   "example":".button, #cart, header",
   "fields": [
     {
@@ -368,7 +368,7 @@
 {
   "id":"mailchimp-success-tracking",
   "title":"Mailchimp",
-  "description":"The tracker works with mailchimp-for-wp plugin. Other plugins not tested/implemented. Tracks submissions for the newsletters.",
+  "description":"The tracker works with mailchimp-for-wp plugin. Other plugins are not tested/implemented. It tracks submissions for the newsletters.",
   "fields": [
     {
       "id":"gae-mailchimp",

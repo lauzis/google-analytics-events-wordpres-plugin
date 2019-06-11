@@ -229,7 +229,7 @@ class Gae_Admin
                 if (is_writable($result_file_path)) {
                     if (file_put_contents($result_file_path, $combined_js_content)) {
                         Gae_Logger::write_log("Result, combined file saved to: $result_file_path ", __FUNCTION__, __LINE__);
-                        self::add_message(sprintf(self::get_translation("Result, combined file saved to: %s"),$result_file_path), "success");
+                        self::add_message(sprintf(self::get_translation("Result, combined file/files saved to: %s"),$result_file_path), "success");
                     } else {
                         Gae_Logger::write_log("FAILED (can be ignored) save to: $result_file_path ", __FUNCTION__, __LINE__);
                     };

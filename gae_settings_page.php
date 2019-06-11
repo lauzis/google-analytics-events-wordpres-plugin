@@ -7,14 +7,11 @@
         - <?php print gae_PUGIN_NAME . " " . gae_CURRENT_VERSION; ?></h1>
     <?php Gae_Admin::print_all_messages(); ?>
     <p>
-        <?= Gae_Admin::get_translation("Google analytics events are addtional collected data that 'happens' on your website. Ussually and mostly events ar trigered by some user action - click, scroll, form submition.<br/>
-        In Google analytics itself events can be used to to setup goals for you website. Events can be added to webpage elements via google tag
-            manager, or hardcoded in the page.<br/>
-        This plugin sets some basic events, that should be collected on most websites, and plugin allows to add some custom events, for your
-        custome elements.<br/>
-        There are several sections below, that can be enabled or disabled separately.<br/>
-        More about event and event tracking read <a href='%s'
-                                                    target='_blank'>%s</a>",['https://wpflow.com/what-is-google-analytics-event-tracking/',"here"]); ?>
+        <?= Gae_Admin::get_translation("Google analytics events are additional collected data that 'happens' on your website. Usually events are triggered by some user's actions - clicking, scrolling, form submition.<br/> 
+In Google analytics itself events can be used to to setup goals for your website. Events can be added to webpage elements via google tag manager, or hardcoded in the page.<br/> 
+This plugin sets some basic events, that should be collected on most websites, and plugin allows to add some custom events, for your custome elements.<br/> 
+There are several sections below, that can be enabled or disabled separately.<br/> 
+More about event and event tracking read <a href='%s' target='_blank'>%s</a>",['https://wpflow.com/what-is-google-analytics-event-tracking/',"here"]); ?>
     </p>
 
     <?php if (Gae_Admin::show_donation_block()) : ?>
@@ -108,7 +105,7 @@
                                     <?php $options = !empty($field["options"]) ? $field["options"] : [] ?>
                                     <?php $description = !empty($field["description"]) ? Gae_Admin::get_translation($field["description"]) : "" ?>
                                     <?php if ($id === "gea-debug-ip") {
-                                        $description .= Gae_Admin::get_translation("<br/>You current ip address is: ") . $_SERVER["REMOTE_ADDR"];
+                                        $description .= Gae_Admin::get_translation("<br/>You current IP address is: ") . $_SERVER["REMOTE_ADDR"];
                                     }
                                     ?>
                                     <li><?php require(gae_INCLUDES_PATH . "/fields/" . $field["type"] . ".php"); ?></li>
