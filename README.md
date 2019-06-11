@@ -2,7 +2,6 @@
 Wordpress plugin that sets basic google analytics events for webpage
 
 == Donate ==
- 
 
 [Paypal](https://www.paypal.me/Lauzis)
 
@@ -16,17 +15,9 @@ ETH: 0xc9681216a25Ac99500482Bd419b4644882a31471
 
 == Todo log ==
 
-0.9.9 Bug fixing
-
-0.9.9 Proof reading, fixing the pigeon English
-
-0.9.10 Check install uninstall scripts
-
 0.9.11 Help text on front.
 
-0.9.12 Translations po/mo files
-
-0.9.13 Donate links
+0.9.12 Donate links
 
 1.0.0 Publishing, drinking beer
 
@@ -64,6 +55,14 @@ generates more leads.
 1. Form submission tracking, there is possible to pass without triggering Form used event. Field change is trigered only after lost focus, to that field. Have to think about better implementation.
 
 == Changelog ==
+
+0.9.11 Translations po/mo files
+
+0.9.10 Check install uninstall scripts
+
+0.9.9 Proof reading, fixing the pigeon English
+
+0.9.9 Bug fixing
 
 0.9.8 Give someone to test, get feedback
     - setup

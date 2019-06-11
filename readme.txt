@@ -17,8 +17,7 @@ While working in small web agency we noticed that most of users that uses google
 
 But those are essential if you want to understand more about what happens inside the webpage not only count visits.
 
-As we were asked what wroks and what does not work in particular website, we had to add our own events, and soon we found out, that there
-is part of events that overlap from project to project. So we created script that could be added to almost any web project.
+As we were asked what works and what does not work in particular website, we had to add our own events, and soon we found out that there is part of events that overlap from project to project. So we created a script that could be added to almost any web project.
 
 So this script adds such events:
 
@@ -33,7 +32,7 @@ So this script adds such events:
 *   Outgoing links
 *   Newsletter subscription tracking
 
-All these events helps to set up goals in google analytics and a helps to customer understand what works, and what has to be changed or improved.
+All these events helps to set up goals in google analytics and helps customers understand what works, and what has to be changed or improved.
 
 
 == Installation ==
@@ -70,7 +69,7 @@ its easier to follow your goals. Earlier you start to track events, longer histo
 
 = 0.9.10 Check install uninstall scripts =
 
-= 0.9.9 Proof reading, fixing the pigeon English =
+= 0.9.9 Proofreading, fixing the pigeon English =
 
 = 0.9.9 Bug fixing =
 
