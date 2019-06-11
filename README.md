@@ -1,5 +1,28 @@
 # Events Google Analytics - Wordpres Plugin
-Wordpress plugin that sets basic google analytics events for webpage
+Plugin that extends basic google analytics script with events, that can be later used to set up goals in google analytics.
+
+== Description ==
+Plugin that extends basic google analytics script with events, that can be later used to set up goals in google analytics.
+While working in small web agency we noticed that most of users that uses google analytics knows almost nothing about google analytics events.
+
+But those are essential if you want to understand more about what happens inside the webpage not only count visits.
+
+As we were asked what works and what does not work in particular website, we had to add our own events, and soon we found out that there is part of events that overlap from project to project. So we created a script that could be added to almost any web project.
+
+So this script adds such events:
+
+*   Time triggered events.
+*   Clicks on social profile links.
+*   Clicks on contact links (email address, phone numbers)
+*   Search form tracking
+*   File downloads
+*   Cta buttons
+*   Form field tracking
+*   Form submissions
+*   Outgoing links
+*   Newsletter subscription tracking
+
+All these events helps to set up goals in google analytics and helps customers understand what works, and what has to be changed or improved.
 
 == Donate ==
 
