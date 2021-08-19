@@ -65,6 +65,8 @@ its easier to follow your goals. Earlier you start to track events, longer histo
 
 == Changelog ==
 
+= 0.9.11.1 Fixed when debuger disabled =
+
 = 0.9.11 Translations po/mo files =
 
 = 0.9.10 Check install uninstall scripts =

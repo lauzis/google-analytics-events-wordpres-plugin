@@ -78,6 +78,7 @@ generates more leads.
 1. Form submission tracking, there is possible to pass without triggering Form used event. Field change is trigered only after lost focus, to that field. Have to think about better implementation.
 
 == Changelog ==
+0.9.11.1  erro when debugger not enabled fixed
 
 0.9.11 Translations po/mo files
 
