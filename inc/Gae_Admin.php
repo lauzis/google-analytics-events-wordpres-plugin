@@ -418,12 +418,8 @@ class Gae_Admin
             } else {
                 if (@touch($translationIdsFile)){
                     chmod($translationIdsFile, 0777);
-                } else{
-                    self::add_message(sprintf(self::get_translation("Could not create file %s"),$translationIdsFile));
                 }
-
             }
-
 
             if (!isset($translationIds[$text])) {
                 $translationIds[$text] = $text;
@@ -440,7 +436,6 @@ class Gae_Admin
             }
 
             if ($changed) {
-
                 if (is_writable($translationIdsFile)){
                     file_put_contents($translationIdsFile, serialize($translationIds));
                 }
