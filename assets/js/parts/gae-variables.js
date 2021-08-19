@@ -62,7 +62,7 @@ const GAE_SECTIONS = [
 ];
 
 if (typeof GAE_DEBUG_LEVEL === "undefined"){
-    var GAE_DEBUG_LEVEL = [gae-debug-level];
+    var GAE_DEBUG_LEVEL = parseInt('[gae-debug-level]') ? parseInt('[gae-debug-level]') : 0;
 }
 
 if (typeof GAE_SCRIPT_TYPE === "undefined"){
