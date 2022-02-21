@@ -65,6 +65,11 @@ if (typeof GAE_DEBUG_LEVEL === "undefined"){
     var GAE_DEBUG_LEVEL = parseInt('[gae-debug-level]') ? parseInt('[gae-debug-level]') : 0;
 }
 
+//no need for this as we are checkin in frontend the GAE_DEBUG_LEVEL, does not matter if it by ip or by user role
+// if (typeof GAE_DEBUG_ADMIN_LEVEL === "undefined"){
+//     var GAE_DEBUG_ADMIN_LEVEL = parseInt('[gae-debug-admin-level]') ? parseInt('[gae-debug-admin-level]') : 0;
+// }
+
 if (typeof GAE_SCRIPT_TYPE === "undefined"){
     var GAE_SCRIPT_TYPE = [gae-script-type];
 

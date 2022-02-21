@@ -22,7 +22,7 @@ class Gae_Admin
     public static function activate()
     {
         //TODO
-        // would be nice to show message with link to settings page 
+        // would be nice to show message with link to settings page
     }
 
     public static function deactivate()
@@ -133,6 +133,39 @@ class Gae_Admin
         return false;
     }
 
+    public static function debug_admin()
+    {
+        $debug_level=0;
+        $current_user = wp_get_current_user();
+        if ($current_user){
+            if (user_can( $current_user, 'administrator' )) {
+                $debug_level = get_option("gae-debug-when-admin");
+            }
+        }
+
+        switch ($debug_level) {
+            case "disabled":
+                return false;
+                break;
+            case "enable-php-log":
+                return 1;
+                break;
+            case "enable-console-log":
+                return 2;
+                break;
+            case "enable-show-on-front":
+                return 3;
+                break;
+            case "enable-use-test-ga-id":
+                return 4;
+                break;
+            default:
+                return $debug_level;
+                break;
+        }
+        return false;
+    }
+
     public static function get_js_parts()
     {
         return [
@@ -202,6 +235,7 @@ class Gae_Admin
                 $js_part_content = $start_text . file_get_contents($file_to_include) . $end_text;
 
                 $js_part_content = str_replace("[gae-debug-level]", Gae_Admin::debug(), $js_part_content);
+                $js_part_content = str_replace("[gae-debug-admin-level]", Gae_Admin::debug_admin(), $js_part_content);
                 $js_part_content = str_replace("[gae-script-type]", Gae_Admin::script_type(), $js_part_content);
 
                 $sections = self::get_sections();

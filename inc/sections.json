@@ -428,6 +428,36 @@
       "value":"",
       "placeholder":"127.0.0.1",
       "default_value":""
+    },
+    {
+      "id":"gae-debug-when-admin",
+      "title":"Debug the events when admin logged in",
+      "type":"select",
+      "value":"",
+      "placeholder":"",
+      "default_value":"disabled",
+      "options":[
+        {
+          "value":"disabled",
+          "title":"Disabled"
+        },
+        {
+          "value":"enable-use-test-ga-id",
+          "title":"Enable - use google analytics test id"
+        },
+        {
+          "value":"enable-php-log",
+          "title":"Enable - php log"
+        },
+        {
+          "value":"enable-console-log",
+          "title":"Enable - console.log + php log"
+        },
+        {
+          "value":"enable-show-on-front",
+          "title":"Enable - show on front + console.log + php log"
+        }
+      ]
     }
   ]
 }
