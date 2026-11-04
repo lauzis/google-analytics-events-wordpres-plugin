@@ -1,13 +1,10 @@
-if (!self.hasClass("gae-event")){
+if (!self.classList.contains("gae-event")){
 
     if (is_outgoing_url(url)){
-        self.click(function(){
-            var text = get_link_text(self);
-            send_event("Outgoing links",'Outgoing link clicked', text.trim()+' button clicked');
+        self.addEventListener("click", function(){
+            send_event("Outgoing links",'Outgoing link clicked', get_link_text(self)+' button clicked');
         });
-        self.addClass("gae-event");
-        self.addClass("gae-event-outgoing-links");
+        self.classList.add("gae-event", "gae-event-outgoing-links");
 
     };
 }
-

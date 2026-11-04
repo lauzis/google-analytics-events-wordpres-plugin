@@ -12,11 +12,14 @@ class Gae_Frontend
     public static function add_scripts()
     {
 
-        wp_enqueue_script('gae-ga', gae_GENERATE_FILE_URL, array('jquery'), gae_CURRENT_VERSION . "-" . get_option('gae-assets-version'));
+        // Plain JavaScript since 1.0.0: no jQuery, which many themes (this
+        // plugin's own site included) do not load. In the footer, so the
+        // debug helper below is defined before it runs.
+        wp_enqueue_script('gae-ga', gae_GENERATE_FILE_URL, array(), gae_CURRENT_VERSION . "-" . get_option('gae-assets-version'), true);
 
         if (!is_admin() && Gae_Admin::debug() && Gae_Admin::debug() > 2) {
             wp_enqueue_style('gae-css', gae_CSS_URL . '/gae-debug.css', array(), gae_CURRENT_VERSION . "-" . get_option('gae-assets-version'));
-            wp_enqueue_script('gae-debug', gae_JS_URL . '/gae-debug.js', array('jquery'), gae_CURRENT_VERSION . "-" . get_option('gae-assets-version'), true);
+            wp_enqueue_script('gae-debug', gae_JS_URL . '/gae-debug.js', array(), gae_CURRENT_VERSION . "-" . get_option('gae-assets-version'), true);
         }
     }
 

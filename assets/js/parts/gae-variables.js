@@ -75,7 +75,7 @@ if (typeof GAE_SCRIPT_TYPE === "undefined"){
 
     if (GAE_SCRIPT_TYPE===-1){
         debug_message("Will try to detect if analytics is included or not!");
-        function_name="";
+        var function_name="";
         if (typeof ga === "function"){
             GAE_SCRIPT_TYPE = 1;
             function_name="ga";

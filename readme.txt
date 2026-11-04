@@ -65,6 +65,15 @@ its easier to follow your goals. Earlier you start to track events, longer histo
 
 == Changelog ==
 
+= 1.0.0 Plain JavaScript, no jQuery =
+* The tracking script no longer needs jQuery. Where a theme did not load jQuery the script was never printed, so nothing was tracked
+* Fixed: on-field-change tracking threw an error on the first change in a Gravity form
+* Fixed: the position of a clicked element is its nearest header, footer or sidebar, not the outermost
+* Fixed: a social link with no text (an icon) is labelled with the network name, not "unknow"
+* Removed: the "history" cookie of the last visited pages. Nothing read it, and it was set before any cookie consent
+* Event categories, actions and labels are unchanged
+* Re-save the plugin settings once after updating: that rebuilds uploads/gae/gae.js from the new parts
+
 = 0.9.11.1 Fixed when debuger disabled =
 
 = 0.9.11 Translations po/mo files =

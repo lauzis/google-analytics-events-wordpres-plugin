@@ -1,46 +1,44 @@
-$( "form" ).each(function(){
+document.querySelectorAll("form").forEach(function(form){
 
-    var self = $(this);
-    if (!self.hasClass("gae-event")){
-        self.submit(function(event){
-            //lets try to find title
-
-            var self = $(this);
-            var formId = self.attr("id");
-            var gravityFormId = get_gravity_form_id(formId);
-            var mailchimpFormId = get_mail_chimp_id(formId);
-            var category = self.data("gaCategory");
-            var action = self.data("gaAction");
-            var label = self.data("gaLabel");
-            var value = self.data("gaValue");
-
-            if (!category){
-                category = "Form";
-            }
-            if (!action){
-                action = "Form Submitted";
-            }
-            if (!label){
-                label = get_link_text(self);
-            }
-            if (!value){
-                value = null;
-            }
-
-            //special cases of forms
-            if (gravityFormId){
-                self.addClass("gae-form-tracking-gravity-success");
-                label = "Gravity form "+gravityFormId;
-            }
-            if (mailchimpFormId){
-                label = "Mailchimp form "+mailchimpFormId;
-                self.addClass("gae-mailchimp");
-            }
-
-            send_event(category, action, label, value)
-
-        });
-        self.addClass("gae-event");
-        self.addClass("gae-event-form-submission-tracking");
+    if (form.classList.contains("gae-event")){
+        return;
     }
+
+    form.addEventListener("submit", function(){
+
+        var formId = form.getAttribute("id");
+        var gravityFormId = get_gravity_form_id(formId);
+        var mailchimpFormId = get_mail_chimp_id(formId);
+        var category = form.dataset.gaCategory;
+        var action = form.dataset.gaAction;
+        var label = form.dataset.gaLabel;
+        var value = form.dataset.gaValue;
+
+        if (!category){
+            category = "Form";
+        }
+        if (!action){
+            action = "Form Submitted";
+        }
+        if (!label){
+            label = get_link_text(form);
+        }
+        if (!value){
+            value = null;
+        }
+
+        //special cases of forms
+        if (gravityFormId){
+            form.classList.add("gae-form-tracking-gravity-success");
+            label = "Gravity form "+gravityFormId;
+        }
+        if (mailchimpFormId){
+            label = "Mailchimp form "+mailchimpFormId;
+            form.classList.add("gae-mailchimp");
+        }
+
+        send_event(category, action, label, value)
+
+    });
+    form.classList.add("gae-event", "gae-event-form-submission-tracking");
 });

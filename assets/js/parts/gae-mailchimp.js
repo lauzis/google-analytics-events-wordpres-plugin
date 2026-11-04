@@ -1,14 +1,13 @@
 
 //Newsletter - add event for successfully subscribing to the newsletter
-if(jQuery('.mc4wp-success').length>0){
+var mailchimp_success = document.querySelector('.mc4wp-success');
+if(mailchimp_success){
 
-    let mailchimFormId = get_mail_chimp_id(jQuery('.mc4wp-success').first().closest("form").attr("id"));
-    let category = "Form";
-    let action = "Form Submitted Successfully";
-    let label = "Mailchimp form";
+    var mailchimp_form = mailchimp_success.closest("form");
+    var mailchimFormId = get_mail_chimp_id(mailchimp_form ? mailchimp_form.getAttribute("id") : null);
+    var label = "Mailchimp form";
     if (mailchimFormId){
         label = "Mailchimp form "+mailchimFormId;
     }
-    let value = null;
-    send_event(category, action, label, value)
+    send_event("Form", "Form Submitted Successfully", label, null)
 }

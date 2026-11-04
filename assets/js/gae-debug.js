@@ -141,15 +141,13 @@ var GAE_DEBUG = {
     },
     showColorBox : function(obj){
         GAE_STORAGE.set("showColorBox",1);
-        var self = jQuery(obj.parentElement);
-        self.addClass("show");
-        jQuery("body").addClass("gae-colorBoxOpened");
+        obj.parentElement.classList.add("show");
+        document.body.classList.add("gae-colorBoxOpened");
     },
     hideColorBox : function(obj){
         GAE_STORAGE.set("showColorBox",0);
-        var self = jQuery(obj.parentElement);
-        self.removeClass("show");
-        jQuery("body").removeClass("gae-colorBoxOpened");
+        obj.parentElement.classList.remove("show");
+        document.body.classList.remove("gae-colorBoxOpened");
     },
     showHideColors : function(eventType, forceOn){
 
@@ -159,23 +157,14 @@ var GAE_DEBUG = {
                 showColor = (forceOn === 1);
             }
 
-            if (!showColor){
-                jQuery('.'+eventType).addClass("gae-hide-color");
-                GAE_STORAGE.set("hideColor_"+eventType,1);
-            } else {
-                jQuery('.'+eventType).removeClass("gae-hide-color");
-                GAE_STORAGE.set("hideColor_"+eventType,0);
-            }
+            document.querySelectorAll('.'+eventType).forEach(function(el){
+                el.classList.toggle("gae-hide-color", !showColor);
+            });
+            GAE_STORAGE.set("hideColor_"+eventType, showColor ? 0 : 1);
         } else{
-            jQuery('.'+eventType).each( function(){
-                var self = jQuery(this);
-                if (self.hasClass("gae-hide-color")){
-                    GAE_STORAGE.set("hideColor_"+eventType,0);
-                    self.removeClass("gae-hide-color");
-                } else {
-                    GAE_STORAGE.set("hideColor_"+eventType,1);
-                    self.addClass("gae-hide-color");
-                }
+            document.querySelectorAll('.'+eventType).forEach(function(el){
+                var hidden = el.classList.toggle("gae-hide-color");
+                GAE_STORAGE.set("hideColor_"+eventType, hidden ? 1 : 0);
             });
         }
     },

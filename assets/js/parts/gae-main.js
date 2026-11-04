@@ -3,19 +3,13 @@
 //[gae-functions]
 
 
-jQuery(function ($) {
-
-    //pushing in history the current url
-    //TODO local storage
-    push_history(get_title());
+gae_ready(function () {
 
     //[gae-contact-links]
 
-    $('a').each(function () {
-        var self = $(this);
-        var url = self.attr("href");
-        var text = get_link_text(self);
-        if (!self.hasClass("gae-event")&& typeof(url)!=="undefined") {
+    document.querySelectorAll('a[href]').forEach(function (self) {
+        var url = self.getAttribute("href");
+        if (!self.classList.contains("gae-event")) {
 
             //[gae-track-links-to-specific-urls]
 
@@ -26,8 +20,6 @@ jQuery(function ($) {
             //[gae-file-downloads]
 
             //[gae-outgoing-links]
-
-            //[gae-track-links-to-specific-urls]
 
         }
     });
@@ -48,4 +40,3 @@ jQuery(function ($) {
     }
 
 });
-

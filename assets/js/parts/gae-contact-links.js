@@ -1,34 +1,24 @@
 //EMAIL ADDRESS LINKS CLICKED
 
-$('a[href^="mailto:"]').click(function(){
+document.querySelectorAll('a[href^="mailto:"]').forEach(function(link){
 
-    var self = $(this);
-    var selected_email = $(this).text();
+    link.addEventListener("click", function(){
+        var click_position = get_element_position(link);
+        send_event('Contacts', "Email address clicked"+ click_position, link.textContent.trim());
+    });
 
-    var click_position=get_element_position(self);
-
-    send_event('Contacts', "Email address clicked"+ click_position, selected_email.trim());
-
+    link.classList.add("gae-event", "gae-event-contact-links");
 });
-
-$('a[href^="mailto:"]').addClass("gae-event");
-$('a[href^="mailto:"]').addClass("gae-event-contact-links");
 
 
 //PHONE NUMBERS CLICKED
-$('a[href^="tel:"]').click(function(){
-    var self = $(this);
+document.querySelectorAll('a[href^="tel:"]').forEach(function(link){
 
-    var selected_phone = self.attr("href");
-    selected_phone = selected_phone.replace("tel:","");
-    var click_position=get_element_position(self);
-    if (typeof(click_position)==="undefined"){
-        click_position="";
-    }
+    link.addEventListener("click", function(){
+        var selected_phone = link.getAttribute("href").replace("tel:","");
+        var click_position = get_element_position(link);
+        send_event("Contacts", "Phone number clicked "+ click_position, selected_phone.trim());
+    });
 
-    send_event("Contacts", "Phone number clicked "+ click_position, selected_phone.trim());
-
+    link.classList.add("gae-event", "gae-event-contact-links");
 });
-
-$('a[href^="tel:"]').addClass("gae-event");
-$('a[href^="tel:"]').addClass("gae-event-contact-links");

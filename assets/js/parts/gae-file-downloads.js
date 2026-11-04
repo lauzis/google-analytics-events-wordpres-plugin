@@ -1,11 +1,8 @@
-if (!self.hasClass("gae-event")){
+if (!self.classList.contains("gae-event")){
     if (is_file(url)){
-        self.click(function(){
-            var text = get_link_text(self);
-            send_event("File download",'File download clicked', text);
+        self.addEventListener("click", function(){
+            send_event("File download",'File download clicked', get_link_text(self));
         });
-        self.addClass("gae-event");
-        self.addClass("gae-event-file-downloads");
+        self.classList.add("gae-event", "gae-event-file-downloads");
     };
 }
-

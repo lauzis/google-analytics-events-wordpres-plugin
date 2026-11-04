@@ -20,7 +20,7 @@ define( 'gae_JS_PARTS_PATH',  gae_ASSETS_PATH."/js/parts");
 
 
 define( 'gae_INCLUDES_PATH',  gae_PLUGIN_PATH."/inc");
-define( 'gae_CURRENT_VERSION', '0.9.7' );
+define( 'gae_CURRENT_VERSION', '1.0.0' );
 
 $uloads_dir = wp_upload_dir();
 

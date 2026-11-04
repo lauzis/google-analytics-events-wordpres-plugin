@@ -1,45 +1,43 @@
+//runs fn once the DOM is there (right away if it already is)
+function gae_ready(fn){
+    if (document.readyState !== "loading") {
+        fn();
+    } else {
+        document.addEventListener("DOMContentLoaded", fn);
+    }
+}
+
 /*
  that could be possible to determine
  if top or bottom element clicked
  getting the position of the element
  */
-function get_element_position(jq_object){
+function get_element_position(element){
 
-    var position = "";
-    position = jq_object.data("gaPosition");
+    var position = element.dataset.gaPosition;
     if (typeof(position)!=="undefined" && position.length>0){
         return position;
     }
 
-    // fallback function if data-ga-position not defined
-    jq_object.parentsUntil('body').each(function(){
-        var self = this;
-        switch(self.nodeName){
-            case "HEADER":
-            case "header":
-                position="Header";
-                return position;
-
-            case "FOOTER":
-            case "footer":
-                position="Footer";
-                return position;
-
-            case "ASIDE":
-            case "aside":
-                position="Sidebar";
-                return position;
-        }
-    });
-
-    return position;
-
+    // fallback if data-ga-position not defined: the nearest header, footer or aside
+    var area = element.closest("header, footer, aside");
+    if (!area){
+        return "";
+    }
+    switch(area.nodeName){
+        case "HEADER":
+            return "Header";
+        case "FOOTER":
+            return "Footer";
+        case "ASIDE":
+            return "Sidebar";
+    }
+    return "";
 }
 
 
 //helper function to check if link is outgoing link
 function is_outgoing_url(url){
-
 
     if (url.indexOf(HOST)!==-1){
         return false;
@@ -58,17 +56,6 @@ function is_outgoing_url(url){
 }
 
 
-//helper function (php in_array)
-function contains(a, obj) {
-    var i = a.length;
-    while (i--) {
-        if (a[i] === obj) {
-            return true;
-        }
-    }
-    return false;
-}
-
 //the list of downloadable files
 function get_valid_file_extensions(){
     return ['.pdf','.doc','.docx','.zip','.xls','.xslx','.odt','.ods','.ppt','.pptx'];
@@ -77,57 +64,38 @@ function get_valid_file_extensions(){
 
 //helper function that check if the link is downlodable file
 function is_file(url){
-    var file_extension = url.split('.').pop();
-    file_extension="."+file_extension;
+    var file_extension = "." + url.split('.').pop();
     if (file_extension.length<5){
-        return contains(get_valid_file_extensions(),file_extension);
+        return get_valid_file_extensions().indexOf(file_extension) !== -1;
     }
     return false;
 }
 
 
-
-
 //function that gets title of the sectiom/page
-function get_title($){
+function get_title(){
 
-    $ = jQuery;
     var title = "";
-    if ($("h1").length>0){
-        title  = $("h1").first().text();
+    var h1 = document.querySelector("h1");
+    if (h1){
+        title = h1.textContent;
     }
-    if (title.length==0){
-        title = document.title;
-        title = title.split("-");
-        title = title.shift();
+    if (title.trim().length==0){
+        title = document.title.split("-").shift();
     }
 
-    if (title.length==0){
-        if ($("h2").length>0){
-            title  = $("h2").first().text();
+    if (title.trim().length==0){
+        var h2 = document.querySelector("h2");
+        if (h2){
+            title = h2.textContent;
         }
     }
 
-    if (title.length==0){
+    if (title.trim().length==0){
         title = document.location.href;
     }
 
-    title = title.trim();
-    return title;
-}
-
-//
-function remove_params_from_url(oldURL) {
-    var index = 0;
-    var newURL = oldURL;
-    index = oldURL.indexOf('?');
-    if(index == -1){
-        index = oldURL.indexOf('#');
-    }
-    if(index != -1){
-        newURL = oldURL.substring(0, index);
-    }
-    return newURL;
+    return title.trim();
 }
 
 
@@ -150,58 +118,43 @@ function get_social_profile_links()
 
 
 //geting the link text / label for the ga event
-function get_link_text(jquery_obj){
+function get_link_text(element){
 
-    var text=jquery_obj.text();
+    var text = element.textContent.trim();
 
     //fallback / overwrite
-    if(jquery_obj.data("gaLabel")){
-        text=jquery_obj.data("gaLabel");
-        return text.trim();
+    if(element.dataset.gaLabel){
+        return element.dataset.gaLabel.trim();
     }
 
-    if (jquery_obj.attr("title")){
-        text = jquery_obj.attr("title");
-        return text.trim();
+    if (element.getAttribute("title")){
+        return element.getAttribute("title").trim();
     }
 
-    if(jquery_obj.attr("alt")){
-        text = jquery_obj.attr("alt");
-        return text.trim();
+    if(element.getAttribute("alt")){
+        return element.getAttribute("alt").trim();
     }
 
-    if (jquery_obj.prop("tagName")==="form" || jquery_obj.prop("tagName")==="FORM"){
+    if (element.nodeName === "FORM"){
 
-        let h1 = jquery_obj.find("h1");
-        if (h1.length>0){
-            return h1.text();
-        }
-        let h2 = jquery_obj.find("h2");
-        if (h2.length>0){
-            return h2.text();
-        }
-        let h3 = jquery_obj.find("h3");
-        if (h3.length>0){
-            return h3.text();
-        }
-        let formName = jquery_obj.attr("name");
-        if (formName){
-            return formName;
+        var headings = ["h1", "h2", "h3"];
+        for (var i = 0; i < headings.length; i++){
+            var heading = element.querySelector(headings[i]);
+            if (heading){
+                return heading.textContent.trim();
+            }
         }
 
-        let formID = jquery_obj.attr("id");
-        if (formID){
-            return formID;
+        var attributes = ["name", "id", "role"];
+        for (var j = 0; j < attributes.length; j++){
+            if (element.getAttribute(attributes[j])){
+                return element.getAttribute(attributes[j]);
+            }
         }
 
-        let formRole = jquery_obj.attr("role");
-        if (formRole){
-            return formRole;
-        }
-
-        let submitBtn = jquery_obj.find('input[type=submit]');
-        if (submitBtn.length>0){
-            return submitBtn.first().text();
+        var submitBtn = element.querySelector('input[type=submit]');
+        if (submitBtn && submitBtn.value){
+            return submitBtn.value;
         }
         return "unknown form"
 
@@ -211,103 +164,16 @@ function get_link_text(jquery_obj){
         return text;
     }
 
-    if(jquery_obj.attr("value")){
-        text = jquery_obj.attr("value");
-        return text.trim();
+    if(element.getAttribute("value")){
+        return element.getAttribute("value").trim();
     }
-
-
 
     return "unknow";
 }
 
 
-//cookie function to track event history
-// for example, we want to se trough wich page
-//was converted (filled form)
-function setCookie(cname, cvalue, exdays) {
-    exdays = exdays || 1;
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    var expires = "expires="+d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
-
-function getCookie(cname) {
-    var name = cname + "=";
-    var ca = document.cookie.split(';');
-    for(var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
-
-
-function json2array(json){
-    var result = [];
-    var keys = Object.keys(json);
-    keys.forEach(function(key){
-        result.push(json[key]);
-    });
-    return result;
-}
-
-
-function push_history(title)
-{
-
-    // storring last 5 urls
-    var allowed_lenght=3;
-    title = title || document.location.href;
-    var h_titles =getCookie("history");
-    if (h_titles.length>0){
-        try {
-            var tmp = JSON.parse(h_titles)
-            h_titles = json2array(tmp);
-            if (title==h_titles[history_urls.length-1]){
-                //the last url in history is the same url
-                // probabbly user refreshed page
-                return;
-            }
-        } catch(e) {
-            return;
-        }
-    } else {
-        h_titles = [];
-    }
-
-    //removing if more history than expo
-    if (h_titles.length>allowed_lenght){
-        h_titles.shift();
-    }
-
-    h_titles.push(title);
-    setCookie("history",JSON.stringify(h_titles));
-}
-
-
-function pop_history(){
-
-    var history_urls = json2array(JSON.parse(getCookie("history")));
-    var url="";
-    if (history_urls.length>0){
-        url = history_urls.pop();
-    }
-    setCookie("history",JSON.stringify(history_urls));
-    return url;
-}
-
-
 function send_event(category, action, label, value){
 
-    
     if(GAE_SCRIPT_TYPE===1 || GAE_SCRIPT_TYPE===3){
 
         if (typeof ga === "function"){
@@ -353,7 +219,7 @@ function debug_message(message){
 
 function get_gravity_form_id(formId){
 
-    if (typeof(formId)==="undefined"){
+    if (!formId){
         return null;
     }
 
@@ -367,7 +233,7 @@ function get_gravity_form_id(formId){
 function get_mail_chimp_id(formId){
     //mc4wp-form-1
 
-    if (typeof(formId)==="undefined"){
+    if (!formId){
         return null;
     }
 

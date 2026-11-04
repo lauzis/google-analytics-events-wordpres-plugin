@@ -1,37 +1,21 @@
-if (!self.hasClass("gae-event")){
-    
+if (!self.classList.contains("gae-event")){
+
     var social_links = get_social_profile_links();
-    var social_link_tracker_added = false;
 
-    for (x in social_links){
-        if (url.indexOf(social_links[x].url)!=-1){
+    for (var social_index = 0; social_index < social_links.length; social_index++){
+        if (url.indexOf(social_links[social_index].url)!=-1){
 
-            self.click(function(){
-                var self = $(this);
-                var url="";
-                url = self.attr("href");
+            var social_title = social_links[social_index].title;
+            self.addEventListener("click", function(){
                 var text = get_link_text(self);
-                if (text.length==0){
-                    var social_links = get_social_profile_links();
-                    for (x in social_links) {
-                        if (url.indexOf(social_links[x].url)!=-1) {
-                            text = social_links[x].title;
-                            break;
-                        }
-                    }
+                if (text.length==0 || text==="unknow"){
+                    text = social_title;
                 }
                 send_event("Contacts",'Social button clicked',text);
-                social_link_click = true;
-
             });
-            self.addClass("gae-event");
-            self.addClass("gae-event-social-links");
-            social_link_tracker_added = true;
+            self.classList.add("gae-event", "gae-event-social-links");
+            //one tracker per link
+            break;
         }
     }
-
-    if (social_link_tracker_added){
-        //skipp looping cause we already added the event
-    };
 }
-
