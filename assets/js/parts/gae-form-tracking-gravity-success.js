@@ -5,13 +5,15 @@
 var gravity_success_sent = {};
 
 function gravity_success_check(element){
-    if (!element.id || element.id.indexOf("gform_confirmation_wrapper_") !== 0){
+    // getAttribute, not .id: on a form with a field named "id", form.id is that field
+    var id = element.getAttribute("id");
+    if (!id || id.indexOf("gform_confirmation_wrapper_") !== 0){
         return;
     }
     if (element.classList.contains("form_saved_message_sent")){
         return;
     }
-    var formId = element.id.replace("gform_confirmation_wrapper_", "");
+    var formId = id.replace("gform_confirmation_wrapper_", "");
     if (gravity_success_sent[formId]){
         return;
     }
