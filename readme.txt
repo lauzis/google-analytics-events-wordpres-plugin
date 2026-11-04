@@ -70,6 +70,7 @@ its easier to follow your goals. Earlier you start to track events, longer histo
 * Fixed: on-field-change tracking threw an error on the first change in a Gravity form
 * Fixed: the position of a clicked element is its nearest header, footer or sidebar, not the outermost
 * Fixed: a social link with no text (an icon) is labelled with the network name, not "unknow"
+* Gravity Forms "submitted successfully" is detected by watching for the confirmation message, so it needs no jQuery and also counts normal (non-AJAX) submits
 * Removed: the "history" cookie of the last visited pages. Nothing read it, and it was set before any cookie consent
 * Event categories, actions and labels are unchanged
 * Re-save the plugin settings once after updating: that rebuilds uploads/gae/gae.js from the new parts
